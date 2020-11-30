@@ -17,7 +17,7 @@ async function login() {
         window.location.replace("/");
     } else {
         var error = document.getElementById('error');
-        error.innerHTML = "Password or Email invalid!"
+        error.innerHTML = "Password or Email invalid!";
     }
 }
 

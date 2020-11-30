@@ -33,6 +33,14 @@ const editPasswordSch = Joi.object({
     repeat_password: Joi.ref('password'),
 });
 
+router.get("/yuki/users", verify, async(req, res) => {
+    res.status(200).json({ status: 200, data: ["Charmader", "Banananana", "BaumHaus", "BANANANANANAN"] });
+});
+
+router.get("/yuki/attacks", verify, async(req, res) => {
+    res.status(200).json({ status: 200, data: ["Tackle", "fireball", "BOOOOM!"] });
+});
+
 router.post("/password", verify, async(req, res) => {
     const { error } = editPasswordSch.validate(req.body);
     if (error) return res.status(400).json({ status: 400, message: error.details[0].message });
