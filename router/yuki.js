@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const verify = require("../middleware/verifyLoginToken");
 const vAdmin = require("../middleware/verifyAdminAcces");
+const fetch = require('node-fetch');
 
 router.get("/monsters", verify, async(req, res) => {
     const options = {
