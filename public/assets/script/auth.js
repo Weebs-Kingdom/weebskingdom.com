@@ -42,6 +42,7 @@ async function auth(goToLoginOnFail) {
 }
 
 async function setupLoggin() {
+    addDev();
     var accSub = document.getElementById('accSub');
 
     createLi(accSub, "/profile", "Profile");
