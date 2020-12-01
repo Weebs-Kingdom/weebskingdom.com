@@ -9,8 +9,7 @@ router.get("/monsters", verify, async(req, res) => {
         headers: {
             'Content-Type': 'application/json',
             'api-token': process.env.YUKIDB_API_TOKEN
-        },
-        body: JSON.stringify(req.body)
+        }
     };
 
     fetch('http://127.0.0.1:5004/api/yuki/monster', options).then(res => res.json()).then(json => {
@@ -39,8 +38,7 @@ router.get("/attacks", verify, async(req, res) => {
         headers: {
             'Content-Type': 'application/json',
             'api-token': process.env.YUKIDB_API_TOKEN
-        },
-        body: JSON.stringify(req.body)
+        }
     };
 
     fetch('http://127.0.0.1:5004/api/yuki/attack', options).then(res => res.json()).then(json => {
