@@ -12,7 +12,7 @@ router.get("/monsters", verify, async(req, res) => {
         body: JSON.stringify(req.body)
     };
 
-    const response = await fetch('http://127.0.0.1:5500/api/yuki/monster', options);
+    const response = await fetch('http://127.0.0.1:5004/api/yuki/monster', options);
     res.status(response.body.status).json(response.body);
 });
 
@@ -26,7 +26,7 @@ router.post("/monsters", verify, async(req, res) => {
         body: JSON.stringify(req.body)
     };
 
-    const response = await fetch('http://127.0.0.1:5500/api/yuki/monster', options);
+    const response = await fetch('http://127.0.0.1:5004/api/yuki/monster', options);
     res.status(response.body.status).json(response.body);
 });
 
@@ -40,7 +40,7 @@ router.get("/attacks", verify, async(req, res) => {
         body: JSON.stringify(req.body)
     };
 
-    const response = await fetch('http://127.0.0.1:5500/api/yuki/attack', options);
+    const response = await fetch('http://127.0.0.1:5004/api/yuki/attack', options);
     res.status(response.body.status).json(response.body);
 });
 
@@ -54,7 +54,7 @@ router.post("/attacks", verify, async(req, res) => {
         body: JSON.stringify(req.body)
     };
 
-    const response = await fetch('http://127.0.0.1:5500/api/yuki/attacks', options);
+    const response = await fetch('http://127.0.0.1:5004/api/yuki/attacks', options);
     res.status(response.body.status).json(response.body);
 });
 
