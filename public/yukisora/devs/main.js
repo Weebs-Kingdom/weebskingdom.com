@@ -107,7 +107,7 @@ function getCheckedAttacks() {
     return ids;
 }
 
-function submit() {
+async function submit() {
     const monsters = getCheckedMonsters();
     const attacks = getCheckedAttacks();
     const name = document.getElementById("name").value;
