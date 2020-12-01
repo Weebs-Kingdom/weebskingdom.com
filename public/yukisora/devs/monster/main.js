@@ -5,8 +5,6 @@ async function init() {
     token = getCookie("auth");
     await fillAttacks();
     await fillEvolves();
-    console.log("hello!");
-    createAttack("Test");
     var errort = document.getElementById('error');
     errort.innerHTML = error;
 }
@@ -135,7 +133,6 @@ async function submit() {
     };
 
     const response = await fetch('/api/yuki/monsters', options);
-    console.log(json);
     var errort = document.getElementById('error');
     if (response)
         if (response.status == 200)

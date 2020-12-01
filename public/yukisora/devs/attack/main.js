@@ -30,7 +30,6 @@ async function submit() {
     };
 
     const response = await fetch('/api/yuki/attacks', options);
-    console.log(json);
     var errort = document.getElementById('error');
     if (response)
         if (response.status == 200)
