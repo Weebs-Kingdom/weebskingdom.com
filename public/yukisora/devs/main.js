@@ -22,16 +22,18 @@ async function fillAttacks() {
     const response = await fetch('/api/yuki/attacks', options);
     const json = await response.json();
     if (json.status == 200) {
-        var attacks = json.data;
-        for (var i = 0; i < attacks.length; i++) {
-            createAttack(attacks[i]);
+        for (var i = 0; i < json.data.length; i++) {
+            createAttack(json.data[i].attackName, json.data[i]._id);
         }
     } else {
         error += json.message;
     }
 }
 
-function createAttack(name) {
+function createAttack(name, idd) {
+    var id = document.createElement('p');
+    id.setAttribute("hidden", true);
+    id.innerHTML = idd;
     var list = document.getElementById('attacksList');
     var di = document.createElement('div');
     var lable = document.createElement('label');
@@ -40,6 +42,23 @@ function createAttack(name) {
     inp.setAttribute("type", "checkbox");
     di.appendChild(inp);
     di.appendChild(lable);
+    di.appendChild(id);
+    list.appendChild(di);
+}
+
+function createEvolve(name, idd) {
+    var id = document.createElement('p');
+    id.setAttribute("hidden", true);
+    id.innerHTML = idd;
+    var list = document.getElementById('evList');
+    var di = document.createElement('div');
+    var lable = document.createElement('label');
+    lable.innerHTML = name;
+    var inp = document.createElement('input');
+    inp.setAttribute("type", "checkbox");
+    di.appendChild(inp);
+    di.appendChild(lable);
+    di.appendChild(id);
     list.appendChild(di);
 }
 
@@ -54,15 +73,67 @@ async function fillEvolves() {
     const response = await fetch('/api/yuki/monsters', options);
     const json = await response.json();
     if (json.status == 200) {
-        var attacks = json.data;
-        var sel = document.getElementById('evolves');
-        for (var i = 0; i < attacks.length; i++) {
-            var opt = document.createElement('option');
-            opt.innerHTML = attacks[i];
-            opt.value = attacks[i];
-            sel.appendChild(opt);
+        for (var i = 0; i < json.data.length; i++) {
+            createEvolve(json.data[i].name, json.data[i]._id);
         }
     } else {
         error += json.message;
     }
+}
+
+function getCheckedMonsters() {
+    var list = document.getElementById('evList');
+    var divs = list.getElementsByTagName('div');
+    var ids = [];
+    for (var i = 0; i < divs.length; i += 1) {
+        var id = divs[i].getElementsByTagName('p')[0].innerHTML;
+        if (divs[i].getElementsByTagName('input')[0].checked) {
+            ids.push(id);
+        }
+    }
+    return ids;
+}
+
+function getCheckedAttacks() {
+    var list = document.getElementById('attacksList');
+    var divs = list.getElementsByTagName('div');
+    var ids = [];
+    for (var i = 0; i < divs.length; i += 1) {
+        var id = divs[i].getElementsByTagName('p')[0].innerHTML;
+        if (divs[i].getElementsByTagName('input')[0].checked) {
+            ids.push(id);
+        }
+    }
+    return ids;
+}
+
+function submit() {
+    const monsters = getCheckedMonsters();
+    const attacks = getCheckedAttacks();
+    const name = document.getElementById("name").value;
+    const image = document.getElementById("imageUrl").value;
+    const hp = document.getElementById("baseHp").value;
+    const evlvl = document.getElementById("evolveLvl").value;
+    const shown = document.getElementById("shown").checked;
+
+    const json = {
+        name: name,
+        imageUrl: image,
+        baseHP: hp,
+        evolveLvl: evlvl,
+        shown: shown,
+        evolves: monsters,
+        attacks: attacks
+    }
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        },
+        body: JSON.stringify(json)
+    };
+
+    const response = await fetch('/api/yuki/monsters', options);
+    console.log(json);
 }

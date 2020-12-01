@@ -313,3 +313,36 @@ body {
 .form__field:invalid {
     box-shadow: none;
 }
+
+.list {
+    text-align: left;
+    overflow: scroll;
+    height: 50vmin;
+    border: 1px solid #000;
+    padding: 10px;
+    overflow-x: hidden;
+    overflow-y: initial;
+}
+
+.list label {
+    margin-left: 1rem;
+    padding: 0;
+}
+
+.listBody {
+    box-shadow: 0 2px 40px 0 rgba(0, 0, 0, .4);
+    text-align: left;
+    margin-top: 2em;
+    transition: all 250ms ease;
+    padding: 1rem;
+}
+
+.listBody label {
+    position: relative;
+    margin-left: 2rem;
+}
+
+.listBody:hover {
+    border-radius: 2rem;
+    box-shadow: 0 2px 30px 0 rgba(0, 0, 255, .4);
+}

@@ -69,11 +69,15 @@
                 <input type="checkbox" class="form__field" placeholder="Shown" name="Shown" id='shown' required />
                 <label for="shown" class="form__label">Shown</label>
             </div>
-            <div id="evList"></div>
-            <div id="attacksList"></div>
+            <div class="listBody"><label>Evolves to:</label>
+                <div class="list" id="evList"></div>
+            </div>
+            <div class="listBody"><label>Attacks:</label>
+                <div class="list" id="attacksList"></div>
+            </div>
 
         </div>
-        <button style="margin-top: 6em;" class="btn" id="loginBtn" type="button" onclick="register()">Submit</button>
+        <button style="margin-top: 6em;" class="btn" id="submitBtn" type="button" onclick="submit()">Submit</button>
     </div>
     </div>
     <div class="textview">
