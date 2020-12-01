@@ -1,6 +1,8 @@
 const router = require("express").Router();
-const auth = require("./auth");
+const user = require("./user");
+const yuki = require("./yuki");
 
-router.use("/api/user", auth);
+router.use("/api/user", user);
+router.use("/api/yuki", yuki)
 
 module.exports = router;

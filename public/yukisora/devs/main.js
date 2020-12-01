@@ -1,20 +1,21 @@
 var error = "";
-async function main() {
+async function init() {
     await fillAttacks();
     await fillEvolves();
-    var error = document.getElementById('error');
-    error.innerHTML = error;
+    console.log("hello!");
+    createAttack("Test");
+    //var error = document.getElementById('error');
+    //error.innerHTML = error;
 }
 
 async function fillAttacks() {
     const options = {
         method: 'GET'
     };
-    const response = await fetch('/api/yuki/users', options);
+    const response = await fetch('/api/yuki/attacks', options);
     const json = await response.json();
     if (json.status == 200) {
         var attacks = json.data;
-        var sel = document.getElementById('attacks');
         for (var i = 0; i < attacks.length; i++) {
             createAttack(attacks[i]);
         }
