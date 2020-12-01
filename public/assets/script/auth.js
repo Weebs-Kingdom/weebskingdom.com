@@ -67,10 +67,9 @@ async function setupLoggin() {
 function addDev() {
     var menu = document.getElementById("menu");
     var devs = createLi(menu, "/yukisora/devs", "Developer");
-    var monster = createSubMenu(devs);
-    createLi(monster, "/yukisora/devs/monster", "Monster");
-    var attack = createSubMenu(devs);
-    createLi(attack, "/yukisora/devs/attack", "Attack");
+    var subMenu = createSubMenu(devs);
+    createLi(subMenu, "/yukisora/devs/monster", "Monster");
+    createLi(subMenu, "/yukisora/devs/attack", "Attack");
 }
 
 function createSubMenu(vin) {
