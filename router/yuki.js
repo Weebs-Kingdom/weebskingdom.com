@@ -14,7 +14,7 @@ router.get("/monsters", verify, async(req, res) => {
     };
 
     fetch('http://127.0.0.1:5004/api/yuki/monster', options).then(res => res.json()).then(json => {
-        res.status(json.status).json(json);
+        res.status(200).json(json);
     });
 });
 
@@ -29,7 +29,7 @@ router.post("/monsters", verify, async(req, res) => {
     };
 
     fetch('http://127.0.0.1:5004/api/yuki/monster', options).then(res => res.json()).then(json => {
-        res.status(json.status).json(json);
+        res.status(200).json(json);
     });
 });
 
@@ -44,7 +44,7 @@ router.get("/attacks", verify, async(req, res) => {
     };
 
     fetch('http://127.0.0.1:5004/api/yuki/attack', options).then(res => res.json()).then(json => {
-        res.status(json.status).json(json);
+        res.status(200).json(json);
     });
 });
 
@@ -58,8 +58,8 @@ router.post("/attacks", verify, async(req, res) => {
         body: JSON.stringify(req.body)
     };
 
-    fetch('http://127.0.0.1:5004/api/yuki/attacks', options).then(res => res.json()).then(json => {
-        res.status(json.status).json(json);
+    fetch('http://127.0.0.1:5004/api/yuki/attack', options).then(res => res.json()).then(json => {
+        res.status(200).json(json);
     });
 });
 
