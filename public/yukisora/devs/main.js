@@ -1,5 +1,8 @@
 var error = "";
+var token;
+
 async function init() {
+    token = getCookie("auth");
     await fillAttacks();
     await fillEvolves();
     console.log("hello!");
@@ -10,7 +13,11 @@ async function init() {
 
 async function fillAttacks() {
     const options = {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        }
     };
     const response = await fetch('/api/yuki/attacks', options);
     const json = await response.json();
@@ -38,7 +45,11 @@ function createAttack(name) {
 
 async function fillEvolves() {
     const options = {
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        }
     };
     const response = await fetch('/api/yuki/monsters', options);
     const json = await response.json();
