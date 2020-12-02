@@ -228,7 +228,14 @@ body {
 }
 
 .textview a {
-    background: linear-gradient(150deg, rgba(255, 0, 0, 0.5), rgba(0, 0, 190, 0.5));
+    transition: all 250ms ease;
+    background: linear-gradient(150deg, rgb(74, 0, 158), rgb(1, 145, 109));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.textview a:hover {
+    background: linear-gradient(150deg, rgb(1, 145, 109), rgb(74, 0, 158));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
