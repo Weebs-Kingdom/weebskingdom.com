@@ -1,3 +1,16 @@
+#heart:hover label {
+    visibility: visible;
+    color: rgba(255, 255, 255, 1);
+}
+
+#heart label {
+    transition: all 400ms ease;
+    width: auto;
+    height: auto;
+    position: fixed;
+    color: rgba(0, 0, 0, 0);
+}
+
 #heart {
     position: relative;
     width: 100px;
@@ -27,6 +40,11 @@
     -ms-transform-origin: 0 100%;
     -o-transform-origin: 0 100%;
     transform-origin: 0 100%;
+}
+
+#heart:hover::after,
+#heart:hover::before {
+    background: #ff0000;
 }
 
 #heart:after {
