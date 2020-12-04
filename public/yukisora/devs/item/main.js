@@ -44,7 +44,7 @@ function createItem(name, idd) {
 }
 
 function getCheckedItem() {
-    var list = document.getElementById('list');
+    var list = document.getElementById('cooks');
     var divs = list.getElementsByTagName('div');
     var ids = [];
     for (var i = 0; i < divs.length; i += 1) {
