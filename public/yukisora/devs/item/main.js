@@ -58,7 +58,7 @@ function getCheckedItem() {
         errort.innerHTML = "Please select only one item!";
         return undefined;
     } else
-        return ids;
+        return ids[0];
 }
 
 async function submit() {
