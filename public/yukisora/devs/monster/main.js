@@ -162,8 +162,9 @@ async function submit() {
 
         if (js.status == 200) {
             errort.innerHTML = "Succesfully added monster!";
-            await delay(3000);
-            location.reload();
+            setTimeout(function() {
+                location.reload();
+            }, 3000);
         } else
             errort.innerHTML = "An error occured! " + JSON.stringify(js);
     } else

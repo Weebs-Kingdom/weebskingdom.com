@@ -37,7 +37,7 @@ async function auth(goToLoginOnFail) {
             console.log("not logged in!");
         }
     } catch (e) {
-
+        window.location.replace("/");
     }
 }
 
