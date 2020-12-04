@@ -97,7 +97,7 @@ async function submit() {
     var errort = document.getElementById('error');
     if (response)
         if (response.status == 200)
-            errort.innerHTML = "Succesfully added monster!";
+            errort.innerHTML = "Succesfully added item!";
         else
             errort.innerHTML = "An error occured! " + response.body;
     else
