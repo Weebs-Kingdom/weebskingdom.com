@@ -192,7 +192,6 @@ function createEditEntry(name, data) {
     btn.innerHTML = "Edit";
     btn.onclick = function() {
         buildEdit(data);
-        console.log("saved for function" + JSON.stringify(data));
     }
 
     br.appendChild(lbl);
@@ -200,12 +199,14 @@ function createEditEntry(name, data) {
 }
 
 function buildEdit(data) {
-    console.log(JSON.stringify(data) + " ssooos");
+    uncheckAll();
     const name = document.getElementById("name");
     const image = document.getElementById("imageUrl");
     const hp = document.getElementById("baseHp");
     const evlvl = document.getElementById("evolveLvl");
     const shown = document.getElementById("shown");
+    selectEvolves(data.evolves);
+    selectAttacks(data.attacks);
 
     name.value = data.name;
     image.value = data.imageUrl;
@@ -215,4 +216,43 @@ function buildEdit(data) {
     } catch (e) {}
     shown.checked = data.shown;
     editMode = true;
+}
+
+function uncheckAll() {
+    var list = document.getElementById('evList');
+    var divs = list.getElementsByTagName('div');
+    var ids = [];
+    for (var i = 0; i < divs.length; i += 1) {
+        divs[i].getElementsByTagName('input')[0].checked = false;
+    }
+}
+
+function selectEvolves(evs) {
+    var list = document.getElementById('evList');
+    var divs = list.getElementsByTagName('div');
+    var ids = [];
+    for (var i = 0; i < divs.length; i += 1) {
+        var id = divs[i].getElementsByTagName('p')[0].innerHTML;
+        for (let j = 0; j < evs.length; j++) {
+            if (id == evs[j]._id) {
+                divs[i].getElementsByTagName('input')[0].checked = true;
+                break;
+            }
+        }
+    }
+}
+
+function selectAttacks(evs) {
+    var list = document.getElementById('attacksList');
+    var divs = list.getElementsByTagName('div');
+    var ids = [];
+    for (var i = 0; i < divs.length; i += 1) {
+        var id = divs[i].getElementsByTagName('p')[0].innerHTML;
+        for (let j = 0; j < evs.length; j++) {
+            if (id == evs[j]._id) {
+                divs[i].getElementsByTagName('input')[0].checked = true;
+                break;
+            }
+        }
+    }
 }
