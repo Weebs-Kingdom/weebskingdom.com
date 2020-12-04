@@ -207,6 +207,8 @@ function createEditEntry(name, data) {
     var lbl = document.createElement("label");
     lbl.innerHTML = name;
 
+    var brr = document.createElement("br");
+
     var btn = document.createElement("button");
     btn.setAttribute("class", "btn");
     btn.innerHTML = "Edit";
@@ -216,6 +218,7 @@ function createEditEntry(name, data) {
 
     br.appendChild(lbl);
     br.appendChild(btn);
+    br.appendChild(brr);
 }
 
 function buildEdit(data) {
