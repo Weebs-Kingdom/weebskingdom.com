@@ -175,6 +175,7 @@ async function btnEdit() {
     const tr = document.getElementById("editListRoot");
     if (editMode) {
         editMode = false;
+        uncheckAll();
         tr.innerHTML = "";
         id = undefined;
         tr.style.visibility = "hidden";
