@@ -195,7 +195,7 @@ function createEditEntry(name, idd, data) {
 }
 
 function buildEdit(id, data) {
-    for (let i = 0; i < json.data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
         if (data[i]._id == id) {
             const name = document.getElementById("name");
             const image = document.getElementById("imageUrl");
