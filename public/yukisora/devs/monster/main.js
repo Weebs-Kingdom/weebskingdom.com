@@ -125,7 +125,7 @@ async function submit() {
         evolves: monsters,
         attacks: attacks
     }
-    const options = undefined;
+    var options = undefined;
 
     if (editMode) {
         options = {
