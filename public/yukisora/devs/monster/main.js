@@ -174,12 +174,14 @@ async function submit() {
 async function btnEdit() {
     const tr = document.getElementById("editListRoot");
     if (editMode) {
+        editMode = false;
         tr.innerHTML = "";
         id = undefined;
         tr.style.visibility = "hidden";
         tr.style.display = "none";
         return;
     }
+    editMode = true;
     tr.style.visibility = "visible";
     tr.style.display = "block";
 
@@ -232,7 +234,6 @@ function buildEdit(data) {
         evlvl.value = parseInt(data.evolveLvl);
     } catch (e) {}
     shown.checked = data.shown;
-    editMode = true;
 }
 
 function uncheckAll() {
