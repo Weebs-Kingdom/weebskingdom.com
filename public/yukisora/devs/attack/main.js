@@ -33,9 +33,11 @@ async function submit() {
     var errort = document.getElementById('error');
     if (response) {
         const js = await response.json();
-        if (js.status == 200)
+        if (js.status == 200) {
             errort.innerHTML = "Succesfully added attack!";
-        else
+            await delay(3000);
+            location.reload();
+        } else
             errort.innerHTML = "An error occured! " + response.body;
     } else
         errort.innerHTML = "An error occured! Fetching wasnt possible";

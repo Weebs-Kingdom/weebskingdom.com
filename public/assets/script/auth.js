@@ -70,6 +70,7 @@ function addDev() {
     var subMenu = createSubMenu(devs);
     createLi(subMenu, "/yukisora/devs/monster", "Monster");
     createLi(subMenu, "/yukisora/devs/attack", "Attack");
+    createLi(subMenu, "/yukisora/devs/item", "Item");
 }
 
 function createSubMenu(vin) {

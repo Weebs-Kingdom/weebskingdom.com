@@ -1,5 +1,6 @@
 var error = "";
 var token;
+var editMode = false;
 
 async function init() {
     token = getCookie("auth");
@@ -123,24 +124,93 @@ async function submit() {
         evolves: monsters,
         attacks: attacks
     }
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'auth-token': token
-        },
-        body: JSON.stringify(json)
-    };
+    const options = undefined;
+
+    if (editMode) {
+        options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': token
+            },
+            body: JSON.stringify(json)
+        };
+    } else {
+        options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': token
+            },
+            body: JSON.stringify(json)
+        };
+    }
 
     const response = await fetch('/api/yuki/monsters', options);
     var errort = document.getElementById('error');
     if (response) {
         const js = await response.json();
 
-        if (js.status == 200)
+        if (js.status == 200) {
             errort.innerHTML = "Succesfully added monster!";
-        else
+            await delay(3000);
+            location.reload();
+        } else
             errort.innerHTML = "An error occured! " + js;
     } else
         errort.innerHTML = "An error occured! Fetching wasnt possible";
+}
+
+async function btnEdit() {
+    const tr = document.getElementById("editListRoot");
+    tr.style.visibility = shown;
+
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': token
+        }
+    };
+    const response = await fetch('/api/yuki/monsters', options);
+    const json = await response.json();
+
+    for (let i = 0; i < json.data.length; i++) {
+        createEditEntry(json.data[i].name, json.data[i]._id, json.data);
+    }
+}
+
+function createEditEntry(name, idd, data) {
+    const br = document.getElementById("editList");
+
+    var lbl = document.createElement("label");
+    lbl.innerHTML = name;
+
+    var btn = document.createElement("button");
+    btn.onclick(ev => {
+        buildEdit(idd, data);
+    });
+
+    br.appendChild(lbl);
+    br.appendChild(btn);
+}
+
+function buildEdit(id, data) {
+    for (let i = 0; i < json.data.length; i++) {
+        if (data[i]._id == id) {
+            const name = document.getElementById("name");
+            const image = document.getElementById("imageUrl");
+            const hp = document.getElementById("baseHp");
+            const evlvl = document.getElementById("evolveLvl");
+            const shown = document.getElementById("shown");
+
+            name.innerHTML = data[i].name;
+            image.innerHTML = data[i].imageUrl;
+            hp.innerHTML = data[i].baseHp;
+            evlvl.innerHTML = data[i].evolveLvl;
+            shown.checked = data[i].shown;
+            editMode = true;
+            break;
+        }
+    }
 }
