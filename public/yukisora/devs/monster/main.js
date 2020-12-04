@@ -165,6 +165,7 @@ async function submit() {
 async function btnEdit() {
     const tr = document.getElementById("editListRoot");
     tr.style.visibility = "visible";
+    tr.style.display = "block";
 
     const options = {
         method: 'GET',
@@ -191,7 +192,7 @@ function createEditEntry(name, data) {
     btn.innerHTML = "Edit";
     btn.onclick = function() {
         buildEdit(data);
-        console.log("saved for function" + data);
+        console.log("saved for function" + JSON.stringify(data));
     }
 
     br.appendChild(lbl);
@@ -199,7 +200,7 @@ function createEditEntry(name, data) {
 }
 
 function buildEdit(data) {
-    console.log(data);
+    console.log(JSON.stringify(data) + " ssooos");
     const name = document.getElementById("name");
     const image = document.getElementById("imageUrl");
     const hp = document.getElementById("baseHp");
