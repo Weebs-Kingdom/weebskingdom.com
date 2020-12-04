@@ -2,6 +2,7 @@
 var error = "";
 var token;
 var editMode = false;
+var id;
 
 async function init() {
     token = getCookie("auth");
@@ -128,6 +129,10 @@ async function submit() {
     var options = undefined;
 
     if (editMode) {
+        var njson = {
+            data: json,
+            _id: id
+        };
         options = {
             method: 'PATCH',
             headers: {
@@ -199,6 +204,7 @@ function createEditEntry(name, data) {
 }
 
 function buildEdit(data) {
+    id = data._id;
     uncheckAll();
     const name = document.getElementById("name");
     const image = document.getElementById("imageUrl");
