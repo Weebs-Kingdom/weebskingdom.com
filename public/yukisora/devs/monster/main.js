@@ -163,7 +163,7 @@ async function submit() {
 
 async function btnEdit() {
     const tr = document.getElementById("editListRoot");
-    tr.style.visibility = shown;
+    tr.style.visibility = "shown";
 
     const options = {
         method: 'GET',
