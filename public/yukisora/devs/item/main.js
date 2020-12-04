@@ -93,7 +93,7 @@ async function submit() {
         body: JSON.stringify(json)
     };
 
-    const response = await fetch('/api/yuki/monsters', options);
+    const response = await fetch('/api/yuki/items', options);
     var errort = document.getElementById('error');
     if (response)
         if (response.status == 200)
