@@ -189,13 +189,17 @@ function createEditEntry(name, data) {
 
     var btn = document.createElement("button");
     btn.innerHTML = "Edit";
-    btn.onclick = function() { buildEdit(data); }
+    btn.onclick = function() {
+        buildEdit(data);
+        console.log("saved for function" + data);
+    }
 
     br.appendChild(lbl);
     br.appendChild(btn);
 }
 
 function buildEdit(data) {
+    console.log(data);
     const name = document.getElementById("name");
     const image = document.getElementById("imageUrl");
     const hp = document.getElementById("baseHp");
