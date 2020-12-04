@@ -208,7 +208,7 @@ function createEditEntry(name, data) {
     lbl.innerHTML = name;
 
     var btn = document.createElement("button");
-    btn.style.class = "btn";
+    btn.setAttribute("class", "btn");
     btn.innerHTML = "Edit";
     btn.onclick = function() {
         buildEdit(data);
