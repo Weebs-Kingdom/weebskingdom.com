@@ -163,7 +163,7 @@ async function submit() {
 
 async function btnEdit() {
     const tr = document.getElementById("editListRoot");
-    tr.style.visibility = "shown";
+    tr.style.visibility = "visible";
 
     const options = {
         method: 'GET',
@@ -187,6 +187,7 @@ function createEditEntry(name, idd, data) {
     lbl.innerHTML = name;
 
     var btn = document.createElement("button");
+    btn.innerHTML = "Edit";
     btn.onclick = function() { buildEdit(idd, data); }
 
     br.appendChild(lbl);
