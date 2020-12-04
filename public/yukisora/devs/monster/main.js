@@ -134,11 +134,13 @@ async function submit() {
 
     const response = await fetch('/api/yuki/monsters', options);
     var errort = document.getElementById('error');
-    if (response)
-        if (response.status == 200)
+    if (response) {
+        const js = await response.json();
+
+        if (js.status == 200)
             errort.innerHTML = "Succesfully added monster!";
         else
-            errort.innerHTML = "An error occured! " + response.body;
-    else
+            errort.innerHTML = "An error occured! " + js;
+    } else
         errort.innerHTML = "An error occured! Fetching wasnt possible";
 }

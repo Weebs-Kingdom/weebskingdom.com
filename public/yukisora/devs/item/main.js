@@ -20,7 +20,7 @@ async function fillItem() {
     const json = await response.json();
     if (json.status == 200) {
         for (var i = 0; i < json.data.length; i++) {
-            createItem(json.data[i].attackName, json.data[i]._id);
+            createItem(json.data[i].itemName, json.data[i]._id);
         }
     } else {
         error += json.message;
@@ -95,11 +95,13 @@ async function submit() {
 
     const response = await fetch('/api/yuki/items', options);
     var errort = document.getElementById('error');
-    if (response)
-        if (response.status == 200)
+    if (response) {
+        const js = await response.json();
+
+        if (js.status == 200)
             errort.innerHTML = "Succesfully added item!";
         else
-            errort.innerHTML = "An error occured! " + response.body;
-    else
+            errort.innerHTML = "An error occured! " + js;
+    } else
         errort.innerHTML = "An error occured! Fetching wasnt possible";
 }

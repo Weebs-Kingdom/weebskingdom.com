@@ -31,11 +31,12 @@ async function submit() {
 
     const response = await fetch('/api/yuki/attacks', options);
     var errort = document.getElementById('error');
-    if (response)
-        if (response.status == 200)
+    if (response) {
+        const js = await response.json();
+        if (js.status == 200)
             errort.innerHTML = "Succesfully added attack!";
         else
             errort.innerHTML = "An error occured! " + response.body;
-    else
+    } else
         errort.innerHTML = "An error occured! Fetching wasnt possible";
 }
