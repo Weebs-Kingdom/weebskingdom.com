@@ -257,7 +257,7 @@ function selectEvolves(evs) {
     for (var i = 0; i < divs.length; i += 1) {
         var id = divs[i].getElementsByTagName('p')[0].innerHTML;
         for (let j = 0; j < evs.length; j++) {
-            if (id == evs[j]._id) {
+            if (id == evs[j]) {
                 divs[i].getElementsByTagName('input')[0].checked = true;
                 break;
             }
@@ -272,7 +272,7 @@ function selectAttacks(evs) {
     for (var i = 0; i < divs.length; i += 1) {
         var id = divs[i].getElementsByTagName('p')[0].innerHTML;
         for (let j = 0; j < evs.length; j++) {
-            if (id == evs[j]._id) {
+            if (id == evs[j]) {
                 divs[i].getElementsByTagName('input')[0].checked = true;
                 break;
             }
