@@ -117,7 +117,7 @@ async function submit() {
     const evlvl = document.getElementById("evolveLvl").value;
     const shown = document.getElementById("shown").checked;
 
-    const json = {
+    var json = {
         name: name,
         imageUrl: image,
         baseHP: hp,
@@ -125,7 +125,8 @@ async function submit() {
         shown: shown,
         evolves: monsters,
         attacks: attacks
-    }
+    };
+
     var options = undefined;
 
     if (editMode) {
@@ -133,6 +134,8 @@ async function submit() {
             data: json,
             _id: id
         };
+
+        json = njson;
         options = {
             method: 'PATCH',
             headers: {
