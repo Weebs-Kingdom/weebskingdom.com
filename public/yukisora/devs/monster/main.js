@@ -176,11 +176,11 @@ async function btnEdit() {
     const json = await response.json();
 
     for (let i = 0; i < json.data.length; i++) {
-        createEditEntry(json.data[i].name, json.data[i]._id, json.data);
+        createEditEntry(json.data[i].name, json.data[i]);
     }
 }
 
-function createEditEntry(name, idd, data) {
+function createEditEntry(name, data) {
     const br = document.getElementById("editList");
 
     var lbl = document.createElement("label");
@@ -195,21 +195,16 @@ function createEditEntry(name, idd, data) {
 }
 
 function buildEdit(id, data) {
-    for (let i = 0; i < data.length; i++) {
-        if (data[i]._id == id) {
-            const name = document.getElementById("name");
-            const image = document.getElementById("imageUrl");
-            const hp = document.getElementById("baseHp");
-            const evlvl = document.getElementById("evolveLvl");
-            const shown = document.getElementById("shown");
+    const name = document.getElementById("name");
+    const image = document.getElementById("imageUrl");
+    const hp = document.getElementById("baseHp");
+    const evlvl = document.getElementById("evolveLvl");
+    const shown = document.getElementById("shown");
 
-            name.innerHTML = data[i].name;
-            image.innerHTML = data[i].imageUrl;
-            hp.innerHTML = data[i].baseHp;
-            evlvl.innerHTML = data[i].evolveLvl;
-            shown.checked = data[i].shown;
-            editMode = true;
-            break;
-        }
-    }
+    name.innerHTML = data.name;
+    image.innerHTML = data.imageUrl;
+    hp.innerHTML = data.baseHp;
+    evlvl.innerHTML = data.evolveLvl;
+    shown.checked = data.shown;
+    editMode = true;
 }
