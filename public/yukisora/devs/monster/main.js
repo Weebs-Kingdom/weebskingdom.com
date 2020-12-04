@@ -173,6 +173,13 @@ async function submit() {
 
 async function btnEdit() {
     const tr = document.getElementById("editListRoot");
+    if (editMode) {
+        tr.innerHTML = "";
+        id = undefined;
+        tr.style.visibility = "hidden";
+        tr.style.display = "none";
+        return;
+    }
     tr.style.visibility = "visible";
     tr.style.display = "block";
 
