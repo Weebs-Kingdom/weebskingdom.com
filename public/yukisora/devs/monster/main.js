@@ -187,9 +187,7 @@ function createEditEntry(name, idd, data) {
     lbl.innerHTML = name;
 
     var btn = document.createElement("button");
-    btn.onclick(ev => {
-        buildEdit(idd, data);
-    });
+    btn.onclick = function() { buildEdit(idd, data); }
 
     br.appendChild(lbl);
     br.appendChild(btn);

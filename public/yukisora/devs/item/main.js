@@ -98,9 +98,11 @@ async function submit() {
     if (response) {
         const js = await response.json();
 
-        if (js.status == 200)
+        if (js.status == 200) {
             errort.innerHTML = "Succesfully added item!";
-        else
+            await delay(3000);
+            location.reload();
+        } else
             errort.innerHTML = "An error occured! " + js;
     } else
         errort.innerHTML = "An error occured! Fetching wasnt possible";
