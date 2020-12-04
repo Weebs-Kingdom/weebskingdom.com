@@ -207,10 +207,10 @@ function buildEdit(data) {
     const evlvl = document.getElementById("evolveLvl");
     const shown = document.getElementById("shown");
 
-    name.innerHTML = data.name;
-    image.innerHTML = data.imageUrl;
-    hp.innerHTML = data.baseHp;
-    evlvl.innerHTML = data.evolveLvl;
+    name.value = data.name;
+    image.value = data.imageUrl;
+    hp.value = data.baseHp;
+    evlvl.value = data.evolveLvl;
     shown.checked = data.shown;
     editMode = true;
 }
