@@ -209,8 +209,8 @@ function buildEdit(data) {
 
     name.value = data.name;
     image.value = data.imageUrl;
-    hp.value = data.baseHp;
-    evlvl.value = data.evolveLvl;
+    hp.value = parseInt(data.baseHP);
+    evlvl.value = parseInt(data.evolveLvl);
     shown.checked = data.shown;
     editMode = true;
 }
