@@ -1,3 +1,4 @@
+//@ts-check
 var error = "";
 var token;
 var editMode = false;
@@ -31,7 +32,7 @@ async function fillAttacks() {
 
 function createAttack(name, idd) {
     var id = document.createElement('p');
-    id.setAttribute("hidden", true);
+    id.setAttribute("hidden", "true");
     id.innerHTML = idd;
     var list = document.getElementById('attacksList');
     var di = document.createElement('div');
@@ -47,7 +48,7 @@ function createAttack(name, idd) {
 
 function createEvolve(name, idd) {
     var id = document.createElement('p');
-    id.setAttribute("hidden", true);
+    id.setAttribute("hidden", "true");
     id.innerHTML = idd;
     var list = document.getElementById('evList');
     var di = document.createElement('div');
@@ -188,13 +189,13 @@ function createEditEntry(name, data) {
 
     var btn = document.createElement("button");
     btn.innerHTML = "Edit";
-    btn.onclick = function() { buildEdit(idd, data); }
+    btn.onclick = function() { buildEdit(data); }
 
     br.appendChild(lbl);
     br.appendChild(btn);
 }
 
-function buildEdit(id, data) {
+function buildEdit(data) {
     const name = document.getElementById("name");
     const image = document.getElementById("imageUrl");
     const hp = document.getElementById("baseHp");
