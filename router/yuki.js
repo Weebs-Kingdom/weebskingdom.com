@@ -31,8 +31,8 @@ router.post("/attacks", verify, async(req, res) => {
     makePost(req, res, "attack");
 });
 
-router.post("/attacks", verify, async(req, res) => {
-    makePost(req, res, "attack");
+router.patch("/attacks", verify, async(req, res) => {
+    makePatch(req, res, "attack");
 });
 
 router.get("/items", verify, async(req, res) => {

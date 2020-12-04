@@ -38,7 +38,7 @@ async function submit() {
             await delay(3000);
             location.reload();
         } else
-            errort.innerHTML = "An error occured! " + response.body;
+            errort.innerHTML = "An error occured! " + JSON.stringify(js);
     } else
         errort.innerHTML = "An error occured! Fetching wasnt possible";
 }
