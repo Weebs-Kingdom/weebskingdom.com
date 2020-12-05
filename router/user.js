@@ -121,7 +121,7 @@ router.post("/login", async(req, res) => {
     if (error) return res.status(400).json({ status: 400, message: error.details[0].message });
 
     //Check if the user is in db
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email.toLowerCase() });
     if (!user) return res.status(400).json({ status: 400, message: "Email or password is wrong!" });
 
     //Check if password is correct
