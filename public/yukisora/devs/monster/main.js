@@ -116,12 +116,13 @@ async function submit() {
     const hp = document.getElementById("baseHp").value;
     const evlvl = document.getElementById("evolveLvl").value;
     const shown = document.getElementById("shown").checked;
-    const rarity = document.getElementById("rarity").value;
     const lvl = document.getElementById("initialLevel").value;
+    var e = document.getElementById("rarity");
+    const select = e.options[e.selectedIndex].text;
 
     var json = {
         initialLevel: lvl,
-        rarity: rarity,
+        rarity: select,
         name: name,
         imageUrl: image,
         baseHP: hp,
@@ -235,6 +236,12 @@ function buildEdit(data) {
     const shown = document.getElementById("shown");
     const rarity = document.getElementById("rarity");
     const lvl = document.getElementById("initialLevel");
+
+    for (let i = 0; i < rarity.options.length; i++) {
+        if (rarity.options[i] == data.rarity) {
+            rarity.selectedIndex = i;
+        }
+    }
 
     selectEvolves(data.evolves);
     selectAttacks(data.attacks);
