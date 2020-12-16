@@ -125,7 +125,7 @@ async function submit() {
         rarity: select,
         name: name,
         imageUrl: image,
-        baseHP: hp,
+        baseHp: hp,
         evolveLvl: evlvl,
         shown: shown,
         evolves: monsters,
