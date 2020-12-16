@@ -166,7 +166,7 @@ async function submit() {
             errort.innerHTML = "Succesfully added monster!";
             setTimeout(function() {
                 location.reload();
-            }, 3000);
+            }, 1000);
         } else
             errort.innerHTML = "An error occured! " + JSON.stringify(js);
     } else
