@@ -117,8 +117,10 @@ async function submit() {
     const evlvl = document.getElementById("evolveLvl").value;
     const shown = document.getElementById("shown").checked;
     const rarity = document.getElementById("rarity").value;
+    const lvl = document.getElementById("initialLevel").value;
 
     var json = {
+        initialLevel: lvl,
         rarity: rarity,
         name: name,
         imageUrl: image,
@@ -232,9 +234,12 @@ function buildEdit(data) {
     const evlvl = document.getElementById("evolveLvl");
     const shown = document.getElementById("shown");
     const rarity = document.getElementById("rarity");
+    const lvl = document.getElementById("initialLevel");
+
     selectEvolves(data.evolves);
     selectAttacks(data.attacks);
 
+    lvl.value = data.initialLevel;
     rarity.value = data.rarity;
     name.value = data.name;
     image.value = data.imageUrl;
