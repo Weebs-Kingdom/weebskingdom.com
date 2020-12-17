@@ -69,7 +69,6 @@ async function submit() {
     const des = document.getElementById("description").value;
     var e = document.getElementById("rarity");
     const select = e.options[e.selectedIndex].text;
-    const hp = document.getElementById("baseHp");
 
     if (!item && cookable) {
         var errort = document.getElementById('error');
@@ -78,7 +77,6 @@ async function submit() {
     }
 
     const json = {
-        baseHp: hp,
         itemName: name,
         itemRarity: select,
         itemImageURL: image,
