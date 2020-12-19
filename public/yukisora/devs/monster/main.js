@@ -276,6 +276,13 @@ function uncheckAll() {
     for (var i = 0; i < divs.length; i += 1) {
         divs[i].getElementsByTagName('input')[0].checked = false;
     }
+
+    list = document.getElementById('attacksList');
+    divs = list.getElementsByTagName('div');
+    var ids = [];
+    for (var i = 0; i < divs.length; i += 1) {
+        divs[i].getElementsByTagName('input')[0].checked = false;
+    }
 }
 
 function selectEvolves(evs) {
