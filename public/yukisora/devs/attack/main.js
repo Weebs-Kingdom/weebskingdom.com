@@ -13,11 +13,15 @@ async function submit() {
     var e = document.getElementById("attackStatusEffect");
     const select = e.options[e.selectedIndex].text;
 
+    var ee = document.getElementById("monstertype");
+    const monstertype = ee.options[ee.selectedIndex].text;
+
     const json = {
         baseDmg: dmg,
         attackName: name,
         level: lvl,
         maxUsage: usage,
+        attackType: monstertype,
         statusEffect: select
     }
     const options = {

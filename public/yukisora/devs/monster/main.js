@@ -120,6 +120,10 @@ async function submit() {
     var e = document.getElementById("rarity");
     const select = e.options[e.selectedIndex].text;
 
+    var ee = document.getElementById("monstertype");
+    const monstertype = ee.options[ee.selectedIndex].text;
+
+
     var json = {
         initialLevel: lvl,
         rarity: select,
@@ -129,7 +133,8 @@ async function submit() {
         evolveLvl: evlvl,
         shown: shown,
         evolves: monsters,
-        attacks: attacks
+        attacks: attacks,
+        monsterType: monstertype
     };
 
     var options = undefined;
@@ -236,10 +241,17 @@ function buildEdit(data) {
     const shown = document.getElementById("shown");
     const rarity = document.getElementById("rarity");
     const lvl = document.getElementById("initialLevel");
+    const monstertype = document.getElementById("monsterType");
 
     for (let i = 0; i < rarity.options.length; i++) {
         if (rarity.options[i] == data.rarity) {
             rarity.selectedIndex = i;
+        }
+    }
+
+    for (let i = 0; i < monstertype.options.length; i++) {
+        if (monstertype.options[i] == data.monsterType) {
+            monstertype.selectedIndex = i;
         }
     }
 
