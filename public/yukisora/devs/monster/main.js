@@ -241,7 +241,7 @@ function buildEdit(data) {
     const shown = document.getElementById("shown");
     const rarity = document.getElementById("rarity");
     const lvl = document.getElementById("initialLevel");
-    const monstertype = document.getElementById("monsterType");
+    const monstertype = document.getElementById("monstertype");
 
     for (let i = 0; i < rarity.options.length; i++) {
         if (rarity.options[i] == data.rarity) {
