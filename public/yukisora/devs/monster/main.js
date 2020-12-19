@@ -244,13 +244,13 @@ function buildEdit(data) {
     const monstertype = document.getElementById("monstertype");
 
     for (let i = 0; i < rarity.options.length; i++) {
-        if (rarity.options[i] == data.rarity) {
+        if (rarity.options[i].value == data.rarity) {
             rarity.selectedIndex = i;
         }
     }
 
     for (let i = 0; i < monstertype.options.length; i++) {
-        if (monstertype.options[i] == data.monsterType[0]) {
+        if (monstertype.options[i].value == data.monsterType[0]) {
             monstertype.selectedIndex = i;
         }
     }
