@@ -134,7 +134,7 @@ async function submit() {
         shown: shown,
         evolves: monsters,
         attacks: attacks,
-        monsterType: monstertype
+        monsterType: [monstertype]
     };
 
     var options = undefined;
@@ -250,7 +250,7 @@ function buildEdit(data) {
     }
 
     for (let i = 0; i < monstertype.options.length; i++) {
-        if (monstertype.options[i] == data.monsterType) {
+        if (monstertype.options[i] == data.monsterType[0]) {
             monstertype.selectedIndex = i;
         }
     }
