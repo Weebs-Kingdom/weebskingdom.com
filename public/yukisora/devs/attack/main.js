@@ -18,7 +18,7 @@ async function submit() {
     var ee = document.getElementById("monstertype");
     const monstertype = ee.options[ee.selectedIndex].text;
 
-    const json = {
+    var json = {
         baseDmg: dmg,
         attackName: name,
         level: lvl,
