@@ -140,7 +140,16 @@ function buildEdit(data) {
     }
 
     name.value = data.attackName;
-    dmg.value = parseInt(data.baseDmg);
-    lvl.value = parseInt(data.level);
+    try {
+        dmg.value = parseInt(data.baseDmg);
+    } catch (e) {
+
+    }
+    try {
+        lvl.value = parseInt(data.level);
+    } catch (e) {
+
+    }
+
     usage.value = parseInt(data.maxUsage);
 }
