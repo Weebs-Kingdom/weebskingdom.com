@@ -127,6 +127,9 @@ function buildEdit(data) {
     const type = document.getElementById("monstertype");
     const status = document.getElementById("attackStatusEffect");
 
+    type.selectedIndex = 0;
+    status.selectedIndex = 0;
+
     for (let i = 0; i < type.options.length; i++) {
         if (type.options[i].value == data.attackType) {
             type.selectedIndex = i;
