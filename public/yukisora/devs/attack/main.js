@@ -26,7 +26,7 @@ async function submit() {
         attackType: monstertype,
         statusEffect: select
     }
-    const options = undefined;
+    var options = undefined;
 
     if (editMode) {
         var njson = {
