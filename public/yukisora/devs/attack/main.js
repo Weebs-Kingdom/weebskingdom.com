@@ -130,7 +130,7 @@ function buildEdit(data) {
     type.selectedIndex = 0;
     status.selectedIndex = 0;
 
-    for (let i = 0; i < type.options.length; i++) {
+    for (let i = 1; i < type.options.length; i++) {
         if (type.options[i].value == data.attackType) {
             type.selectedIndex = i;
         }
