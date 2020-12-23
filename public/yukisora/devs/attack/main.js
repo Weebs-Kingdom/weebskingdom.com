@@ -94,7 +94,7 @@ async function btnEdit() {
     const json = await response.json();
 
     for (let i = 0; i < json.data.length; i++) {
-        createEditEntry(json.data[i].name, json.data[i]);
+        createEditEntry(json.data[i].attackName, json.data[i]);
     }
 }
 
