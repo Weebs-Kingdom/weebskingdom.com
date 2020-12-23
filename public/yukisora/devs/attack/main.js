@@ -120,7 +120,6 @@ function createEditEntry(name, data) {
 
 function buildEdit(data) {
     id = data._id;
-    uncheckAll();
     const name = document.getElementById("attackName");
     const dmg = document.getElementById("attackDmg");
     const lvl = document.getElementById("attackLvl");
