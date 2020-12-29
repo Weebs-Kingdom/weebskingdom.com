@@ -3,6 +3,7 @@ var error = "";
 var token;
 var editMode = false;
 var id;
+var data = undefined;
 
 async function init() {
     resetAttack();
@@ -15,6 +16,7 @@ async function init() {
 }
 
 async function fillAttacks() {
+    document.getElementById('attacksList').innerHTML = "";
     const options = {
         method: 'GET',
         headers: {
@@ -234,6 +236,7 @@ function createEditEntry(name, data) {
 }
 
 function buildEdit(data) {
+    this.data = data;
     id = data._id;
     uncheckAll();
     const name = document.getElementById("name");
@@ -416,6 +419,9 @@ async function submitAttack() {
             errort.innerHTML = "Succesfully added attack!";
             setTimeout(async function() {
                 await fillAttacks();
+                if (data != undefined) {
+                    buildEdit(data);
+                }
             }, 100);
         } else
             errort.innerHTML = "An error occured! " + JSON.stringify(js);
