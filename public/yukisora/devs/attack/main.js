@@ -1,7 +1,7 @@
 var error = "";
 var token;
-var editMode = false;
-var id;
+var attackEditMode = false;
+var atId;
 
 async function init() {
     token = getCookie("auth");
@@ -28,10 +28,10 @@ async function submit() {
     }
     var options = undefined;
 
-    if (editMode) {
+    if (attackEditMode) {
         var njson = {
             data: json,
-            _id: id
+            _id: atId
         };
 
         json = njson;
@@ -71,15 +71,15 @@ async function submit() {
 
 async function btnEdit() {
     const tr = document.getElementById("editListRoot");
-    if (editMode) {
-        editMode = false;
+    if (attackEditMode) {
+        attackEditMode = false;
         document.getElementById("editList").innerHTML = "";
-        id = undefined;
+        atId = undefined;
         tr.style.visibility = "hidden";
         tr.style.display = "none";
         return;
     }
-    editMode = true;
+    attackEditMode = true;
     tr.style.visibility = "visible";
     tr.style.display = "block";
 
@@ -119,7 +119,7 @@ function createEditEntry(name, data) {
 }
 
 function buildEdit(data) {
-    id = data._id;
+    atId = data._id;
     const name = document.getElementById("attackName");
     const dmg = document.getElementById("attackDmg");
     const lvl = document.getElementById("attackLvl");
