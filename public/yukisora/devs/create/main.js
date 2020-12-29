@@ -430,10 +430,10 @@ async function submitAttack() {
 }
 
 async function btnEditAt() {
-    const tr = document.getElementById("editListRoot");
+    const tr = document.getElementById("editListRootAt");
     if (attackEditMode) {
         attackEditMode = false;
-        document.getElementById("editList").innerHTML = "";
+        document.getElementById("editListAt").innerHTML = "";
         atId = undefined;
         tr.style.visibility = "hidden";
         tr.style.display = "none";
@@ -459,7 +459,7 @@ async function btnEditAt() {
 }
 
 function createEditEntryAt(name, data) {
-    const br = document.getElementById("editList");
+    const br = document.getElementById("editListAt");
 
     var lbl = document.createElement("label");
     lbl.innerHTML = name;
