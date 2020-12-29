@@ -429,7 +429,7 @@ async function submitAttack() {
         errort.innerHTML = "An error occured! Fetching wasnt possible";
 }
 
-async function btnEdit() {
+async function btnEditAt() {
     const tr = document.getElementById("editListRoot");
     if (attackEditMode) {
         attackEditMode = false;
@@ -454,11 +454,11 @@ async function btnEdit() {
     const json = await response.json();
 
     for (let i = 0; i < json.data.length; i++) {
-        createEditEntry(json.data[i].attackName, json.data[i]);
+        createEditEntryAt(json.data[i].attackName, json.data[i]);
     }
 }
 
-function createEditEntry(name, data) {
+function createEditEntryAt(name, data) {
     const br = document.getElementById("editList");
 
     var lbl = document.createElement("label");
@@ -470,7 +470,7 @@ function createEditEntry(name, data) {
     btn.setAttribute("class", "btn");
     btn.innerHTML = "Edit";
     btn.onclick = function() {
-        buildEdit(data);
+        buildEditAt(data);
     }
 
     br.appendChild(lbl);
@@ -478,7 +478,7 @@ function createEditEntry(name, data) {
     br.appendChild(brr);
 }
 
-function buildEdit(data) {
+function buildEditAt(data) {
     atId = data._id;
     const name = document.getElementById("attackName");
     const dmg = document.getElementById("attackDmg");
