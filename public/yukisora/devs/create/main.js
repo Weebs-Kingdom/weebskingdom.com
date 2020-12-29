@@ -328,7 +328,7 @@ function resetMonster() {
     document.getElementById("monstertype").selectedIndex = 0;
 }
 
-function createAttack() {
+function createAttackBtn() {
     var cl = document.getElementById("close");
     document.getElementById("createAttackButton").hidden = true;
     cl.hidden = true;
@@ -340,7 +340,7 @@ function createAttack() {
     dialog.showModal();
 }
 
-function closeAttack() {
+function closeAttackBtn() {
     var cl = document.getElementById("close");
     cl.hidden = true;
     document.getElementById("createAttackButton").hidden = false;
