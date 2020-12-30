@@ -8,8 +8,6 @@ var attacks = undefined;
 var evolves = undefined;
 
 async function init() {
-    resetAttack();
-    resetMonster();
     token = getCookie("auth");
     await loadAttacks();
     await loadEvolves();
