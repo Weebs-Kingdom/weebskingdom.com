@@ -10,35 +10,37 @@
     <meta name="description" content="Meine Homepage über Projecte usw.">
     <meta name="theme-color" content="#ffffff">
 </head>
-<button style="margin-top: 6em;" class="fixedBtn" id="createAttackButton" onclick="createAttackBtn()" type="button">Create Attack</button>
-<dialog id="attackDialog">
-    <div id="attack">
-        <button style="margin-top: 6em;" class="fixedBtn denyBtn" id="close" type="button" onclick="closeAttackBtn()">Close</button>
-        <div class="textview">
-            <button style="margin-top: 1em;" class="btn" id="editBtn" type="button" onclick="btnEditAt()">Edit</button>
-            <div style="visibility: hidden; display: none; text-align: left;" id="editListRootAt"><label>Edit</label>
-                <div class="list" id="editListAt"></div>
+
+<body onload="auth(true), init()">
+    <button style="margin-top: 6em;" class="fixedBtn" id="createAttackButton" onclick="createAttackBtn()" type="button">Create Attack</button>
+    <dialog id="attackDialog">
+        <div id="attack">
+            <button style="margin-top: 6em;" class="fixedBtn denyBtn" id="close" type="button" onclick="closeAttackBtn()">Close</button>
+            <div class="textview">
+                <button style="margin-top: 1em;" class="btn" id="editBtn" type="button" onclick="btnEditAt()">Edit</button>
+                <div style="visibility: hidden; display: none; text-align: left;" id="editListRootAt"><label>Edit</label>
+                    <div class="list" id="editListAt"></div>
+                </div>
             </div>
-        </div>
-        <div class="textview" id="createMonster">
-            <div class="form__group field">
-                <input type="input" class="form__field" placeholder="Attack Name" name="Attack Name" id='attackName' required />
-                <label for="attackName" class="form__label">Attack Name</label>
-            </div>
-            <div class="form__group field">
-                <input type="number" class="form__field" placeholder="Attack Damage" name="Attack Damage" id='attackDmg' required />
-                <label for="attackDmg" class="form__label">Attack Damage</label>
-            </div>
-            <div class="form__group field">
-                <input type="number" class="form__field" placeholder="Level" name="Level" id='attackLvl' required />
-                <label for="attackLvl" class="form__label">Level</label>
-            </div>
-            <div class="form__group field">
-                <input type="number" class="form__field" placeholder="Max Usages" name="Max Usages" id='attackUsage' required />
-                <label for="attackUsage" class="form__label">Max Usages</label>
-            </div>
-            <div class="form__group field">
-                <select id="attackmonstertype">
+            <div class="textview" id="createMonster">
+                <div class="form__group field">
+                    <input type="input" class="form__field" placeholder="Attack Name" name="Attack Name" id='attackName' required />
+                    <label for="attackName" class="form__label">Attack Name</label>
+                </div>
+                <div class="form__group field">
+                    <input type="number" class="form__field" placeholder="Attack Damage" name="Attack Damage" id='attackDmg' required />
+                    <label for="attackDmg" class="form__label">Attack Damage</label>
+                </div>
+                <div class="form__group field">
+                    <input type="number" class="form__field" placeholder="Level" name="Level" id='attackLvl' required />
+                    <label for="attackLvl" class="form__label">Level</label>
+                </div>
+                <div class="form__group field">
+                    <input type="number" class="form__field" placeholder="Max Usages" name="Max Usages" id='attackUsage' required />
+                    <label for="attackUsage" class="form__label">Max Usages</label>
+                </div>
+                <div class="form__group field">
+                    <select id="attackmonstertype">
                     <option>normal</option>
                     <option>psychic</option>
                     <option>fighting</option>
@@ -58,10 +60,10 @@
                     <option>dark</option>
                     <option>fairy</option>
                 </select>
-                <label for="monstertype" class="form__label">Monstertype</label>
-            </div>
-            <div class="form__group field">
-                <select id="attackStatusEffect">
+                    <label for="monstertype" class="form__label">Monstertype</label>
+                </div>
+                <div class="form__group field">
+                    <select id="attackStatusEffect">
                     <option></option>
                     <option>burn</option>
                     <option>poison</option>
@@ -70,15 +72,13 @@
                     <option>sleep</option>
                     <option>confusion</option>
                 </select>
-                <label for="attackStatusEffect" class="form__label">Status Effect</label>
+                    <label for="attackStatusEffect" class="form__label">Status Effect</label>
+                </div>
+                <p class="message" id="aterror"></p>
+                <button style="margin-top: 6em;" class="btn" id="submitBtn" type="button" onclick="submitAttack()">Submit</button>
             </div>
-            <p class="message" id="aterror"></p>
-            <button style="margin-top: 6em;" class="btn" id="submitBtn" type="button" onclick="submitAttack()">Submit</button>
         </div>
-    </div>
-</dialog>
-
-<body onload="auth(true), init()">
+    </dialog>
     <div>
         <input type="checkbox" id="main-navigation-toggle" class="btn btn--close" title="Toggle main navigation" />
         <label for="main-navigation-toggle">
