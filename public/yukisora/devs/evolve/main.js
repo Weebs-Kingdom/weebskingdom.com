@@ -128,39 +128,9 @@ function buildOneEvForm(div) {
     createField("baseHp", "number", "Base HP", div);
     createField("initialLevel", "number", "Initial Level", div);
     createField("evolveLvl", "number", "Evolve Level", div);
-    div.innerHTML += "<div class=\"form__group field\"> <select id = \"rarity\"> <option > normal < /option> <option > epic < /option> <option > legendary < /option> <option > mystic < /option> </select> <label for = \"rarity\" class=\"form__label\">Rarity</label> </div> <
-    div class = \"form__group field\"> <
-    select id = \"monstertype\"> <
-    option > normal < /option> <
-    option > psychic < /option> <
-    option > fighting < /option> <
-    option > flying < /option> <
-    option > poison < /option> <
-    option > ground < /option> <
-    option > rock < /option> <
-    option > bug < /option> <
-    option > ghost < /option> <
-    option > steel < /option> <
-    option > fire < /option> <
-    option > water < /option> <
-    option > grass < /option> <
-    option > electric < /option> <
-    option > ice < /option> <
-    option > dragon < /option> <
-    option > dark < /option> <
-    option > fairy < /option> < /
-    select > <
-        label
-    for = \"monstertype\" class=\"form__label\">Monstertype</label> < /
-    div > ";
-
+    div.innerHTML += '<div class=\"form__group field\"> <select id = \"rarity\"> <option > normal < /option> <option > epic < /option> <option > legendary < /option> <option > mystic < /option> </select> <label for = \"rarity\" class=\"form__label\">Rarity</label> </div> <div class = \"form__group field\"> <select id = \"monstertype\"> <option > normal < /option> <option > psychic < /option> <option > fighting < /option> <option > flying < /option> <option > poison < /option> <option > ground < /option> <option > rock < /option> <option > bug < /option> <option > ghost < /option> <option > steel < /option> <option > fire < /option> <option > water < /option> <option > grass < /option> <option > electric < /option> <option > ice < /option> <option > dragon < /option> <option > dark < /option> <option > fairy < /option> < /select > <label for = \"monstertype\" class=\"form__label\">Monstertype</label> < /div > ';
     createField("shown", "checkbox", "Shown", div);
-    div.innerHTML += "<div class=\"listBody\"><label>Evolves to:</label> <
-    div class = \"list\" id=\"evList\"></div> < /
-    div > <
-        div class = \"listBody\"><label>Attacks:</label> <
-    div class = \"list\" id=\"attacksList\"></div> < /
-    div > ";
+    div.innerHTML += '<div class=\"listBody\"><label>Evolves to:</label> <div class = \"list\" id=\"evList\"></div> < /div > <div class = \"listBody\"><label>Attacks:</label> <div class = \"list\" id=\"attacksList\"></div> < /div > ';
 }
 
 function createField(name, type, place, ind) {
