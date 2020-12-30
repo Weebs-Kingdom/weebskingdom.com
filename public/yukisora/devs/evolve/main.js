@@ -167,7 +167,6 @@ function findEvolveBevore(data) {
 }
 
 async function loadAttacks() {
-    document.getElementById('attacksList').innerHTML = "";
     const options = {
         method: 'GET',
         headers: {
