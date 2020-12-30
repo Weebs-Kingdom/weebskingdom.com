@@ -46,7 +46,7 @@ function buildEvolve(data) {
     var findNew = true;
     while (findNew) {
         const d = findEvolveBevore(evsList[0]);
-        if (d != undefined || d.length > 0) {
+        if (d != undefined && d.length > 0) {
             evsList.unshift(d);
         } else {
             findNew = false;
@@ -56,7 +56,7 @@ function buildEvolve(data) {
 
     while (findNew) {
         const d = findEvolveAfter(evsList[evsList.length - 1]);
-        if (d != undefined || d.length > 0) {
+        if (d != undefined && d.length > 0) {
             evsList.push(d);
         } else {
             findNew = false;
