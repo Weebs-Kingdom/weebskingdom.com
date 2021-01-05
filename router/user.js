@@ -139,7 +139,6 @@ router.get("/auth", verify, async(req, res) => {
 });
 
 router.post("/genToken", verify, vAdmin, async(req, res) => {
-    console.log("called");
     var maxUse = req.body.maxUse;
     if (!maxUse) {
         maxUse = 1;
@@ -148,25 +147,19 @@ router.post("/genToken", verify, vAdmin, async(req, res) => {
     }
 
     var token;
-    console.log("we've got this far");
     var doItAgain = true;
     while (true) {
         token = makeToken(6);
-        console.log("we've got this far and have a token named " + token);
         if (Tokens.findOne({ token: token }).token != token) break;
     }
-
-    console.log("have a token " + token);
 
     const cToken = new Tokens({
         token: token,
         maxUse: maxUse
-    });
-    console.log("a object");
+    })
 
     try {
         const savedToken = await cToken.save();
-        console.log("saved");
         res.status(200).json({ status: 200, message: savedToken.token });
     } catch (er) {
         res.status(400).json({ status: 400, message: "Error while creating new token!", error: err });
