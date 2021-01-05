@@ -1,6 +1,6 @@
 {
   "name": "index",
-  "version": "1.0.0",
+  "version": "PATCH_1.1",
   "description": "Site for MindCollaps.de",
   "main": "index.js",
   "scripts": {
