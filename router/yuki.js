@@ -1,73 +1,80 @@
 const router = require("express").Router();
 const verify = require("../middleware/verifyLoginToken");
 const vAdmin = require("../middleware/verifyAdminAcces");
+const vDev = require("../middleware/verifyDev");
 const fetch = require('node-fetch');
 
-router.get("/monsters", verify, async(req, res) => {
-    makeGet(res, "monster");
+//dev
+router.get("/monsters", verify, vDev, async(req, res) => {
+    redirectGet(res, "monster");
 });
 
-router.patch("/monsters", verify, async(req, res) => {
-    makePatch(req, res, "monster");
+router.patch("/monsters", verify, vDev, async(req, res) => {
+    redirectPatch(req.body, res, "monster");
 });
 
-router.delete("/monsters", verify, async(req, res) => {
-    makeDelete(req, res, "monster");
+router.delete("/monsters", verify, vDev, async(req, res) => {
+    redirectDelete(req.body, res, "monster");
 });
 
-router.post("/monsters", verify, async(req, res) => {
-    makePost(req, res, "monster");
+router.post("/monsters", verify, vDev, async(req, res) => {
+    redirectPost(req.body, res, "monster");
 });
 
-router.get("/attacks", verify, async(req, res) => {
-    makeGet(res, "attack");
+router.get("/attacks", verify, vDev, async(req, res) => {
+    redirectGet(res, "attack");
 });
 
-router.delete("/attacks", verify, async(req, res) => {
-    makeDelete(req, res, "attack");
+router.delete("/attacks", verify, vDev, async(req, res) => {
+    redirectDelete(req.body, res, "attack");
 });
 
-router.post("/attacks", verify, async(req, res) => {
-    makePost(req, res, "attack");
+router.post("/attacks", verify, vDev, async(req, res) => {
+    redirectPost(req.body, res, "attack");
 });
 
-router.patch("/attacks", verify, async(req, res) => {
-    makePatch(req, res, "attack");
+router.patch("/attacks", verify, vDev, async(req, res) => {
+    redirectPatch(req.body, res, "attack");
 });
 
-router.get("/items", verify, async(req, res) => {
-    makeGet(res, "item");
+router.get("/items", verify, vDev, async(req, res) => {
+    redirectGet(res, "item");
 });
 
-router.delete("/items", verify, async(req, res) => {
-    makeDelete(req, res, "item");
+router.delete("/items", verify, vDev, async(req, res) => {
+    redirectDelete(req.body, res, "item");
 });
 
-router.patch("/items", verify, async(req, res) => {
-    makePatch(req, res, "item");
+router.patch("/items", verify, vDev, async(req, res) => {
+    redirectPatch(req.body, res, "item");
 });
 
-router.post("/items", verify, async(req, res) => {
-    makePost(req, res, "item");
+router.post("/items", verify, vDev, async(req, res) => {
+    redirectPost(req.body, res, "item");
 });
 
-router.get("/jobs", verify, async(req, res) => {
-    makeGet(res, "job");
+router.get("/jobs", verify, vDev, async(req, res) => {
+    redirectGet(res, "job");
 });
 
-router.delete("/jobs", verify, async(req, res) => {
-    makeDelete(req, res, "job");
+router.delete("/jobs", verify, vDev, async(req, res) => {
+    redirectDelete(req.body, res, "job");
 });
 
-router.patch("/jobs", verify, async(req, res) => {
-    makePatch(req, res, "job");
+router.patch("/jobs", verify, vDev, async(req, res) => {
+    redirectPatch(req.body, res, "job");
 });
 
-router.post("/jobs", verify, async(req, res) => {
-    makePost(req, res, "job");
+router.post("/jobs", verify, vDev, async(req, res) => {
+    redirectPost(req.body, res, "job");
 });
 
-function makeGet(res, api) {
+//all
+router.get("/discuser", verify, async(req, res) => {
+    redirectPost({id: req.dbUser.discordId}, res, "getUser");
+});
+
+function redirectGet(res, api) {
     const options = {
         method: 'GET',
         headers: {
@@ -81,14 +88,14 @@ function makeGet(res, api) {
     });
 }
 
-function makePost(req, res, api) {
+function redirectPost(jjson, res, api) {
     const options = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'api-token': process.env.YUKIDB_API_TOKEN
         },
-        body: JSON.stringify(req.body)
+        body: JSON.stringify(jjson)
     };
 
     fetch('http://127.0.0.1:5004/api/yuki/' + api, options).then(res => res.json()).then(json => {
@@ -96,14 +103,14 @@ function makePost(req, res, api) {
     });
 }
 
-function makePatch(req, res, api) {
+function redirectPatch(jjson, res, api) {
     const options = {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             'api-token': process.env.YUKIDB_API_TOKEN
         },
-        body: JSON.stringify(req.body)
+        body: JSON.stringify(jjson)
     };
 
     fetch('http://127.0.0.1:5004/api/yuki/' + api, options).then(res => res.json()).then(json => {
@@ -111,14 +118,14 @@ function makePatch(req, res, api) {
     });
 }
 
-function makeDelete(req, res, api) {
+function redirectDelete(jjson, res, api) {
     const options = {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'api-token': process.env.YUKIDB_API_TOKEN
         },
-        body: JSON.stringify(req.body)
+        body: JSON.stringify(jjson)
     };
 
     fetch('http://127.0.0.1:5004/api/yuki/' + api, options).then(res => res.json()).then(json => {
