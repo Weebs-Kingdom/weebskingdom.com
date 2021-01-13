@@ -4,6 +4,7 @@
     <title>DSGVO</title>
     <link rel="stylesheet" href="/assets/style/main.css">
     <link rel="stylesheet" href="/assets/style/menu.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="/assets/script/auth.js"></script>
     <meta name="title" content="MindCollaps.de DSGVO">
@@ -12,6 +13,7 @@
 </head>
 
 <body>
+    <div id="navdiv" v-html="navbar"></div>
     <div class="textview">
         <h1>Datenschutzerklärung</h1>
         <p>Verantwortlicher im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung (DSGVO), ist:</p>
@@ -176,6 +178,7 @@
         <h2>Fragen an den Datenschutzbeauftragten</h2>
         <p>Wenn Sie Fragen zum Datenschutz haben, schreiben Sie uns bitte eine E-Mail oder wenden Sie sich direkt an die für den Datenschutz verantwortliche Person in unserer Organisation:</p>
         <p>Noah Elijah Till (NTill@gmx.de)</p>
+        <script type="text/javascript" src="/assets/script/navbar.js"></script>
     </div>
 </body>
 
