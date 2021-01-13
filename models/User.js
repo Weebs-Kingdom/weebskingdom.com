@@ -26,6 +26,13 @@ const userSchema = new mongoose.Schema({
     admin: {
         type: Boolean,
         default: false
+    },
+    developer: {
+        type: Boolean,
+        default: false
+    },
+    discordId: {
+        type: String
     }
 });
 

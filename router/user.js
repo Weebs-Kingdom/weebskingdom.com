@@ -1,10 +1,13 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const Tokens = require("../models/Tokens");
+const DiscTokens = require("../models/DiscConnectToken");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const fetch = require('node-fetch');
 const verify = require("../middleware/verifyLoginToken");
 const vAdmin = require("../middleware/verifyAdminAcces");
+const vDev = require("../middleware/verifyDev");
 
 //VALIDATION
 const Joi = require("joi");
@@ -139,7 +142,6 @@ router.get("/auth", verify, async(req, res) => {
 });
 
 router.post("/genToken", verify, vAdmin, async(req, res) => {
-    console.log("called");
     var maxUse = req.body.maxUse;
     if (!maxUse) {
         maxUse = 1;
@@ -148,25 +150,19 @@ router.post("/genToken", verify, vAdmin, async(req, res) => {
     }
 
     var token;
-    console.log("we've got this far");
     var doItAgain = true;
     while (true) {
         token = makeToken(6);
-        console.log("we've got this far and have a token named " + token);
         if (Tokens.findOne({ token: token }).token != token) break;
     }
-
-    console.log("have a token " + token);
 
     const cToken = new Tokens({
         token: token,
         maxUse: maxUse
-    });
-    console.log("a object");
+    })
 
     try {
         const savedToken = await cToken.save();
-        console.log("saved");
         res.status(200).json({ status: 200, message: savedToken.token });
     } catch (er) {
         res.status(400).json({ status: 400, message: "Error while creating new token!", error: err });
@@ -181,8 +177,64 @@ router.get("/email", verify, async(req, res) => {
     res.status(200).json({ status: 200, message: req.dbUser.email });
 });
 
+router.post("/discconnect", verify, async (req, res) => {
+    var token = makeToken(5);
+    var ftok = await DiscTokens.findOne({token: token});
+    while (ftok){
+        token = makeToken(5);
+        ftok = await DiscTokens.findOne({token: token});
+    }
+
+    var lastOnes = [];
+    lastOnes.push(await DiscTokens.find({user: req.dbUser._id}));
+    lastOnes.push(await DiscTokens.find({discordId: req.body.user}));
+
+    for (var i = 0; i < lastOnes.length; i++) {
+        try {
+            await lastOnes[i].remove();
+        } catch (e){
+        }
+    }
+
+    var stoken = new DiscTokens({
+        token: token,
+        user: req.dbUser._id,
+        discordId: req.body.user
+    });
+    await stoken.save();
+
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({instruction: "discconnect", data: {user: req.body.user, token: token}})
+    };
+
+    fetch('http://127.0.0.1:5003/api', options).then(res => res.json()).then(json => {
+        res.status(200).json(json);
+    });
+});
+
+router.post("/discconnecttoken", verify, async (req, res) => {
+    var token = req.body.token;
+    var fToken = await DiscTokens.findOne({token: token, user: req.dbUser._id});
+    if(fToken){
+        req.dbUser.discordId = fToken.discordId;
+        await req.dbUser.save();
+        await fToken.remove();
+        return res.status(200).json({ status: 200, message: "authenticated" });
+    } else {
+        res.status(400).json({ status: 400, message: "token invalid!" });
+    }
+});
+
 router.get("/isAdmin", verify, vAdmin, async(req, res) => {
     res.status(200).json({ status: 200, message: req.dbUser.admin });
+});
+
+router.get("/isDev", verify, vDev, async(req, res) => {
+    res.status(200).json({ status: 200, message: req.dbUser.developer });
 });
 
 async function hashPw(pw) {

@@ -23,7 +23,7 @@ async function auth(goToLoginOnFail) {
             var login = document.getElementById('login');
             login.innerHTML = "Logout";
             login.href = "";
-            login.onclick = function() {
+            login.onclick = function () {
                 deleteCookie("auth");
                 if (goToLoginOnFail) {
                     window.location.replace("/");
@@ -37,16 +37,33 @@ async function auth(goToLoginOnFail) {
             console.log("not logged in!");
         }
     } catch (e) {
+        if(goToLoginOnFail)
         window.location.replace("/");
     }
 }
 
 async function setupLoggin() {
-    addDev();
-    var accSub = document.getElementById('accSub');
+    if (await getIsDev()){
+        addDev();
+    }
 
+    var accSub = document.getElementById('accSub');
     createLi(accSub, "/profile", "Profile");
 
+    if (await getIsAdmin()){
+        addAdmin();
+    }
+}
+
+async function getIsAdmin() {
+    return await getRoute("/api/user/isAdmin");
+}
+
+async function getIsDev() {
+    return await getRoute("/api/user/isDev");
+}
+
+async function getRoute(link) {
     const options = {
         method: 'GET',
         headers: {
@@ -54,14 +71,15 @@ async function setupLoggin() {
             'auth-token': token
         }
     };
-    const response = await fetch('/api/user/isAdmin', options);
+    const response = await fetch(link, options);
+    return response.status === 200;
+}
 
-    if (response.status == 200) {
-        var menu = document.getElementById("menu");
-        var adminLi = createLi(menu, "/admin", "Admin");
-        var ul = createSubMenu(adminLi);
-        createLi(ul, "/admin/gentoken", "Token");
-    }
+function addAdmin() {
+    var menu = document.getElementById("menu");
+    var adminLi = createLi(menu, "/admin", "Admin");
+    var ul = createSubMenu(adminLi);
+    createLi(ul, "/admin/gentoken", "Token");
 }
 
 function addDev() {
@@ -112,7 +130,9 @@ function setCookie(name, value, days) {
     document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
 }
 
-function deleteCookie(name) { setCookie(name, '', -1); }
+function deleteCookie(name) {
+    setCookie(name, '', -1);
+}
 
 function isLoggedIn() {
     return loggedIn;

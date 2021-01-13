@@ -4,6 +4,7 @@
     <title>Create Item</title>
     <link rel="stylesheet" href="/assets/style/main.css">
     <link rel="stylesheet" href="/assets/style/menu.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="/assets/script/auth.js"></script>
     <meta name="title" content="MindCollaps.de Registrierung">
@@ -12,76 +13,43 @@
 </head>
 
 <body onload="auth(true), init()">
-    <div>
-        <input type="checkbox" id="main-navigation-toggle" class="btn btn--close" title="Toggle main navigation" />
-        <label for="main-navigation-toggle">
-  <span></span>
-</label>
-        <nav id="main-navigation" class="nav-main">
-            <ul id="menu" class="menu">
-                <li class="menu__item">
-                    <a class="menu__link" href="/">Home</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link">Projects</a>
-                    <ul class="submenu">
-                        <li class="menu__item">
-                            <a class="menu__link" href="http://pc.mindcollaps.de">PC Building contest</a>
-                        </li>
-                        <li class="menu__item">
-                            <a class="menu__link" href="/lazyteam">Lazy Team</a>
-                        </li>
-                        <li class="menu__item">
-                            <a class="menu__link" href="/yukisora">Yuki Sora</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link">Account</a>
-                    <ul id="accSub" class="submenu">
-                        <li class="menu__item">
-                            <a class="menu__link" id="login" href="/login">Login</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div id="item">
-        <div class="textview" id="createMonster">
-            <div class="form__group field">
-                <input type="input" class="form__field" placeholder="Name" name="Name" id='name' required />
-                <label for="name" class="form__label">Name</label>
-            </div>
-            <div class="form__group field">
-                <input type="input" class="form__field" placeholder="Image URL" name="Image URL" id='imageUrl' required />
-                <label for="imageUrl" class="form__label">Image URL</label>
-            </div>
-            <div class="form__group field">
-                <input type="checkbox" class="form__field" placeholder="Cookable" name="Cookable" id='cookable' required />
-                <label for="cookable" class="form__label">Cookable</label>
-            </div>
-            <div class="form__group field">
-                <input type="input" class="form__field" placeholder="Description" name="Description" id='description' required />
-                <label for="description" class="form__label">Description</label>
-            </div>
-            <div class="form__group field">
-                <select id="rarity">
-                    <option>normal</option>
-                    <option>epic</option>
-                    <option>legendary</option>
-                    <option>mystic</option>
-                </select>
-                <label for="rarity" class="form__label">Rarity</label>
-            </div>
-            <div id="divCooks" class="listBody"><label>Cooks into</label>
-                <div class="list" id="cooks"></div>
-            </div>
-            <p class="message" id="error"></p>
-            <button style="margin-top: 6em;" class="btn" id="submitBtn" type="button" onclick="submit()">Submit</button>
+<div id="navdiv" v-html="navbar"></div>
+<div id="item">
+    <div class="textview" id="createMonster">
+        <div class="form__group field">
+            <input type="input" class="form__field" placeholder="Name" name="Name" id='name' required/>
+            <label for="name" class="form__label">Name</label>
         </div>
+        <div class="form__group field">
+            <input type="input" class="form__field" placeholder="Image URL" name="Image URL" id='imageUrl' required/>
+            <label for="imageUrl" class="form__label">Image URL</label>
+        </div>
+        <div class="form__group field">
+            <input type="checkbox" class="form__field" placeholder="Cookable" name="Cookable" id='cookable' required/>
+            <label for="cookable" class="form__label">Cookable</label>
+        </div>
+        <div class="form__group field">
+            <input type="input" class="form__field" placeholder="Description" name="Description" id='description'
+                   required/>
+            <label for="description" class="form__label">Description</label>
+        </div>
+        <div class="form__group field">
+            <select id="rarity">
+                <option>normal</option>
+                <option>epic</option>
+                <option>legendary</option>
+                <option>mystic</option>
+            </select>
+            <label for="rarity" class="form__label">Rarity</label>
+        </div>
+        <div id="divCooks" class="listBody"><label>Cooks into</label>
+            <div class="list" id="cooks"></div>
+        </div>
+        <p class="message" id="error"></p>
+        <button style="margin-top: 6em;" class="btn" id="submitBtn" type="button" onclick="submit()">Submit</button>
     </div>
-    </div>
+</div>
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
 </body>
 
 </html>

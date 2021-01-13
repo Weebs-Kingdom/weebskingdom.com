@@ -158,7 +158,7 @@ button:hover {
     border-radius: 6px;
     width: fit-content;
     text-align: center;
-    padding: 15px;
+    padding: 2rem;
 }
 
 .advice:hover {

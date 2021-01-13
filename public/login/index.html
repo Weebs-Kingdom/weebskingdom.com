@@ -4,6 +4,7 @@
     <title>Login</title>
     <link rel="stylesheet" href="/assets/style/main.css">
     <link rel="stylesheet" href="/assets/style/menu.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="/assets/script/auth.js"></script>
     <meta name="title" content="MindCollaps.de Login">
@@ -12,42 +13,8 @@
 </head>
 
 <body onload="auth(false)">
-    <div>
-        <input type="checkbox" id="main-navigation-toggle" class="btn btn--close" title="Toggle main navigation" />
-        <label for="main-navigation-toggle">
-  <span></span>
-</label>
-        <nav id="main-navigation" class="nav-main">
-            <ul id="menu" class="menu">
-                <li class="menu__item">
-                    <a class="menu__link" href="/">Home</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link">Projects</a>
-                    <ul class="submenu">
-                        <li class="menu__item">
-                            <a class="menu__link" href="http://pc.mindcollaps.de">PC Building contest</a>
-                        </li>
-                        <li class="menu__item">
-                            <a class="menu__link" href="/lazyteam">Lazy Team</a>
-                        </li>
-                        <li class="menu__item">
-                            <a class="menu__link" href="/yukisora">Yuki Sora</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link">Account</a>
-                    <ul id="accSub" class="submenu">
-                        <li class="menu__item">
-                            <a class="menu__link" id="login" href="/login">Login</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div class="textview" id="login">
+<div id="navdiv" v-html="navbar"></div>
+    <div class="textview">
         <div class="form__group field">
             <input type="input" class="form__field" placeholder="Email" name="Email" id='email' required />
             <label for="email" class="form__label">Email</label>
@@ -62,6 +29,7 @@
     <div class="textview">
         <p class="message" id="error">Passwort vergessen? Setze es <a href="/profile">hier</a> zurück.</p>
     </div>
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
 </body>
 
 </html>
