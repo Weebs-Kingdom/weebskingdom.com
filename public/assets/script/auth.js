@@ -1,6 +1,7 @@
 var loggedIn = false;
 var isAdmin = false;
 var token;
+var dbuser;
 
 async function auth(goToLoginOnFail) {
     token = getCookie("auth");
@@ -16,6 +17,7 @@ async function auth(goToLoginOnFail) {
     try {
         const response = await fetch('/api/user/auth', options);
         const json = await response.json();
+        await loadUser();
 
         if (json.status == 200) {
             loggedIn = true;
@@ -87,6 +89,8 @@ function addDev() {
     var devs = createLi(menu, "/yukisora/devs", "Developer");
     var subMenu = createSubMenu(devs);
     createLi(subMenu, "/yukisora/devs/create", "Monster");
+    createLi(subMenu, "/yukisora/devs/monsterlist", "Mosterlist");
+    createLi(subMenu, "/yukisora/devs/attacklist", "Attacklist");
     createLi(subMenu, "/yukisora/devs/item", "Item");
 }
 
@@ -118,6 +122,21 @@ function createLi(vin, href, inHtml) {
     }
     return lis;
 }
+
+async function loadUser(){
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': token
+            }
+        };
+
+        const response = await fetch('/api/yuki/discuser', options);
+        const json = await response.json();
+        this.dbuser = json.data;
+}
+
 
 function getCookie(name) {
     var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');

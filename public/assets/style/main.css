@@ -61,7 +61,7 @@ button:hover {
     margin: auto;
     height: 1px;
     width: 100%;
-    background: var(#1c1c1c);
+    background: #1c1c1c;
     border: 0;
     box-shadow: 0 2px 0 hsla(0, 0%, 100%, .05);
     margin-top: 4vmin;
@@ -80,7 +80,6 @@ button:hover {
 
 .footer a {
     text-decoration: none;
-    color: var(--font-color);
     margin: 10px;
     text-align: left;
 }
@@ -177,10 +176,7 @@ button:hover {
 .textview {
     transition: all 250ms ease;
     background-color: #141414;
-    margin: auto;
-    margin-top: 3em;
-    margin-left: 5vmax;
-    margin-right: 5vmax;
+    margin: 3em 5vmax auto;
     box-shadow: 0 2px 30px 0 rgba(0, 0, 0, .4);
     border-radius: 6px;
     width: auto;
@@ -337,11 +333,13 @@ button:hover {
 }
 
 .listBody {
+    border-radius: 0.8rem;
     box-shadow: 0 2px 40px 0 rgba(0, 0, 0, .4);
     text-align: left;
-    margin-top: 2em;
+    margin: 3em 5vmax auto;
     transition: all 250ms ease;
-    padding: 1rem;
+    padding: 2rem;
+
 }
 
 .listBody label {
@@ -349,7 +347,19 @@ button:hover {
     margin-left: 2rem;
 }
 
-.listBody:hover {
+.listBody .content {
+    border-radius: 0.8rem;
+    transition: all 250ms ease;
+    text-align: center;
+    overflow: scroll;
+    padding: 1vmin;
+    overflow-x: hidden;
+    overflow-y: initial;
+    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.4);
+    margin-bottom: 2vmax;
+}
+
+.listBody .content:hover{
     border-radius: 2rem;
     box-shadow: 0 2px 30px 0 rgba(0, 0, 255, .4);
 }
@@ -400,4 +410,87 @@ dialog.hide {
 
 dialog::backdrop {
     background-color: rgba(0, 0, 51, 0.4);
+}
+
+.shopItem {
+    transition: all 250ms ease;
+    background-color: #141414;
+    margin: auto;
+    margin-top: 3em;
+    margin-left: 5vmax;
+    margin-right: 5vmax;
+    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, .4);
+    border-radius: 6px;
+    width: auto;
+    text-align: center;
+    padding: 2vmin 20vmin;
+}
+
+.shopItem:hover {
+    box-shadow: 0 2px 30px 0 rgba(0, 0, 255, .4);
+    border-radius: 2rem;
+}
+
+.shopItem .des {
+    transition: all 250ms ease;
+    background: linear-gradient(150deg, rgb(248, 12, 243), rgb(0, 255, 228));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 0.4rem;
+    margin-bottom: 0.6rem;
+}
+
+.shopItem h1 {
+    background: linear-gradient(150deg, rgba(172, 54, 0, 0.753), rgba(235, 2, 2, 0.651));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 8vmin;
+}
+
+
+.lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+.lds-ripple div {
+    position: absolute;
+    border: 4px solid #fff;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+    0% {
+        top: 36px;
+        left: 36px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+    100% {
+        top: 0px;
+        left: 0px;
+        width: 72px;
+        height: 72px;
+        opacity: 0;
+    }
+}
+
+.overlayable {
+    position: relative;
+}
+
+.overlayable .overlay {
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.overlayable .static {
+    z-index: 10;
 }

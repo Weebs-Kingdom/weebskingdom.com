@@ -1,8 +1,8 @@
-Mindcollaps.de Developer Website patched to version 1.0.2
+Mindcollaps.de Developer Website patched to version 1.0.3
 
 New features
-• You can connect your account with a discord account now
-• Changed whole website to Vue.js framework
+•
+•
 •
 
 Bugfix

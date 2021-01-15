@@ -1,0 +1,22 @@
+<html>
+
+<head>
+    <title>Create</title>
+    <link rel="stylesheet" href="/assets/style/main.css">
+    <link rel="stylesheet" href="/assets/style/menu.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="text/javascript" src="/assets/script/auth.js"></script>
+    <meta name="title" content="MindCollaps.de Registrierung">
+    <meta name="description" content="Meine Homepage über Projecte usw.">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body onload="auth(true)">
+<div id="navdiv" v-html="navbar"></div>
+<div id="shop"> <product v-for="item in shop" :item="item"></product> </div>
+
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
+<script type="text/javascript" src="/assets/script/shop.js"></script>
+</body>
+
+</html>

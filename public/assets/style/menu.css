@@ -165,7 +165,7 @@
 
 .menu>.menu__item {
     font-family: var(--font-family-secondary);
-    font-size: 10vmin;
+    font-size: 8vmin;
 }
 
 .submenu {
@@ -181,7 +181,7 @@
 
 .submenu .menu__item {
     font-family: var(--font-family-primary);
-    font-size: 3.5vmin;
+    font-size: 2.5vmin;
     width: 100%;
 }
 
