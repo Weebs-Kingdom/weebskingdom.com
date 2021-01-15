@@ -44,6 +44,6 @@ var monster = new Vue({
 });
 
 Vue.component('monster', {
-    template: '<div class="content overlayable"> <div class="overlay" v-if="monster.deleting"><div class="lds-ripple"><div></div><div></div></div></div> <div><h1>{{monster.name}}</h1> <div class="static"> <div class="des"><img v-if="monster.image != undefined && monster.image != ``" :src="monster.image"> <a v-else>No monster image</a></div> <button class="denyBtn" v-on:click="$emit(`delete`,monster._id)">Delete</button> </div></div> </div>',
+    template: '<div class="content overlayable"> <div class="overlay" v-if="monster.deleting"><div class="lds-ripple"><div></div><div></div></div></div> <div><h1>{{monster.name}}</h1> <div class="static"> <div class="des"><img v-if="monster.image != undefined && monster.imageUrl != ``" :src="monster.imageUrl"> <a v-else>No monster image</a></div> <button class="denyBtn" v-on:click="$emit(`delete`,monster._id)">Delete</button> </div></div> </div>',
     props: ['monster']
 });
