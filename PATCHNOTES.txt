@@ -1,11 +1,14 @@
 Mindcollaps.de Developer Website patched to version 1.0.3
 
 New features
-•
-•
-•
+• Basic shop implementation
+• Attack list
+• Monster list
+
+Changes
+• CSS font of menu is smaller
 
 Bugfix
-•
+• Admin is always developer
 •
 •
