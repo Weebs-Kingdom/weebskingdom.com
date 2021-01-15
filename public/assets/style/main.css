@@ -494,3 +494,9 @@ dialog::backdrop {
 .overlayable .static {
     z-index: 10;
 }
+
+img {
+    border-radius: 8px;
+    width: 20vmin;
+    margin-bottom: 1rem;
+}
