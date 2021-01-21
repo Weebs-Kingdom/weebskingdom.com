@@ -12,42 +12,9 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 
-<body onload="auth(true), init()">
-    <div>
-        <input type="checkbox" id="main-navigation-toggle" class="btn btn--close" title="Toggle main navigation" />
-        <label for="main-navigation-toggle">
-  <span></span>
-</label>
-        <nav id="main-navigation" class="nav-main">
-            <ul id="menu" class="menu">
-                <li class="menu__item">
-                    <a class="menu__link" href="/">Home</a>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link">Projects</a>
-                    <ul class="submenu">
-                        <li class="menu__item">
-                            <a class="menu__link" href="http://pc.mindcollaps.de">PC Building contest</a>
-                        </li>
-                        <li class="menu__item">
-                            <a class="menu__link" href="/lazyteam">Lazy Team</a>
-                        </li>
-                        <li class="menu__item">
-                            <a class="menu__link" href="/yukisora">Yuki Sora</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu__item">
-                    <a class="menu__link">Account</a>
-                    <ul id="accSub" class="submenu">
-                        <li class="menu__item">
-                            <a class="menu__link" id="login" href="/login">Login</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-    </div>
+<body onload="init()">
+<script>auth(true)</script>
+<div id="navdiv" v-html="navbar"></div>
     <div class="advice">
         <div class="txt">Because of you, <a>Yuki</a> is alive and a part from our guild</div>
         <br>
@@ -60,7 +27,7 @@
         Herer you can find tools to make new database entrys and more. <br> With this permission, you can edit, delete, create and patch existing database entrys, so please use it in a way of respect.
         <br>
         <h1>Tools</h1>
-        <a href="/yukisora/devs/monster">Create Monster</a> <a href="/yukisora/devs/attack">Create Attack</a>
+        <a href="/yukisora/devs/monsterlist">Create Monster</a> <a href="/yukisora/devs/attacklist">Create Attack</a>
     </div>
     <script type="text/javascript" src="/assets/script/navbar.js"></script>
 </body>
