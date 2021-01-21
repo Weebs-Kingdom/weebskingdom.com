@@ -112,6 +112,7 @@ var monster = new Vue({
             const json = await response.json();
             if (json.status === 200) {
                 this.monsters = await this.loadMonster();
+                this.searchFc();
             }
         },
         searchFc: function () {
@@ -262,6 +263,7 @@ var monster = new Vue({
                 const json = await response.json();
                 if (json.status === 200) {
                     this.monsters = await this.loadMonster();
+                    this.searchFc();
                     this.submitmsg = "Successfully updated monster!";
                     return json.message;
                 } else {
