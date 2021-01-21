@@ -20,9 +20,3 @@ async function login() {
         error.innerHTML = "Password or Email invalid!";
     }
 }
-
-function setCookie(name, value, days) {
-    var d = new Date;
-    d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days);
-    document.cookie = name + "=" + value + ";path=/;expires=" + d.toGMTString();
-}

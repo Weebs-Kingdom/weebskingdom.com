@@ -1,13 +1,16 @@
 const router = require("express").Router();
-const User = require("../models/User");
-const Tokens = require("../models/Tokens");
-const DiscTokens = require("../models/DiscConnectToken");
+const User = require("../models/user/User");
+const Tokens = require("../models/tokens/LoginTokens");
+const AuthTokens = require("../models/tokens/EmailAuthTokens");
+const DiscTokens = require("../models/tokens/DiscConnectToken");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetch = require('node-fetch');
 const verify = require("../middleware/verifyLoginToken");
 const vAdmin = require("../middleware/verifyAdminAcces");
 const vDev = require("../middleware/verifyDev");
+const Mailer = require("../middleware/mailer");
+const ejs = require("ejs")
 
 //VALIDATION
 const Joi = require("joi");
@@ -26,6 +29,13 @@ const regSchema = Joi.object({
     access_token: Joi.string().required()
 });
 
+const defaultRegSchema = Joi.object({
+    email: emailSch,
+    password: passwordSch,
+    username: nameSch,
+    repeat_password: Joi.ref('password')
+});
+
 const loginSchema = Joi.object({
     password: passwordSch,
     email: emailSch
@@ -34,6 +44,36 @@ const loginSchema = Joi.object({
 const editPasswordSch = Joi.object({
     password: passwordSch,
     repeat_password: Joi.ref('password'),
+});
+
+router.post("/mail", async(req, res) => {
+    const data = await ejs.renderFile("./views/verifyMail.ejs", { name: "MindCollaps", token: "this is a test uwu" });
+    const mailData = {
+        from: 'Weebs Kingdome Team <info@mindcollaps.de>',  // sender address
+        to: "ntill@gmx.de",   // list of receivers
+        subject: 'Your token',
+        html: data
+    };
+
+    await Mailer.transporter().sendMail(mailData, function(err, info) {
+        if (err) {
+            console.log(err)
+            res.json({
+                status: 400,
+                error: err
+            })
+        } else {
+            console.log("Password Reset Mail sent to " + req.body.email)
+            res.json({
+                status: 200,
+                response: "email sent",
+                data: {
+                    email: req.body.email
+                }
+            })
+        }
+    });
+    res.status(200).json({msg: "Did it...I guess"});
 });
 
 router.post("/password", verify, async(req, res) => {
@@ -76,8 +116,45 @@ router.post("/email", verify, async(req, res) => {
     }
 });
 
+router.get("/tokens", verify, vAdmin, async(req, res) => {
+    res.status(200).json({data: await Tokens.find(), status: 200});
+});
+
+router.delete("/tokens", verify, vAdmin, async(req, res) => {
+    var tk = await Tokens.findOne({token: req.body.token});
+    await tk.remove();
+    res.status(200).json({status: 200, msg: "removed token"});
+});
 
 router.post("/register", async(req, res) => {
+    const { error } = defaultRegSchema.validate(req.body);
+    if (error) return res.status(400).json({ status: 400, message: error.details[0].message });
+
+    const emailExists = await User.findOne({ email: req.body.email.toLowerCase() });
+    if (emailExists) return res.status(400).json({ status: 400, message: "Email already registered!" });
+
+    //Hashing password
+    const hashPassword = await hashPw(req.body.password);
+
+    //Create new user
+    const cUser = new User({
+        name: req.body.username,
+        email: req.body.email.toLowerCase(),
+        password: hashPassword,
+        admin: false,
+        developer: false
+    });
+
+    try {
+        const savedUser = await cUser.save();
+        await sendRegisterToken(savedUser);
+        res.status(200).json({ status: 200, message: "Created user" });
+    } catch (err) {
+        res.status(400).json({ status: 400, message: "error while creating new user!", error: err });
+    }
+});
+
+router.post("/registertk", async(req, res) => {
     const { error } = regSchema.validate(req.body);
     if (error) return res.status(400).json({ status: 400, message: error.details[0].message });
 
@@ -86,15 +163,15 @@ router.post("/register", async(req, res) => {
     if (!tk) return res.status(400).json({ status: 400, message: "Token not found!" });
 
     if (tk.used >= tk.maxUse) {
-        tk.remove();
+        await tk.remove();
         res.status(400).json({ status: 400, message: "Token expired!" });
         return;
     }
 
-    if (tk.used + 1 >= tk.maxUse) tk.remove();
+    if (tk.used + 1 >= tk.maxUse) await tk.remove();
     else {
         tk.used = tk.used + 1;
-        tk.save();
+        await tk.save();
     }
 
     //Check if the user is already in the database
@@ -104,19 +181,30 @@ router.post("/register", async(req, res) => {
     //Hashing password
     const hashPassword = await hashPw(req.body.password);
 
+    var isAdmin = tk.isAdmin;
+    var isDev = tk.isDev;
+
+    if(isAdmin === undefined)
+        isAdmin = false;
+
+    if(isDev === undefined)
+        isDev = false;
+
     //Create new user
     const cUser = new User({
         name: req.body.username,
         email: req.body.email.toLowerCase(),
-        password: hashPassword
+        password: hashPassword,
+        admin: isAdmin,
+        developer: isDev
     });
     try {
         const savedUser = await cUser.save();
-        res.status(200).json({ status: 200, message: savedUser._id });
+        await sendRegisterToken(savedUser);
+        res.status(200).json({ status: 200, message: "Created user" });
     } catch (err) {
         res.status(400).json({ status: 400, message: "error while creating new user!", error: err });
     }
-
 });
 
 router.post("/login", async(req, res) => {
@@ -129,12 +217,37 @@ router.post("/login", async(req, res) => {
 
     //Check if password is correct
     const validPass = await bcrypt.compare(req.body.password, user.password);
-    if (!validPass) return res.status(400).json({ status: 400, message: "Email or password is wrong" });
+    if (!validPass) return res.status(400).json({ status: 400, message: "Email or password is wrong!" });
 
     //Create and assing a token
     const time = new Date();
     const token = jwt.sign({ _id: user._id, ctime: time }, process.env.TOKEN_SECRET);
     res.header("auth-token", token).json({ status: 200, message: token });
+});
+
+router.get("/resentAuthEmail", verify, async(req, res) => {
+    await sendRegisterToken(req.dbUser);
+    res.status(200).json({message: "Sent email!", status: 200});
+});
+
+router.post("/activate", async(req, res) => {
+    var u = undefined;
+    try {
+        const verified = jwt.verify(req.body.token, process.env.TOKEN_SECRET);
+        const time = new Date(verified.ctime);
+        const expireTime = time.setMinutes(time.getMinutes() + 30);
+        const now = new Date();
+
+        if (now > expireTime) return res.status(401).json({ status: 401, message: "Token expired!" });
+
+        u = await User.findOne({ _id: verified._id });
+        if(!u) return res.status(401).json({ status: 401, message: "This token is invalid" });
+    } catch (e){
+        return res.status(401).json({ status: 401, message: "This token is invalid" });
+    }
+    u.emailVerified = true;
+    await u.save();
+    res.status(200).json({message: "Activated your profile!", status: 200});
 });
 
 router.get("/auth", verify, async(req, res) => {
@@ -143,6 +256,15 @@ router.get("/auth", verify, async(req, res) => {
 
 router.post("/genToken", verify, vAdmin, async(req, res) => {
     var maxUse = req.body.maxUse;
+    var isAdmin = req.body.isAdmin;
+    var isDev = req.body.isDev;
+
+    if(isAdmin === undefined)
+        isAdmin = false;
+
+    if(isDev === undefined)
+        isDev = false;
+
     if (!maxUse) {
         maxUse = 1;
     } else if (maxUse == 0) {
@@ -153,12 +275,14 @@ router.post("/genToken", verify, vAdmin, async(req, res) => {
     var doItAgain = true;
     while (true) {
         token = makeToken(6);
-        if (Tokens.findOne({ token: token }).token != token) break;
+        if (Tokens.findOne({ token: token }).token !== token) break;
     }
 
     const cToken = new Tokens({
         token: token,
-        maxUse: maxUse
+        maxUse: maxUse,
+        isAdmin: isAdmin,
+        isDev: isDev
     })
 
     try {
@@ -251,6 +375,29 @@ function makeToken(length) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+}
+
+async function sendRegisterToken(u){
+    const time = new Date();
+    const token = jwt.sign({ _id: u._id, ctime: time }, process.env.TOKEN_SECRET);
+
+    const data = await ejs.renderFile("./views/verifyMail.ejs", { name: u.name, token: token });
+    const mailData = {
+        from: 'Weebs Kingdome Team <info@mindcollaps.de>',  // sender address
+        to: u.email,   // list of receivers
+        subject: 'Verify your account',
+        html: data
+    };
+
+    await Mailer.transporter().sendMail(mailData, function(err, info) {
+        if (err) {
+            console.log(err)
+            res.json({
+                status: 400,
+                error: err
+            })
+        }
+    });
 }
 
 

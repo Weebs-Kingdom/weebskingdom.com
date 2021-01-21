@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         require: true,
-        min: 6
+        min: 4
     },
     email: {
         type: String,
@@ -29,10 +29,14 @@ const userSchema = new mongoose.Schema({
     },
     developer: {
         type: Boolean,
-        default: false
+        default: false,
     },
     discordId: {
         type: String
+    },
+    emailVerified: {
+        type: Boolean,
+        default: false
     }
 });
 

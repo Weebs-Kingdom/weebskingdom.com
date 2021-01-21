@@ -1,10 +1,104 @@
 :root {
-    --color-primary: #18181A;
-    --color-secondary: #75757C;
+    --color-primary: #1c1c1f;
+    --color-secondary: #202022;
+    --color-tertiary: #1e1e21;
+    --color-glass: rgba(31, 31, 31, 0.6);
+    --color-scrollbar: #7289da;
+
+    --color-bg: #1a1a1c;
+    --color-backdrop: rgba(0, 0, 51, 0.4);
+
+    --button-0: #7289da;
+    --button-0-2: #7289da;
+    --button-0-hover: #7289da;
+    --button-0-2-hover: #7289da;
+
+    --button-decline: #DA7289;
+    --button-decline-2: #DA7289;
+    --button-decline-hover: #DA7289;
+    --button-decline-2-hover: #DA7289;
+
+    --button-accept: #89DA72;
+    --button-accept-2: #89DA72;
+    --button-accept-hover: #89DA72;
+    --button-accept-2-hover: #89DA72;
+
+    --color-headline: #dddddd;
+    --color-shadow: rgba(0, 0, 0, .4);
+    --color-shadow-hover: #36393e;
+    --color-shadow-highlight: rgba(33, 0, 255, 0.3);
+
     --color-dark: #364C62;
     --color-light: #F5F5F5;
     --font-family-primary: "Roboto Mono", monospace;
     --font-family-secondary: "Rubik Mono One", sans-serif;
+
+    --color-font-primary: #ababab;
+    --color-font-primary-hover: var(--color-font-primary);
+    --color-font-primary-2: var(--color-font-primary);
+    --color-font-primary-hover-2: var(--color-font-primary);
+
+    --color-font-secondary: #ffffff;
+    --color-font-secondary-hover: #ffffff;
+    --color-font-secondary-2: #ffffff;
+    --color-font-secondary-hover-2: #ffffff;
+
+    --color-font-highlight: #7289da;
+    --color-font-highlight-2: #a46ed4;
+    --color-font-highlight-hover: #5d70b1;
+    --color-font-highlight-hover-2: #744c94;
+
+    --td: 100ms;
+    --te: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+[data-theme="cyberpunk"] {
+    --color-primary: #1c1c1f;
+    --color-secondary: #202022;
+
+    --color-bg: #fcec0c;
+    --color-backdrop: rgba(0, 0, 51, 0.4);
+
+    --button-0: #7289da;
+    --button-0-2: #7289da;
+    --button-0-hover: #7289da;
+    --button-0-2-hover: #7289da;
+
+    --button-decline: #DA7289;
+    --button-decline-2: #DA7289;
+    --button-decline-hover: #DA7289;
+    --button-decline-2-hover: #DA7289;
+
+    --button-accept: #89DA72;
+    --button-accept-2: #89DA72;
+    --button-accept-hover: #89DA72;
+    --button-accept-2-hover: #89DA72;
+
+    --color-headline: #136377;
+    --color-shadow: rgba(0, 0, 0, .4);
+    --color-shadow-hover: #36393e;
+    --color-shadow-highlight: rgba(33, 0, 255, 0.3);
+
+    --color-dark: #364C62;
+    --color-light: #F5F5F5;
+    --font-family-primary: "Roboto Mono", monospace;
+    --font-family-secondary: "Rubik Mono One", sans-serif;
+
+    --color-font-primary: #d1c5c0;
+    --color-font-primary-hover: var(--color-font-primary);
+    --color-font-primary-2: var(--color-font-primary);
+    --color-font-primary-hover-2: var(--color-font-primary);
+
+    --color-font-secondary: #ffffff;
+    --color-font-secondary-hover: #ffffff;
+    --color-font-secondary-2: #ffffff;
+    --color-font-secondary-hover-2: #ffffff;
+
+    --color-font-highlight: #7289da;
+    --color-font-highlight-2: #7289da;
+    --color-font-highlight-hover: #5d70b1;
+    --color-font-highlight-hover-2: #5d70b1;
+
     --td: 150ms;
     --te: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
@@ -15,10 +109,31 @@ body {
     margin: 0;
     font-size: 3vmin;
     font-family: "Roboto", sans-serif;
-    color: #d9d9d9;
-    background-color: #1c1c1c;
+    color: var(--color-font-primary);
+    background-color: var(--color-bg);
     overflow-x: hidden;
     position: relative;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px var(--color-shadow);
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: var(--color-scrollbar);
+    background-image: -webkit-linear-gradient(90deg,
+    transparent,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent,
+    transparent)
 }
 
 button {
@@ -30,7 +145,7 @@ button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: linear-gradient(to right, #0c6d65, #2aaf5d);
+    background: linear-gradient(to right, var(--button-0), var(--button-0-2));
     border-radius: 5px;
     font-size: 2vmin;
     padding: 12px 15px;
@@ -38,9 +153,9 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(to right, #0f8379, #2ec468);
+    background: linear-gradient(to right, var(--button-0-hover), var(--button-0-2-hover));
     border-radius: 10px;
-    box-shadow: 0 1rem .6rem rgba(33, 0, 255, 0.3);
+    box-shadow: 0 1rem .6rem var(--color-shadow-highlight);
     transform: translate(0, -.4rem);
 }
 
@@ -63,7 +178,7 @@ button:hover {
     width: 100%;
     background: #1c1c1c;
     border: 0;
-    box-shadow: 0 2px 0 hsla(0, 0%, 100%, .05);
+    box-shadow: 0 2px 0 var(--color-shadow);
     margin-top: 4vmin;
     margin-bottom: 4vmin;
 }
@@ -85,7 +200,7 @@ button:hover {
 }
 
 .footer a:hover {
-    color: rgb(82, 128, 226);
+    color: var(--color-font-primary-hover);
 }
 
 .footer h1 {
@@ -115,7 +230,7 @@ button:hover {
 
 .previewBig div {
     border-radius: 6px;
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, .4);
+    box-shadow: 0 2px 30px 0 var(--color-shadow);
     margin-bottom: 1em;
 }
 
@@ -139,18 +254,18 @@ button:hover {
     padding: 1vmin 5vmin;
     margin-top: 0.4em;
     text-align: center;
-    box-shadow: 0 2px 60px 0 rgba(0, 0, 0, .4);
+    box-shadow: 0 2px 60px 0 var(--color-shadow);
     border-radius: 8px;
 }
 
 .knockout:hover {
     border-radius: 2rem;
-    box-shadow: 0 2px 60px 0 rgba(0, 0, 255, .4);
+    box-shadow: 0 2px 60px 0 var(--color-shadow-hover);
 }
 
 .advice {
     transition: all 250ms ease;
-    background-color: #141414;
+    background-color: var(--color-primary);
     margin: auto;
     margin-top: 3em;
     box-shadow: 0 2px 30px 0 rgba(0, 0, 0, .4);
@@ -162,12 +277,12 @@ button:hover {
 
 .advice:hover {
     border-radius: 2rem;
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 255, .4);
+    box-shadow: 0 2px 30px 0 var(--color-shadow-hover);
 }
 
 .advice a {
     text-decoration-style: solid;
-    background: linear-gradient(150deg, rgb(95, 0, 247), rgb(0, 139, 204));
+    background: linear-gradient(150deg, var(--color-font-highlight), var(--color-font-highlight-2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
@@ -175,9 +290,9 @@ button:hover {
 
 .textview {
     transition: all 250ms ease;
-    background-color: #141414;
+    background-color: var(--color-primary);
     margin: 3em 5vmax auto;
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, .4);
+    box-shadow: 0 2px 30px 0 var(--color-shadow);
     border-radius: 6px;
     width: auto;
     text-align: center;
@@ -186,7 +301,6 @@ button:hover {
 
 .textview:hover {
     border-radius: 2rem;
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 255, .4);
 }
 
 .textview .text {
@@ -202,17 +316,16 @@ button:hover {
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     font-weight: bold;
-    background: linear-gradient(150deg, rgb(255, 0, 0), rgb(0, 0, 190));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    box-shadow: 0 2px 19px 0 rgba(0, 0, 0, .4);
+    background: var(--color-secondary);
+    box-shadow: 0 2px 19px 0 var(--color-shadow);
+    color: var(--color-headline);
     border-radius: 6px;
     padding: 2vmin 6vmin;
 }
 
 .textview h1:hover {
     border-radius: 2rem;
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 255, .4);
+    box-shadow: 0 2px 30px 0 var(--color-shadow-hover);
 }
 
 .textview ul {
@@ -225,19 +338,19 @@ button:hover {
 
 .textview a {
     transition: all 250ms ease;
-    background: linear-gradient(150deg, rgb(74, 0, 158), rgb(1, 145, 109));
+    background: linear-gradient(150deg, var(--color-font-highlight), var(--color-font-highlight-2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .textview a:hover {
-    background: linear-gradient(150deg, rgb(1, 145, 109), rgb(74, 0, 158));
+    background: linear-gradient(150deg, var(--color-font-highlight-hover), var(--color-font-highlight-hover-2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .textview .special {
-    background: linear-gradient(150deg, rgba(172, 54, 0, 0.753), rgba(235, 2, 2, 0.651));
+    background: linear-gradient(150deg, var(--color-font-highlight), var(--color-font-highlight-2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 8vmin;
@@ -246,7 +359,7 @@ button:hover {
 .post {
     margin: auto;
     margin-top: 3em;
-    box-shadow: 0 2px 40px 0 rgba(0, 0, 0, .4);
+    box-shadow: 0 2px 40px 0 var(--color-shadow);
     border-radius: 9px;
     width: fit-content;
     text-align: center;
@@ -276,7 +389,7 @@ button:hover {
     color: transparent;
 }
 
-.form__field:placeholder-shown~.form__label {
+.form__field:placeholder-shown ~ .form__label {
     font-size: 1.3rem;
     cursor: text;
     top: 20px;
@@ -288,24 +401,24 @@ button:hover {
     display: block;
     transition: 0.2s;
     font-size: 1rem;
-    color: #9b9b9b;
+    color: var(--color-font-primary);
 }
 
 .form__field:focus {
     padding-bottom: 6px;
     font-weight: 700;
     border-width: 3px;
-    border-image: linear-gradient(to right, #11998e, #38ef7d);
+    border-image: linear-gradient(to right, var(--color-font-highlight), var(--color-font-highlight-2));
     border-image-slice: 1;
 }
 
-.form__field:focus~.form__label {
+.form__field:focus ~ .form__label {
     position: absolute;
     top: 0;
     display: block;
     transition: 0.2s;
     font-size: 1rem;
-    color: #11998e;
+    color: var(--color-font-highlight-2);
     font-weight: 700;
 }
 
@@ -321,7 +434,7 @@ button:hover {
     text-align: left;
     overflow: scroll;
     height: 50vmin;
-    border: 1px solid #000;
+    border: 1px solid var(--color-dark);
     padding: 10px;
     overflow-x: hidden;
     overflow-y: initial;
@@ -333,8 +446,9 @@ button:hover {
 }
 
 .listBody {
+    background-color: var(--color-primary);
     border-radius: 0.8rem;
-    box-shadow: 0 2px 40px 0 rgba(0, 0, 0, .4);
+    box-shadow: 0 2px 40px 0 var(--color-shadow);
     text-align: left;
     margin: 3em 5vmax auto;
     transition: all 250ms ease;
@@ -348,6 +462,7 @@ button:hover {
 }
 
 .listBody .content {
+    background-color: var(--color-secondary);
     border-radius: 0.8rem;
     transition: all 250ms ease;
     text-align: center;
@@ -355,34 +470,35 @@ button:hover {
     padding: 1vmin;
     overflow-x: hidden;
     overflow-y: initial;
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 30px 0 var(--color-shadow);
     margin-bottom: 2vmax;
 }
 
-.listBody .content:hover{
+.listBody .content:hover {
     border-radius: 2rem;
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 255, .4);
+    box-shadow: 0 2px 30px 0 var(--color-shadow-hover);
 }
 
 .fixedBtn {
     position: fixed;
-    top: 1;
+    top: 1vmin;
     right: 7vmin;
 }
 
 .denyBtn {
-    background: linear-gradient(to right, #6d0c0c, #af2a2a);
+    background: linear-gradient(to right, var(--button-decline), var(--button-decline-2));
 }
 
 .denyBtn:hover {
-    background: linear-gradient(to right, #af2a2a, #6d0c0c);
-    box-shadow: 0 1rem .6rem rgba(255, 0, 0, 0.3);
+    background: linear-gradient(to right, var(--button-decline-hover), var(--button-decline-2-hover));
+    box-shadow: 0 1rem .6rem var(--button-decline-hover);
 }
 
 dialog {
-    width: 150vmin;
-    background-color: transparent;
+    width: 100%;
+    background-color: var(--color-backdrop);
     border-color: transparent;
+    color: var(--color-font-primary);
 }
 
 dialog[open] {
@@ -409,17 +525,17 @@ dialog.hide {
 }
 
 dialog::backdrop {
-    background-color: rgba(0, 0, 51, 0.4);
+    background-color: var(--color-backdrop);
 }
 
 .shopItem {
     transition: all 250ms ease;
-    background-color: #141414;
+    background-color: var(--color-primary);
     margin: auto;
     margin-top: 3em;
     margin-left: 5vmax;
     margin-right: 5vmax;
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 0, .4);
+    box-shadow: 0 2px 30px 0 var(--color-shadow);
     border-radius: 6px;
     width: auto;
     text-align: center;
@@ -427,21 +543,21 @@ dialog::backdrop {
 }
 
 .shopItem:hover {
-    box-shadow: 0 2px 30px 0 rgba(0, 0, 255, .4);
+    box-shadow: 0 2px 30px 0 var(--color-shadow-hover);
     border-radius: 2rem;
 }
 
 .shopItem .des {
     transition: all 250ms ease;
-    background: linear-gradient(150deg, rgb(248, 12, 243), rgb(0, 255, 228));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding: 0.4rem;
+    padding: 2vmin;
     margin-bottom: 0.6rem;
+    background-color: var(--color-bg);
+    margin-bottom: 3vmin;
+    box-shadow: inset 0 0 1em var(--color-shadow);
 }
 
 .shopItem h1 {
-    background: linear-gradient(150deg, rgba(172, 54, 0, 0.753), rgba(235, 2, 2, 0.651));
+    background: linear-gradient(150deg, var(--color-font-secondary-hover), var(--color-font-secondary-hover-2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 8vmin;
@@ -454,22 +570,26 @@ dialog::backdrop {
     width: 80px;
     height: 80px;
 }
+
 .lds-ripple div {
     position: absolute;
-    border: 4px solid #fff;
+    border: 4px solid var(--color-light);
     opacity: 1;
     border-radius: 50%;
     animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
+
 .lds-ripple div:nth-child(2) {
     animation-delay: -0.5s;
 }
+
 @keyframes lds-ripple {
     0% {
         top: 36px;
         left: 36px;
         width: 0;
         height: 0;
+
         opacity: 1;
     }
     100% {
@@ -500,3 +620,133 @@ img {
     width: 20vmin;
     margin-bottom: 1rem;
 }
+
+.cart {
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+.cart-btn {
+    position: relative;
+    left: 46%;
+}
+
+.cartitems {
+    box-shadow: inset 0 0 1em var(--color-shadow);
+    background-color: var(--color-secondary);
+    text-align: center;
+    padding: 4vmin;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: fit-content;
+    margin-left: 1vmin;
+    margin-right: 1vmin;
+    border-radius: 10px;
+}
+
+.cart-item {
+    background-color: transparent;
+    text-align: left;
+    width: auto;
+    height: auto;
+}
+
+.cart-item .cart-item-description {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: inline-flex;
+    height: 10vmin;
+}
+
+.cart-item-description .img {
+    height: 4vmin;
+    border-right: 5px solid var(--color-dark);
+}
+
+.cart-item-description .img img {
+    position: relative;
+    top: -10vmin;
+}
+
+.cart-item-description .name {
+    border-right: 5px solid var(--color-dark);
+    display: inline-block;
+    width: 70vmin;
+}
+
+.cart-item-description .amount {
+    border-right: 5px solid var(--color-dark);
+    display: inline-block;
+    width: 30vmin;
+}
+
+.cart-item-description .price {
+    display: inline-block;
+    width: 40vmin;
+}
+
+.material-icons {
+    cursor: pointer;
+    font-size: 3vmin !important;
+}
+
+.blur {
+    transition: all 250ms ease;
+    background-size: cover;
+    background-color: var(--color-glass);
+    z-index: -1;
+    -webkit-filter: blur(100px);
+    filter: blur(100px);
+    position: fixed;
+    padding: 0;
+    margin: 0;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.border {
+    width: 100%;
+    background-color: var(--color-dark);
+}
+
+.weboos {
+    left: -0.5vmin;
+    top: 1.5vmin;
+    position: relative;
+    height: 5vmin;
+    width: auto;
+    margin: 0;
+}
+
+.editbox {
+    position: fixed;
+    box-shadow: inset 0 0 1em var(--color-shadow);
+    background-color: var(--color-backdrop);
+    text-align: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.editbox .ct {
+    position: fixed;
+    top: 6vmin;
+    bottom: 6vmin;
+    left: 6vmin;
+    right: 6vmin;
+    background-color: var(--color-secondary);
+    padding: 4vmin;
+    border-radius: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+

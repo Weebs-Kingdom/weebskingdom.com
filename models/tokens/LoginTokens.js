@@ -13,6 +13,14 @@ const tokenSchema = new mongoose.Schema({
     token: {
         type: String,
         require: true
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+    isDev: {
+        type: Boolean,
+        default: false
     }
 });
 

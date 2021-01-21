@@ -1,14 +1,23 @@
-Mindcollaps.de Developer Website patched to version 1.0.3
+Mindcollaps.de Developer Website patched to version 1.0.4 <alpha>
 
 New features
-• Basic shop implementation
-• Attack list
-• Monster list
+• Authentication Email service
+• Email messaging service
+• Shopping cart
+• Updated package.json
+• Auth token generator enhancement
+• Possibility to register without a token
+• DSGVO
+• Changed some parts to english
+• Monsterlist filter feature
+• Monsterlist create monster
+• Monsterlist direct edit link
+• Enhanced security
 
 Changes
-• CSS font of menu is smaller
+• Theme and CSS changes
 
 Bugfix
-• Admin is always developer
+•
 •
 •

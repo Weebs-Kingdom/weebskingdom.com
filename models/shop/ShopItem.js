@@ -11,7 +11,8 @@ const shopItem = new mongoose.Schema({
     connectedRole: String,
     stock: Number,
     hasStocks: Boolean,
-    rarity: String
+    rarity: String,
+    category: String
 });
 
 module.exports = mongoose.model("ShopItem", shopItem);

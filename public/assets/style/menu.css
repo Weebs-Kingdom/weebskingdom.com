@@ -186,8 +186,8 @@
 }
 
 .submenu .menu__link {
-    color: var(--color-secondary);
-    text-shadow: 1px 1px 0 var(--color-primary), 2px 2px 0 var(--color-primary);
+    color: var(--color-headline);
+    text-shadow: 1px 1px 0 var(--color-shadow), 2px 2px 0 var(--color-shadow);
 }
 
 .submenu .menu__link::before,
@@ -272,7 +272,7 @@
 }
 
 .menu__item:hover>.menu__link {
-    color: var(--color-secondary);
+    color: var(--color-font-secondary);
     opacity: 1;
     transform: translate(0, 0);
 }

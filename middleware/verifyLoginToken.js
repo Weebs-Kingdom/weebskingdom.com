@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/user/User");
 
 module.exports = async function(req, res, next) {
     const token = req.header("auth-token");
@@ -15,6 +15,7 @@ module.exports = async function(req, res, next) {
         if (now > expireTime) return res.status(401).json({ status: 401, message: "Token expired!" });
         const u = await User.findOne({ _id: verified._id });
         if (!u) return res.status(401).json({ status: 401, message: "Access Denied! Not listed anymore!" });
+        if(!verified) return res.status(401).json({ status: 401, message: "Access Denied!" });
         req.dbUser = u;
         req.user = verified;
         next();

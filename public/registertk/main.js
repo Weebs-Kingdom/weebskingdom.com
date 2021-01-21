@@ -13,16 +13,13 @@ async function register() {
         body: JSON.stringify({ password: password, email: email, username: username, access_token: token, repeat_password: rpassword })
     };
 
-    const response = await fetch('/api/user/register', options);
+    const response = await fetch('/api/user/registertk', options);
     const json = await response.json();
-    console.log(json);
-
-    if (json.status == 200) {
-        var error = document.getElementById('error');
+    var error = document.getElementById('error');
+    if (json.status === 200) {
         error.innerHTML = "Registrierung erfolgreich"
         window.location.replace("/login");
     } else {
-        var error = document.getElementById('error');
         error.innerHTML = json.message;
     }
 }

@@ -4,6 +4,7 @@ const app = express();
 const appRouter = require('./router/app.js');
 const dotenv = require("dotenv");
 const database = require("./middleware/database");
+const mailer = require("./middleware/mailer");
 
 dotenv.config();
 app.listen(5001, () => console.log('listening on port ' + 5001));
@@ -11,6 +12,7 @@ app.use(express.static('public'));
 app.use(express.json({ limit: '2mb' }));
 app.use(appRouter);
 database.connect();
+mailer.connect();
 console.log("Ready for action!")
 
 process.on('unhandledRejection', (reason, p) => {

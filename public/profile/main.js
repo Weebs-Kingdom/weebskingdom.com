@@ -59,14 +59,53 @@ async function submit() {
 var ema = false;
 var use = false;
 var pw = false;
+var dbUser = undefined;
 
-function init() {
+async function init() {
     input = document.getElementById("input");
     input1 = document.getElementById("input1");
     hide("input1");
     hide("input");
+
+    try {
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': token
+            }
+        };
+
+        const response = await fetch('/api/yuki/discuser', options);
+        if(response.status === 200){
+            const json = await response.json();
+            dbUser = json.data;
+        }
+        if(dbUser.emailVerified){
+            document.getElementById("resent").hidden = true;
+        }
+    } catch (e){
+    }
 }
 
+async function resentEmail(){
+    try {
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': token
+            }
+        };
+
+        const response = await fetch('/api/user/resentAuthEmail', options);
+        if(response.status === 200){
+            var error = document.getElementById('error');
+            error.innerHTML = "Sent auth email again!";
+        }
+    } catch (e){
+    }
+}
 
 function btnPw() {
     show("input");

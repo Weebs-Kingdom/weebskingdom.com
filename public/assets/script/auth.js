@@ -1,11 +1,20 @@
 var loggedIn = false;
 var isAdmin = false;
 var token;
-var dbuser;
+var dbUser;
+
+function changeTheme(theme){
+    document.documentElement.setAttribute('data-theme', theme);
+}
 
 async function auth(goToLoginOnFail) {
     token = getCookie("auth");
-    if (!token) return;
+    if (!token) {
+        if (goToLoginOnFail) {
+            window.location.replace("/login");
+        }
+        return;
+    }
     const options = {
         method: 'GET',
         headers: {
@@ -17,12 +26,13 @@ async function auth(goToLoginOnFail) {
     try {
         const response = await fetch('/api/user/auth', options);
         const json = await response.json();
-        await loadUser();
 
-        if (json.status == 200) {
+        if (json.status === 200) {
             loggedIn = true;
             console.log("logged in!");
             var login = document.getElementById('login');
+            var regi = document.getElementById('regi');
+            regi.remove();
             login.innerHTML = "Logout";
             login.href = "";
             login.onclick = function () {
@@ -31,20 +41,20 @@ async function auth(goToLoginOnFail) {
                     window.location.replace("/");
                 }
             }
-            setupLoggin();
+            await setupLogin();
         } else {
+            console.log("not logged in!");
             if (goToLoginOnFail) {
                 window.location.replace("/login");
             }
-            console.log("not logged in!");
         }
     } catch (e) {
-        if(goToLoginOnFail)
-        window.location.replace("/");
+        console.log(e);
+        console.log("error");
     }
 }
 
-async function setupLoggin() {
+async function setupLogin() {
     if (await getIsDev()){
         addDev();
     }
@@ -88,8 +98,7 @@ function addDev() {
     var menu = document.getElementById("menu");
     var devs = createLi(menu, "/yukisora/devs", "Developer");
     var subMenu = createSubMenu(devs);
-    createLi(subMenu, "/yukisora/devs/create", "Monster");
-    createLi(subMenu, "/yukisora/devs/monsterlist", "Mosterlist");
+    createLi(subMenu, "/yukisora/devs/monsterlist", "Monster");
     createLi(subMenu, "/yukisora/devs/attacklist", "Attacklist");
     createLi(subMenu, "/yukisora/devs/item", "Item");
 }
@@ -133,8 +142,10 @@ async function loadUser(){
         };
 
         const response = await fetch('/api/yuki/discuser', options);
-        const json = await response.json();
-        this.dbuser = json.data;
+        if(response.status === 200){
+            const json = await response.json();
+            return json.data;
+        }
 }
 
 
@@ -155,4 +166,19 @@ function deleteCookie(name) {
 
 function isLoggedIn() {
     return loggedIn;
+}
+
+function ping(host) {
+    var http = new XMLHttpRequest();
+    http.open("GET", host, /*async*/true);
+    http.onreadystatechange = function() {
+        if (http.readyState == 4) {
+        }
+    };
+    try {
+        http.send(null);
+    } catch(exception) {
+       return true;
+    }
+    return false;
 }

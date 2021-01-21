@@ -4,6 +4,7 @@
     <title>Create</title>
     <link rel="stylesheet" href="/assets/style/main.css">
     <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script type="text/javascript" src="/assets/script/auth.js"></script>
     <meta name="title" content="MindCollaps.de Registrierung">
@@ -11,9 +12,9 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 
-<body onload="auth(true)">
+<body onload="await auth(true)">
 <div id="navdiv" v-html="navbar"></div>
-<div id="shop"> <product v-for="item in shop" :item="item"></product> </div>
+<div id="shop"> <cart :items="complexCart" @add="addToCart" @deleteone="deleteOneFromCart" @delete="deleteFromCart"></cart> <product v-for="item in shop" :item="item" @add="addToCart"></product> </div>
 
 <script type="text/javascript" src="/assets/script/navbar.js"></script>
 <script type="text/javascript" src="/assets/script/shop.js"></script>
