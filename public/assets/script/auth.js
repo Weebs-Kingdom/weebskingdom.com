@@ -99,8 +99,8 @@ function addDev() {
     var devs = createLi(menu, "/yukisora/devs", "Developer");
     var subMenu = createSubMenu(devs);
     createLi(subMenu, "/yukisora/devs/monsterlist", "Monster");
-    createLi(subMenu, "/yukisora/devs/attacklist", "Attacklist");
     createLi(subMenu, "/yukisora/devs/item", "Item");
+    createLi(subMenu, "/yukisora/devs/attacklist", "Attack");
 }
 
 function createSubMenu(vin) {

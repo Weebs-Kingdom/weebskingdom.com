@@ -4,8 +4,10 @@
     <title>Attack List</title>
     <link rel="stylesheet" href="/assets/style/main.css">
     <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script type="text/javascript" src="/assets/script/auth.js"></script>
+    <script type="text/javascript" src="/assets/script/maSearch.js"></script>
     <meta name="title" content="MindCollaps.de Registrierung">
     <meta name="description" content="Meine Homepage über Projecte usw.">
     <meta name="theme-color" content="#ffffff">
@@ -14,10 +16,87 @@
 <body>
 <script>auth(false);</script>
 <div id="navdiv" v-html="navbar"></div>
-<div class="advice">
-    <div class="txt">To search a specific attack use the hotkey: CTRL + F</div>
+<div id="attacklist">
+    <button class="fixedBtn" v-if="!show" @click="create">Create</button>
+    <div class="editbox" v-if="show">
+        <div class="ct">
+            <button class="fixedBtn denyBtn" @click="closeEd">Close</button>
+            <a class="advice">
+                {{modeinfo}}
+            </a>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Name" name="Name" id='name' v-model="aattackName" :value="aattackName" required/>
+                <label for="name" class="form__label">Name</label>
+            </div>
+            <div class="form__group field">
+                <input type="number" class="form__field" placeholder="Base Damage" name="Base Damage" id='baseDmg'
+                       v-model="abaseDmg" :value="abaseDmg" required/>
+                <label for="baseDmg" class="form__label">Base Damage</label>
+            </div>
+            <div class="form__group field">
+                <input type="number" class="form__field" placeholder="Level" name="Level" id='level'
+                       v-model="alevel" :value="alevel" required/>
+                <label for="level" class="form__label">Level</label>
+            </div>
+            <div class="form__group field">
+                <input type="number" class="form__field" placeholder="Max Usage" name="Max Usage" id='usage'
+                       v-model="amaxUsage" :value="amaxUsage" required/>
+                <label for="usage" class="form__label">Max Usage</label>
+            </div>
+            <div class="form__group field">
+                <select id="statuseffect" v-model="astatusEffect" :value="astatusEffect">
+                    <option></option>
+                    <option>burn</option>
+                    <option>poison</option>
+                    <option>freeze</option>
+                    <option>paralysis</option>
+                    <option>sleep</option>
+                    <option>confusion</option>
+                </select>
+                <label for="statuseffect" class="form__label">Status effect</label>
+            </div>
+            <div class="form__group field">
+                <select id="monstertype" v-model="aattackType" :value="aattackType">
+                    <option>normal</option>
+                    <option>psychic</option>
+                    <option>fighting</option>
+                    <option>flying</option>
+                    <option>poison</option>
+                    <option>ground</option>
+                    <option>rock</option>
+                    <option>bug</option>
+                    <option>ghost</option>
+                    <option>steel</option>
+                    <option>fire</option>
+                    <option>water</option>
+                    <option>grass</option>
+                    <option>electric</option>
+                    <option>ice</option>
+                    <option>dragon</option>
+                    <option>dark</option>
+                    <option>fairy</option>
+                </select>
+                <label for="monstertype" class="form__label">Attack type</label>
+            </div>
+            <p class="message">{{submitmsg}}</p>
+            <div style="margin-top: 6em; display: inline-flex" >
+                <button class="btn" type="button" @click="submit">Submit</button>
+                <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="deleteAttack(edetingAttack)" v-if="editMode">delete</button>
+            </div>
+        </div>
+    </div>
+    <div class="advice">
+        <div class="txt">To search a specific attack use the hotkey: CTRL + F</div>
+    </div>
+    <div class="advice">
+        <div class="txt">
+            <input style="width: 50vmax" type="search" class="form__field" placeholder="Search" name="Search" id='serc'
+                   @keyup="searchFc" v-model="searchB"/>
+        </div>
+    </div>
+    <div class="listBody"><attack v-for="attack in filteredAttacks" :attack="attack" @edit="edit" @delete="deleteAttack"></attack></div>
 </div>
-<div id="attacklist" class="listBody"><attack v-for="attack in attacks" :attack="attack" @delete="deleteAttack"></attack></div>
+
 <script src="mainvue.js"></script>
 <script type="text/javascript" src="/assets/script/navbar.js"></script>
 </body>

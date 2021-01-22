@@ -12,7 +12,8 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 
-<body onload="await auth(true)">
+<body>
+<script>auth(true)</script>
 <div id="navdiv" v-html="navbar"></div>
 <div id="shop"> <cart :items="complexCart" @add="addToCart" @deleteone="deleteOneFromCart" @delete="deleteFromCart"></cart> <product v-for="item in shop" :item="item" @add="addToCart"></product> </div>
 

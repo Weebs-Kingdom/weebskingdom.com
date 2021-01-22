@@ -147,8 +147,8 @@ button {
     appearance: none;
     background: linear-gradient(to right, var(--button-0), var(--button-0-2));
     border-radius: 5px;
-    font-size: 2vmin;
-    padding: 12px 15px;
+    font-size: 2.5vmin;
+    padding: 0.8vmin 1.4vmin;
     width: fit-content;
 }
 
@@ -494,6 +494,15 @@ button:hover {
     box-shadow: 0 1rem .6rem var(--button-decline-hover);
 }
 
+.acceptBtn {
+    background: linear-gradient(to right, var(--button-accept), var(--button-accept-2));
+}
+
+.acceptBtn:hover {
+    background: linear-gradient(to right, var(--button-accept-hover), var(--button-accept-2-hover));
+    box-shadow: 0 1rem .6rem var(--button-accept-hover);
+}
+
 dialog {
     width: 100%;
     background-color: var(--color-backdrop);
@@ -691,7 +700,7 @@ img {
 
 .material-icons {
     cursor: pointer;
-    font-size: 2vmin !important;
+    font-size: 3vmin !important;
 }
 
 .blur {
@@ -748,5 +757,26 @@ img {
     border-radius: 10px;
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 2vmax;
+    }
+
+    button {
+        font-size: 2.5vmax;
+        padding: 0.8vmax 1.4vmax;
+    }
+
+    .fixedBtn {
+        top: 7vmax;
+        right: 0;
+    }
+
+    .material-icons {
+        cursor: pointer;
+        font-size: 3vmax !important;
+    }
 }
 
