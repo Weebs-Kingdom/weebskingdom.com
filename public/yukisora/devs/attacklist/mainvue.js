@@ -37,7 +37,6 @@ var attack = new Vue({
 
         abaseDmg: 10,
         aattackName: "undefined",
-        alevel: 1,
         amaxUsage: 20,
         astatusEffect: "",
         aattackType: "normal",
@@ -137,7 +136,6 @@ var attack = new Vue({
 
             this.abaseDmg = attack.baseDmg;
             this.aattackName = attack.attackName;
-            this.alevel = attack.level;
             this.amaxUsage = attack.maxUsage;
             this.astatusEffect = attack.statusEffect;
             this.aattackType = attack.attackType;
@@ -146,7 +144,6 @@ var attack = new Vue({
             var packedAttack = {
                 baseDmg: this.abaseDmg,
                 attackName: this.aattackName,
-                level: this.alevel,
                 maxUsage: this.amaxUsage,
                 statusEffect: this.astatusEffect,
                 attackType: this.aattackType

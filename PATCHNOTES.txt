@@ -1,13 +1,13 @@
-Mindcollaps.de Developer Website patched to version 1.0.4 <alpha>
+Mindcollaps.de Website patched to version 1.0.4 <alpha>
 
 New features
-• Enhanced attack filter and creation system
+• New attack level system
 •
 •
 •
 
 Changes
-• Removed old attack and monster creators
+• Shop enhancement
 
 Bugfix
 •

@@ -124,10 +124,10 @@ Vue.component('cartitem', {
                     <div class="cart-item-description">
                         <div class="img"><img v-if="image != undefined && image != ''" :src="image"><a v-else>No product image</a></div>
                         <div class="name"><a class="cart-item-label">{{name}}</a></div>
-                        <div class="amount">
+                        <div class="amount" style="vertical-align: middle; display: inline-block; text-align: center">
+                            <a style="vertical-align: middle" v-on:click="$emit('deleteone',id)"> <i class="material-icons">remove</i> </a>
                             <a class="cart-item-amount">{{amount}}</a>
-                            <a v-on:click="$emit('add',id)"> <i class="material-icons">add</i> </a>
-                            <a v-on:click="$emit('deleteone',id)"> <i class="material-icons">remove</i> </a>
+                            <a style="vertical-align: middle" v-on:click="$emit('add',id)"> <i class="material-icons">add</i> </a>
                         </div>
                         <div class="price">
                             <a class="cart-item-price">{{price}} <img class="weboos" src="/assets/img/weboos.png"></a>

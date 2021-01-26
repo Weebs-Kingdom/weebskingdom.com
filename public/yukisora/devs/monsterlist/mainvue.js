@@ -124,6 +124,17 @@ var monster = new Vue({
             this.mshown = mnster.shown;
             this.mevolves = mnster.evolves;
             this.mattacks = mnster.attacks;
+            if(!mnster.attacks)
+                this.mattacks = [];
+            else {
+                var natts = [];
+                for (let i = 0; i < this.mattacks.length; i++) {
+                    natts[i] = {};
+                    natts[i].attack = this.mattacks[i]._id;
+                    natts[i].level = this.mattacks[i].level;
+                }
+                this.mattacks = natts;
+            }
             this.mrarity = mnster.rarity;
             this.mmonsterType = mnster.monsterType;
         },
@@ -145,14 +156,16 @@ var monster = new Vue({
                         this.mmonsterType.splice(i, 1);
                 }
         },
-        clckAttack: function (id, add) {
-            if (add)
-                this.mattacks.push(id);
-            else
-                for (let i = 0; i < this.mattacks; i++) {
-                    if (this.mattacks[i]._id == id)
-                        this.mattacks.splice(i, 1);
+        clckAttack: function (id, add, lvl) {
+            for (let i = 0; i < this.mattacks.length; i++) {
+                if (this.mattacks[i]._id == id || this.mattacks[i].attack == id) {
+                    this.mattacks.splice(i, 1);
                 }
+            }
+            if (add) {
+                const a = {attack: id, level: lvl};
+                this.mattacks.push(a);
+            }
         },
         editAttack: function (id) {
             var win = window.open("/yukisora/devs/attacklist?edit=" + id + "&c=true", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=auto,height=auto");
@@ -271,20 +284,37 @@ Vue.component('evolves', {
 Vue.component('attacks', {
     template: `
    <div style="display: table-row">
-   <input style="display: table-cell" type="checkbox" :checked="isSelected()" @click="change($event.target.checked)"/>
-        <a style="display: table-cell">{{ev.attackName}}</a> <a style="display: table-cell">Level: {{ev.level}}</a> <a style="display: table-cell">BaseDMG: {{ev.baseDmg}}</a>
+   <input style="display: table-cell" type="checkbox" v-model.checked="checked" @change="change()"/>
+        <a style="display: table-cell">{{ev.attackName}}</a> 
+        <div style="display: table-cell"><a>Level: </a> <input type="number" v-model.number="lvl" @change="change()" @keyup="change()"></div> 
+        <a style="display: table-cell">BaseDMG: {{ev.baseDmg}}</a>
         <button class="material-icons" v-on:click="edit">edit</button>
    </div>
    `,
+    data: function (){
+      return {
+          lvl: 1,
+          checked: false
+      }
+    },
+    created: function (){
+        if(this.isSelected()){
+            this.lvl = this.selected.filter(e => e.attack == this.ev._id)[0].level;
+            if(!this.lvl || this.lvl == undefined || this.lvl === 0)
+                this.lvl = 1;
+        }
+    },
     props: ['ev', 'selected'],
     methods: {
-        change: function (bl) {
-            this.$emit('clicked', this.ev._id, bl);
+        change: function () {
+            this.$emit('clicked', this.ev._id, this.checked, this.lvl);
         },
         isSelected: function () {
             for (const el of this.selected) {
-                if (this.ev._id == el)
+                if (this.ev._id == el.attack) {
+                    this.checked = true;
                     return true;
+                }
             }
             return false;
         },
@@ -317,7 +347,6 @@ Vue.component('types', {
 });
 
 async function loadAttacks() {
-    console.log("bllbbbkl");
     const options = {
         method: 'GET',
         headers: {
@@ -344,6 +373,8 @@ async function loadMonsters() {
         }
     };
 
+
+
     const response = await fetch('/api/yuki/monsters', options);
     const json = await response.json();
     if (json.status === 200) {
@@ -352,7 +383,6 @@ async function loadMonsters() {
             if(!ping(ele.imageUrl))
                 ele.imageUrl = undefined;
         }*/
-
         monsters = json.data;
     } else {
         return undefined;
