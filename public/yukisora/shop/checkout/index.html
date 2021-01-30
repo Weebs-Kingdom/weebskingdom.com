@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <title>Create</title>
+    <link rel="stylesheet" href="/assets/style/main.css">
+    <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600" rel="stylesheet">
+    <link href="/assets/style/checkoutbtn.css" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="text/javascript" src="/assets/script/auth.js"></script>
+    <meta name="title" content="MindCollaps.de Registrierung">
+    <meta name="description" content="Meine Homepage über Projecte usw.">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+<script>auth(true)</script>
+<div id="navdiv" v-html="navbar"></div>
+<div id="shop">
+    <div class="checkout">
+        <div class="buylist textview">
+            <div v-if="itemsTotal >= 1" class="cocartitems">
+                <cartitem v-for="item in complexCart" @add="addToCart" @deleteone="deleteOneFromCart"
+                          @delete="deleteFromCart"
+                          :amount="item.amount" :name="item.name" :price="item.price" :id="item._id"
+                          :image="item.image"></cartitem>
+            </div>
+            <div v-else style="display: flex; align-items: center; height: 100%; justify-content: center">
+                <a class="link">
+                    Nothing here
+                </a>
+            </div>
+        </div>
+        <div class="buyarea textview">
+            <div class="text">
+                <h1 class="headline">Checkout</h1>
+                <a v-if="itemsTotal >= 50">You are just about to buy a shit load of stuff OWO</a>
+                <a v-else-if="itemsTotal >= 30">You are just about to buy a lot of stuff</a>
+                <a v-else-if="itemsTotal >= 10">You are just about to buy many items</a>
+                <a v-else-if="itemsTotal >= 5">You are just about to buy some stuff</a>
+                <a v-else-if="itemsTotal > 1">You are just about to buy a few items</a>
+                <a v-else>You are just about to buy an item</a>
+            </div>
+
+            <div class="text">
+                <a class="link">Total: {{getTotal()}} 宅</a>
+            </div>
+
+            <div class="checkoutbtn">
+                <main @click="checkout">
+                    <div class="button">
+                        <div class="text">Submit</div>
+                    </div>
+                    <div class="progress-bar"></div>
+                    <svg x="0px" y="0px"
+                         viewBox="0 0 25 30" style="enable-background:new 0 0 25 30;">
+                        <path class="check" class="st0" d="M2,19.2C5.9,23.6,9.4,28,9.4,28L23,2"/>
+                    </svg>
+                </main>
+            </div>
+
+            <div style="justify-content: end">
+                <h1 class="ml11">
+                    <span class="text-wrapper">
+                        <span class="line line1"></span>
+                        <span class="letters" id="messageuwu"></span>
+                    </span>
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
+<script type="text/javascript" src="/assets/script/shop.js"></script>
+</body>
+
+</html>

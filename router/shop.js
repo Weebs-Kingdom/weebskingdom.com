@@ -2,6 +2,7 @@ const router = require("express").Router();
 const verify = require("../middleware/verifyLoginToken");
 const vAdmin = require("../middleware/verifyAdminAcces");
 const vDev = require("../middleware/verifyDev");
+const vActive = require("../middleware/verifyActivatedAcount");
 const fetch = require('node-fetch');
 
 const ShopItem = require("../models/shop/ShopItem");

@@ -289,12 +289,12 @@ button:hover {
 }
 
 .textview {
+    overflow: hidden;
     transition: all 250ms ease;
     background-color: var(--color-primary);
     margin: 3em 5vmax auto;
     box-shadow: 0 2px 30px 0 var(--color-shadow);
     border-radius: 6px;
-    width: auto;
     text-align: center;
     padding: 2vmin 20vmin;
 }
@@ -307,7 +307,7 @@ button:hover {
     margin-bottom: 4em;
 }
 
-.textview h1 {
+.textview .headline {
     transition: all 250ms ease;
     display: block;
     font-size: 2em;
@@ -323,7 +323,7 @@ button:hover {
     padding: 2vmin 6vmin;
 }
 
-.textview h1:hover {
+.textview .headline:hover {
     border-radius: 2rem;
     box-shadow: 0 2px 30px 0 var(--color-shadow-hover);
 }
@@ -336,14 +336,14 @@ button:hover {
     list-style-position: inside
 }
 
-.textview a {
+.textview .link {
     transition: all 250ms ease;
     background: linear-gradient(150deg, var(--color-font-highlight), var(--color-font-highlight-2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-.textview a:hover {
+.textview .link:hover {
     background: linear-gradient(150deg, var(--color-font-highlight-hover), var(--color-font-highlight-hover-2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -656,8 +656,57 @@ img {
     border-radius: 10px;
 }
 
+.cocartitems {
+    display: flex;
+    flex-flow: wrap;
+    align-content: center;
+    background-color: var(--color-tertiary);
+    height: fit-content;
+    width: fit-content;
+}
+
+.cocartitems .cart-item .cart-item-description{
+    height: 6vmin;
+}
+
+.cocartitems .cart-item {
+    font-size: 1.5vmin;
+}
+
+.cocartitems .cart-item-description .img {
+    height: 1vmin;
+}
+
+.cocartitems .cart-item-description .img img {
+    height: 15vmin;
+    width: auto;
+    position: relative;
+    top: -7vmin;
+}
+
+.cocartitems .cart-item-description .name {
+    border-right: 5px solid var(--color-dark);
+    display: inline-block;
+    width: 24vmin;
+}
+
+.cocartitems .cart-item-description .amount {
+    border-right: 5px solid var(--color-dark);
+    display: inline-block;
+    width: 8vmin;
+}
+
+.cocartitems .cart-item-description .price {
+    display: inline-block;
+    width: 12vmin;
+}
+
+.cocartitems .material-icons {
+    font-size: 1.5vmin !important;
+}
+
 .cart-item {
-    background-color: transparent;
+    background-color: var(--color-tertiary);
     text-align: left;
     width: auto;
     height: auto;
@@ -726,15 +775,6 @@ img {
     background-color: var(--color-dark);
 }
 
-.weboos {
-    left: -0.5vmin;
-    top: 1.5vmin;
-    position: relative;
-    height: 5vmin;
-    width: auto;
-    margin: 0;
-}
-
 .editbox {
     position: fixed;
     box-shadow: inset 0 0 1em var(--color-shadow);
@@ -757,6 +797,83 @@ img {
     border-radius: 10px;
     overflow-x: hidden;
     overflow-y: scroll;
+}
+
+.unselectable {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    /*
+      Introduced in Internet Explorer 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkout{
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.checkout .buylist {
+    display: flex;
+    text-align: center;
+    margin-left: 4vmin;
+    background: var(--color-secondary);
+    padding: 3vmin;
+    position: relative;
+    top: 10%;
+    height: 70%;
+    width: 40%;
+    justify-content: center;
+}
+
+.checkout .buyarea {
+    text-align: center;
+    background: var(--color-secondary);
+    padding: 2vmin;
+    position: relative;
+    top: 10%;
+    height: 70%;
+    width: 30%;
+}
+
+.ml11 {
+    font-weight: 700;
+    font-size: 2vmin;
+}
+
+.ml11 .text-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-top: 0.1em;
+    padding-right: 0.05em;
+    padding-bottom: 0.15em;
+}
+
+.ml11 .line {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: #fff;
+    transform-origin: 0 50%;
+}
+
+.ml11 .line1 {
+    top: 0;
+    left: 0;
+}
+
+.ml11 .letter {
+    display: inline-block;
+    line-height: 1em;
 }
 
 @media only screen and (max-width: 600px) {

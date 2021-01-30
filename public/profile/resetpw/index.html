@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>Profile</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="text/javascript" src="/assets/script/auth.js"></script>
+    <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="/assets/style/main.css">
+    <meta name="title" content="MindCollaps.de Profile">
+    <meta name="description" content="Meine Homepage über Projecte usw.">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+<script>auth(false)</script>
+<div id="navdiv" v-html="navbar"></div>
+<div class="advice">
+    <a>Forgot your password? Reset now!</a>
+</div>
+<div class="textview" id="reset">
+    <div v-if="bchangePassword">
+        <div class="form__group field">
+            <input type="password" class="form__field" placeholder="Password" name="Password" id="password"
+                   v-model="password" required/>
+            <label for="password" class="form__label">Password</label>
+        </div>
+        <div class="form__group field">
+            <input type="password" class="form__field" placeholder="Repeat password" name="Repeat password" id="rpassword"
+                   v-model="repeat_password" required/>
+            <label for="rpassword" class="form__label">Repeat password</label>
+        </div>
+        <button style="margin-top: 4vmin" @click="changePassword" class="acceptBtn">Change password</button>
+    </div>
+    <div v-else>
+        <div class="form__group field">
+            <input type="email" class="form__field" placeholder="E-Mail" name="E-Mail" id="ema" v-model="email" required/>
+            <label for="ema" class="form__label">E-Mail</label>
+        </div>
+        <button style="margin-top: 4vmin" @click="reqResetPassword" class="acceptBtn">Send reset E-Mail</button>
+    </div>
+    <div class="text">
+        {{msg}}
+    </div>
+</div>
+<script type="text/javascript" src="mainvue.js"></script>
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
+</body>
+
+</html>

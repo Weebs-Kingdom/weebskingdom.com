@@ -7,15 +7,13 @@ module.exports = async function(req, res, next) {
 
     try {
         const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+        if(!verified) return res.status(401).json({ status: 401, message: "Access Denied!" });
         const time = new Date(verified.ctime);
         const expireTime = time.setHours(time.getHours() + 48);
         const now = new Date();
-
-
         if (now > expireTime) return res.status(401).json({ status: 401, message: "Token expired!" });
         const u = await User.findOne({ _id: verified._id });
         if (!u) return res.status(401).json({ status: 401, message: "Access Denied! Not listed anymore!" });
-        if(!verified) return res.status(401).json({ status: 401, message: "Access Denied!" });
         req.dbUser = u;
         req.user = verified;
         next();

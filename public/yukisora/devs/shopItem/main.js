@@ -39,7 +39,7 @@ function createItem(json) {
         parent = json._id;
         document.getElementById("name").value = json.itemName;
         if(json.itemImageURL !== undefined)
-        document.getElementById("imageUrl").value = json.itemImageURL;
+        document.getElementById("imageUrl").value = json.imageUrl;
         document.getElementById("description").value = json.itemDescription;
 
         var e = document.getElementById("rarity");
