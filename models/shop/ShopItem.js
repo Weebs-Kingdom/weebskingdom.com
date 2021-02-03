@@ -9,6 +9,7 @@ const shopItem = new mongoose.Schema({
     isRole: {type: Boolean, default: false},
     connectedItemId: String,
     connectedRole: String,
+    connectedRoute: String,
     stock: Number,
     hasStocks: Boolean,
     rarity: String,

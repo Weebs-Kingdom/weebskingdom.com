@@ -183,9 +183,10 @@ var shop = new Vue({
             const options = {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'auth-token': token
                 },
-                body: JSON.stringify({cart: this.complexCart})
+                body: JSON.stringify({cart: this.shoppingcart})
             };
             var json = {};
             var oke = false;
@@ -203,7 +204,7 @@ var shop = new Vue({
             if(json.status === 200){
                 this.checkoutMessage = "The items are now activated and you can find them in your account";
                 oke = true;
-            } else if(json.status === 400){
+            } else if(json.status === 400 ||json.status === 401){
                 this.checkoutMessage = json.message;
             } else {
                 this.checkoutMessage = "While connection to the server a error occurred";
@@ -211,7 +212,7 @@ var shop = new Vue({
 
             if(oke){
                 this.complexCart = [];
-                this.cart = [];
+                this.shoppingcart = [];
                 this.saveShop();
             }
         },
@@ -267,7 +268,6 @@ Vue.component('cart', {
             for (const e of this.items) {
                 it += e.price * e.amount;
             }
-            console.log(it);
             return it;
         },
         toggle: function () {

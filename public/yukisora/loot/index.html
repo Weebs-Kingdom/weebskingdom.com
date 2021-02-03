@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>Lootbox</title>
+    <link rel="stylesheet" href="/assets/style/main.css">
+    <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="/assets/style/anime.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600" rel="stylesheet">
+    <link href="/assets/style/checkoutbtn.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="text/javascript" src="/assets/script/auth.js"></script>
+    <meta name="title" content="MindCollaps.de Registrierung">
+    <meta name="description" content="Meine Homepage über Projecte usw.">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+<script>auth(true)</script>
+<div id="loot">
+    <div id="anime" class="anime">
+        <div id="particles-js"></div>
+        <span class="ocly cly">
+        </span>
+        <div class="particles"></div>
+        <span class="icly cly"></span>
+        <div id="lootImage">
+            <img :src="image">
+        </div>
+        <div id="bg" class="bg"></div>
+        <div v-if="key" id="keyImage" @click="loadLootBox" class="aImage">
+            <img style="position: relative;" class="img"
+                 src="https://i.pinimg.com/564x/68/f0/3c/68f03cd7503ca4da0e264a1d65273857.jpg">
+            <a>Use key</a>
+        </div>
+        <div style="visibility: hidden" id="lootBoxImage" @click="openLootBox" class="aImage">
+            <img src="https://cdn.dribbble.com/users/1356973/screenshots/4539868/loot-box.png?compress=1&resize=800x600">
+            <a v-if="showMsg">Open</a>
+        </div>
+        <div v-if="showMsg" class="errorMsg">
+            <a>{{msg}}</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="mainvue.js"></script>
+</body>
+
+</html>

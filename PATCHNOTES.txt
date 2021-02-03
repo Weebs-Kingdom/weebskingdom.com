@@ -1,15 +1,18 @@
 Mindcollaps.de Website patched to version 1.0.4 <alpha>
 
 New features
-• New attack level system
-•
-•
-•
+• Shopitem logic
+• New shopitem system
+• Lootboxes and keys
+• UF ANIMATION UFFFFFFFFFFF
+• New item creator
 
 Changes
 • Shop enhancement
+• You have to activate your account
+•
 
 Bugfix
-•
+• Some stuff I forgot
 •
 •

@@ -61,6 +61,7 @@ async function submit() {
     const price = document.getElementById("price").value;
     const isStocked = document.getElementById("isStocked").checked;
     const stock = document.getElementById("stock").value;
+    const route = document.getElementById("route").value;
     var e = document.getElementById("rarity");
     const select = e.options[e.selectedIndex].text;
 
@@ -87,7 +88,8 @@ async function submit() {
         isItem: isItem,
         connectedItemId: parent,
         connectedRole: role,
-        isRole: isRole
+        isRole: isRole,
+        connectedRoute: route
     }
     const options = {
         method: 'POST',

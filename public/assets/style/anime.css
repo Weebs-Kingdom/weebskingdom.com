@@ -1,0 +1,193 @@
+:root {
+    --dotColor: #ffffff;
+    --glitterColor: #414040;
+    --oclycolor1: #7e7e7e;
+    --oclycolor2: #3c3c3c;
+
+    --iclycolor1: #d7d6d6;
+    --iclycolor2: #cdf2ff;
+
+    --overlay: #690000;
+    --bg-parts: #f800ff;
+}
+
+[data-theme="legendary"] {
+    --dotColor: #f68001;
+    --glitterColor: #cf9306;
+    --oclycolor1: #e94808;
+    --oclycolor2: #e7580d;
+
+    --iclycolor1: #eebd0a;
+    --iclycolor2: #e39905;
+
+    --overlay: #690000;
+    --bg-parts: #ffffff;
+}
+
+[data-theme="epic"] {
+    --dotColor: #a955fa;
+    --glitterColor: #60b4fa;
+    --oclycolor1: #d001f5;
+    --oclycolor2: #51008f;
+
+    --iclycolor1: #5e1ef3;
+    --iclycolor2: #3703b0;
+
+    --overlay: #690000;
+    --bg-parts: #ffffff;
+}
+
+[data-theme="mystic"] {
+    --dotColor:  #ff9900;
+    --glitterColor: #eeba06;
+    --oclycolor1: #00f3cf;
+    --oclycolor2: #0485d9;
+
+    --iclycolor1: #50f69f;
+    --iclycolor2: #1eec7c;
+
+    --overlay: #690000;
+    --bg-parts: #ffffff;
+}
+
+.particles {
+    position: absolute;
+    top: 50%;
+}
+
+.dot {
+    position: absolute;
+    border-radius: 40%;
+    background-color: var(--dotColor);
+}
+
+.glitter {
+    position: absolute;
+
+    width: 0;
+    height: 0;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+
+    border-left: 4px solid var(--glitterColor);
+}
+
+.anime {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+}
+
+.anime .ocly {
+    position: absolute;
+    height: 25vmin;
+    width: 25vmin;
+    background: linear-gradient(150deg, var(--oclycolor1), var(--oclycolor2));
+}
+
+.anime .icly {
+    position: absolute;
+    height: 24vmin;
+    width: 24vmin;
+    background: linear-gradient(150deg, var(--iclycolor1), var(--iclycolor2));
+}
+
+.anime .cly {
+    text-align: center;
+    border-radius: 50%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+.anime .img {
+    position: absolute;
+    height: 21vmin;
+    width: 21vmin;
+}
+
+.anime .text {
+
+}
+
+.anime .bg {
+    position: relative;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.anime .cell {
+    background-color: var(--overlay);
+    height: 4%;
+    width: 4%;
+}
+
+canvas {
+    display: block;
+    vertical-align: bottom;
+}
+
+
+/* ---- particles.js container ---- */
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.img {
+    position: absolute;
+    align-self: center;
+}
+
+.img img {
+    position: relative;
+    top: 20vmin;
+}
+
+#lootImage {
+    position: absolute;
+    align-self: center;
+}
+
+#lootImage img{
+    position: relative;
+}
+
+.errorMsg {
+    top: 10vmin;
+    position: absolute;
+    align-self: center;
+    color: #000000;
+    background-color: #006cbc;
+    vertical-align: center;
+    horiz-align: center;
+    padding: 1vmin;
+    border-radius: 10px;
+    box-shadow: 0 1rem .6rem var(--color-shadow-highlight);
+}
+
+.aImage {
+    display: flex;
+    position: absolute;
+    align-self: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.aImage a {
+    align-self: center;
+    justify-self: center;
+    position: absolute;
+    color: #000000;
+    background-color: #00f3cf;
+    vertical-align: center;
+    horiz-align: center;
+    padding: 1vmin;
+    border-radius: 10px;
+    box-shadow: 0 1rem .6rem var(--color-shadow-highlight);
+}

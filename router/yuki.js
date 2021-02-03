@@ -5,76 +5,76 @@ const vDev = require("../middleware/verifyDev");
 const fetch = require('node-fetch');
 
 //dev
-router.get("/monsters", verify, vDev, async(req, res) => {
+router.get("/monsters", verify, vDev, async (req, res) => {
     redirectGet(res, "monster");
 });
 
-router.patch("/monsters", verify, vDev, async(req, res) => {
+router.patch("/monsters", verify, vDev, async (req, res) => {
     redirectPatch(req.body, res, "monster");
 });
 
-router.delete("/monsters", verify, vDev, async(req, res) => {
+router.delete("/monsters", verify, vDev, async (req, res) => {
     redirectDelete(req.body, res, "monster");
 });
 
-router.post("/monsters", verify, vDev, async(req, res) => {
+router.post("/monsters", verify, vDev, async (req, res) => {
     redirectPost(req.body, res, "monster");
 });
 
-router.get("/attacks", verify, vDev, async(req, res) => {
+router.get("/attacks", verify, vDev, async (req, res) => {
     redirectGet(res, "attack");
 });
 
-router.delete("/attacks", verify, vDev, async(req, res) => {
+router.delete("/attacks", verify, vDev, async (req, res) => {
     redirectDelete(req.body, res, "attack");
 });
 
-router.post("/attacks", verify, vDev, async(req, res) => {
+router.post("/attacks", verify, vDev, async (req, res) => {
     redirectPost(req.body, res, "attack");
 });
 
-router.patch("/attacks", verify, vDev, async(req, res) => {
+router.patch("/attacks", verify, vDev, async (req, res) => {
     redirectPatch(req.body, res, "attack");
 });
 
-router.get("/items", verify, vDev, async(req, res) => {
+router.get("/items", verify, vDev, async (req, res) => {
     redirectGet(res, "item");
 });
 
-router.delete("/items", verify, vDev, async(req, res) => {
+router.delete("/items", verify, vDev, async (req, res) => {
     redirectDelete(req.body, res, "item");
 });
 
-router.patch("/items", verify, vDev, async(req, res) => {
+router.patch("/items", verify, vDev, async (req, res) => {
     redirectPatch(req.body, res, "item");
 });
 
-router.post("/items", verify, vDev, async(req, res) => {
+router.post("/items", verify, vDev, async (req, res) => {
     redirectPost(req.body, res, "item");
 });
 
-router.get("/jobs", verify, vDev, async(req, res) => {
+router.get("/jobs", verify, vDev, async (req, res) => {
     redirectGet(res, "job");
 });
 
-router.delete("/jobs", verify, vDev, async(req, res) => {
+router.delete("/jobs", verify, vDev, async (req, res) => {
     redirectDelete(req.body, res, "job");
 });
 
-router.patch("/jobs", verify, vDev, async(req, res) => {
+router.patch("/jobs", verify, vDev, async (req, res) => {
     redirectPatch(req.body, res, "job");
 });
 
-router.post("/jobs", verify, vDev, async(req, res) => {
+router.post("/jobs", verify, vDev, async (req, res) => {
     redirectPost(req.body, res, "job");
 });
 
 //all
-router.get("/discuser", verify, async(req, res) => {
+router.get("/discuser", verify, async (req, res) => {
     redirectPost({id: req.dbUser.discordId}, res, "getUser");
 });
 
-function redirectGet(res, api) {
+async function redirectGet(res, api) {
     const options = {
         method: 'GET',
         headers: {
@@ -82,13 +82,15 @@ function redirectGet(res, api) {
             'api-token': process.env.YUKIDB_API_TOKEN
         }
     };
-
-    fetch('http://127.0.0.1:5004/api/yuki/' + api, options).then(res => res.json()).then(json => {
-        res.status(200).json(json);
+    const json = await fetch('http://127.0.0.1:5004/api/yuki/' + api, options).then(r => r.json()).then(json => {
+        if (res != "override")
+            return res.status(200).json(json);
+        else return json;
     });
+    return json;
 }
 
-function redirectPost(jjson, res, api) {
+async function redirectPost(jjson, res, api) {
     const options = {
         method: 'POST',
         headers: {
@@ -98,9 +100,12 @@ function redirectPost(jjson, res, api) {
         body: JSON.stringify(jjson)
     };
 
-    fetch('http://127.0.0.1:5004/api/yuki/' + api, options).then(res => res.json()).then(json => {
-        res.status(200).json(json);
+    const json = await fetch('http://127.0.0.1:5004/api/yuki/' + api, options).then(res => res.json()).then(json => {
+        if (res != "override")
+            return res.status(200).json(json);
+        else return json;
     });
+    return json;
 }
 
 function redirectPatch(jjson, res, api) {
@@ -134,3 +139,27 @@ function redirectDelete(jjson, res, api) {
 }
 
 module.exports = router;
+module.exports.getItems = async function () {
+    var res = await redirectGet("override", "item");
+    return res;
+}
+
+module.exports.coins = async function (c, user){
+    var res = await redirectPost({coins: c, id: user}, "override", "coins");
+    return res;
+}
+
+module.exports.item = async function(item, amount, user){
+    var res = await redirectPost({item: item, id: user, amount: amount}, "override", "userItem");
+    return res;
+}
+
+module.exports.lootbox = async function(user){
+    var res = await redirectPost({id: user}, "override", "openLootBox");
+    return res;
+}
+
+module.exports.route = async function(user, route){
+    var res = await redirectPost({id: user}, "override", route);
+    return res;
+}
