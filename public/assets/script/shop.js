@@ -179,7 +179,6 @@ var shop = new Vue({
                 return
             else
                 this.checkedButton = true;
-            checkoutBtn.play();
             const options = {
                 method: 'POST',
                 headers: {
@@ -202,7 +201,10 @@ var shop = new Vue({
             }
 
             if(json.status === 200){
-                this.checkoutMessage = "The items are now activated and you can find them in your account";
+                checkoutBtn.play();
+                setTimeout(() => {
+                    this.checkoutMessage = "The items are now activated and you can find them in your account";
+                }, 4000);
                 oke = true;
             } else if(json.status === 400 ||json.status === 401){
                 this.checkoutMessage = json.message;
@@ -211,9 +213,11 @@ var shop = new Vue({
             }
 
             if(oke){
-                this.complexCart = [];
-                this.shoppingcart = [];
-                this.saveShop();
+                setTimeout(() => {
+                    this.complexCart = [];
+                    this.shoppingcart = [];
+                    this.saveShop();
+                }, 4000)
             }
         },
         getTotal: function (){

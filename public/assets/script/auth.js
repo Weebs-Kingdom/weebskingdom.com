@@ -30,6 +30,10 @@ async function auth(goToLoginOnFail) {
         if (json.status === 200) {
             loggedIn = true;
             console.log("logged in!");
+            try {
+                dbUser = await loadUser();
+            } catch (e){
+            }
             var login = document.getElementById('login');
             var regi = document.getElementById('regi');
             regi.remove();
@@ -60,7 +64,10 @@ async function setupLogin() {
     }
 
     var accSub = document.getElementById('accSub');
+    var home = document.getElementById('home');
     createLi(accSub, "/profile", "Profile");
+    createLi(home, "/yukisora/shop", "Shop");
+    createLi(home, "/yukisora/loot", "Lootbox");
 
     if (await getIsAdmin()){
         addAdmin();

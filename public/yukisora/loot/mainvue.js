@@ -25,7 +25,7 @@ var loot = new Vue({
                     background.play();
                     setTimeout(() => {
                         window.location.reload();
-                    }, 10000);
+                    }, 5000);
                 }, 100);
             }, 850);
 

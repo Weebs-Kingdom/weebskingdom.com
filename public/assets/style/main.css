@@ -626,7 +626,7 @@ dialog::backdrop {
 
 img {
     border-radius: 8px;
-    width: 20vmin;
+    height: 20vmin;
     margin-bottom: 1rem;
 }
 

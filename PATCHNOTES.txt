@@ -1,4 +1,4 @@
-Mindcollaps.de Website patched to version 1.0.4 <alpha>
+Weebskingdom.com Website patched to version 1.0.4 <alpha>
 
 New features
 • Shopitem logic

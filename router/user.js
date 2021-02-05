@@ -276,7 +276,7 @@ router.get("/email", verify, async (req, res) => {
     res.status(200).json({status: 200, message: req.dbUser.email});
 });
 
-router.post("/discconnect", verify, vActive, async (req, res) => {
+router.post("/discconnect", verify, async (req, res) => {
     var token = makeToken(5);
     var ftok = await DiscTokens.findOne({token: token});
     while (ftok) {
@@ -315,7 +315,7 @@ router.post("/discconnect", verify, vActive, async (req, res) => {
     });
 });
 
-router.post("/discconnecttoken", verify, vActive, async (req, res) => {
+router.post("/discconnecttoken", verify, async (req, res) => {
     var token = req.body.token;
     var fToken = await DiscTokens.findOne({token: token, user: req.dbUser._id});
     if (fToken) {
@@ -403,7 +403,7 @@ async function sendPwResetToken(u) {
 
 async function sendEmail(email, data, subject){
     const mailData = {
-        from: 'Weebs Kingdome Team <info@mindcollaps.de>',  // sender address
+        from: 'Weebs Kingdome Team <info@weebskingdom.com>',  // sender address
         to: email,   // list of receivers
         subject: subject,
         html: data

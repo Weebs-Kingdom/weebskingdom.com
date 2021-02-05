@@ -73,6 +73,14 @@ router.post("/checkout", verify, vActive, async (req, res) => {
                 }
         }
 
+        if(!ok){
+            if(e.connectedRole){
+                const js = await giveUserRole(String(e.connectedRole).toLowerCase(), req.dbUser.discordId);
+                if(js.status == 200)
+                    ok = true;
+            }
+        }
+
         //If item give fails, you get money back lol~
         if(!ok) {
             await yukiapi.coins(e.price*e.cartamount, req.dbUser.discordId);
@@ -96,6 +104,20 @@ function findItem(items, id){
         }
     }
     return undefined;
+}
+
+async function giveUserRole(role, discUserId){
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({instruction: "giverole", data: {user:discUserId, role: role}})
+    };
+
+    return await fetch('http://127.0.0.1:5003/api', options).then(res => res.json()).then(json => {
+        return json;
+    }).catch(e => {return undefined;});
 }
 
 module.exports = router;
