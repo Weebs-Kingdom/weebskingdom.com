@@ -33,12 +33,12 @@
         </div>
         <div id="bg" class="bg"></div>
         <div v-if="key" id="keyImage" @click="loadLootBox" class="aImage">
-            <img style="position: relative;" class="img"
-                 src="https://i.pinimg.com/564x/68/f0/3c/68f03cd7503ca4da0e264a1d65273857.jpg">
-            <a>Use key</a>
+            <img style="position: relative; height: 70vmin; width: auto" class="img"
+                 src="/yukisora/assets/items/loot-key.PNG">
+            <a style="">Use key</a>
         </div>
         <div style="visibility: hidden" id="lootBoxImage" @click="openLootBox" class="aImage">
-            <img src="https://cdn.dribbble.com/users/1356973/screenshots/4539868/loot-box.png?compress=1&resize=800x600">
+            <img style="height: 70vmin; width: auto" src="/yukisora/assets/items/loot.PNG">
             <a v-if="showMsg">Open</a>
         </div>
         <div v-if="showMsg" class="errorMsg">

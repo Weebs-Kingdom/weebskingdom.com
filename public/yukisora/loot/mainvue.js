@@ -66,7 +66,7 @@ var loot = new Vue({
         }
     },
     data: {
-        image: "https://cdn.dribbble.com/users/1356973/screenshots/4539868/loot-box.png?compress=1&resize=800x600",
+        image: "",
         clicked: false,
         ready: false,
         msg: "",
