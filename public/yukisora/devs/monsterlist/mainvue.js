@@ -60,6 +60,10 @@ var monster = new Vue({
     },
     methods: {
         deleteMonster: async function (id) {
+            var answer = window.confirm("Delete?");
+            if (!answer)
+                return;
+
             this.closeEd();
             const options = {
                 method: 'DELETE',
