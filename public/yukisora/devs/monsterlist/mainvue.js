@@ -110,7 +110,7 @@ var monster = new Vue({
             this.mshown = true;
             this.mevolves = [];
             this.mattacks = [];
-            this.mrarity = "normal";
+            this.mrarity = "";
             this.mmonsterType = ["normal"];
         },
         setupEdit: function (id) {
@@ -139,22 +139,20 @@ var monster = new Vue({
             this.mmonsterType = mnster.monsterType;
         },
         clckEv: function (id, add) {
-            if (add)
-                this.mevolves.push(id);
-            else
-                for (let i = 0; i < this.mevolves; i++) {
-                    if (this.mevolves[i]._id == id)
+                for (let i = 0; i < this.mevolves.length; i++) {
+                    if (this.mevolves[i] == id)
                         this.mevolves.splice(i, 1);
                 }
+            if (add)
+                this.mevolves.push(id);
         },
         clckType: function (id, add) {
-            if (add)
-                this.mmonsterType.push(id);
-            else
-                for (let i = 0; i < this.mmonsterType; i++) {
+                for (let i = 0; i < this.mmonsterType.length; i++) {
                     if (this.mmonsterType[i] == id)
                         this.mmonsterType.splice(i, 1);
                 }
+            if (add)
+                this.mmonsterType.push(id);
         },
         clckAttack: function (id, add, lvl) {
             for (let i = 0; i < this.mattacks.length; i++) {
