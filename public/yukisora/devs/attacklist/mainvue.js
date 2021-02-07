@@ -45,6 +45,8 @@ var attack = new Vue({
         this.attacks = await this.loadAttack();
         this.filteredAttacks = this.attacks;
 
+        window.addEventListener('keypress', this.doCommand);
+
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const edit = urlParams.get('edit');
@@ -61,6 +63,13 @@ var attack = new Vue({
         }
     },
     methods: {
+        doCommand(e) {
+            let cmd = e.keyCode;
+            if(cmd == 13){
+                if(this.creatMode || this.editMode)
+                    this.submit();
+            }
+        },
         loadAttack: async function () {
             const options = {
                 method: 'GET',
@@ -79,6 +88,10 @@ var attack = new Vue({
             }
         },
         deleteAttack: async function (id) {
+            var answer = window.confirm("Delete?");
+            if (!answer)
+                return;
+
             this.closeEd();
             const options = {
                 method: 'DELETE',
@@ -141,6 +154,7 @@ var attack = new Vue({
             this.aattackType = attack.attackType;
         },
         submit: async function (){
+            location.replace("#" + "msg");
             var packedAttack = {
                 baseDmg: this.abaseDmg,
                 attackName: this.aattackName,

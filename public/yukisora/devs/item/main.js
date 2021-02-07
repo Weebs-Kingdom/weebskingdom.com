@@ -75,6 +75,10 @@ var it = new Vue({
             this.show = true;
         },
         del: async function (id) {
+            var answer = window.confirm("Delete?");
+            if (!answer)
+                return;
+
             const options = {
                 method: 'DELETE',
                 headers: {

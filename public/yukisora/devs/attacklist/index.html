@@ -73,7 +73,7 @@
                 </select>
                 <label for="monstertype" class="form__label">Attack type</label>
             </div>
-            <p class="message">{{submitmsg}}</p>
+            <p id="msg" class="message">{{submitmsg}}</p>
             <div style="margin-top: 6em; display: inline-flex" >
                 <button class="btn" type="button" @click="submit">Submit</button>
                 <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="deleteAttack(edetingAttack)" v-if="editMode">delete</button>

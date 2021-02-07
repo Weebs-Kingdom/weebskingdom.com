@@ -19,72 +19,74 @@
 <div id="monsterlist">
     <button class="fixedBtn" v-if="!show" @click="create">Create</button>
     <div class="editbox" v-if="show">
-        <div class="ct">
+        <div class="ct" >
             <button class="fixedBtn denyBtn" @click="closeEd">Close</button>
             <a class="advice">
                 {{modeinfo}}
             </a>
-            <div class="form__group field">
-                <input type="input" class="form__field" placeholder="Name" name="Name" id='name' v-model="mname" :value="mname" required/>
-                <label for="name" class="form__label">Name</label>
-            </div>
-            <div class="form__group field">
-                <input type="input" class="form__field" placeholder="Image URL" name="Image URL" id='imageUrl'
-                       v-model="mimageUrl" :value="mimageUrl" required/>
-                <label for="imageUrl" class="form__label">Image URL</label>
-            </div>
-            <div class="form__group field">
-                <input type="number" class="form__field" placeholder="Base HP" name="Base HP" id='baseHp'
-                       v-model="mbaseHp" :value="mbaseHp" required/>
-                <label for="baseHp" class="form__label">Base HP</label>
-            </div>
-            <div class="form__group field">
-                <input type="number" class="form__field" placeholder="Initial Level" name="Initial Level"
-                       id='initialLevel' v-model="minitialLevel" :value="minitialLevel" required/>
-                <label for="initialLevel" class="form__label">Initial Level</label>
-            </div>
-            <div class="form__group field">
-                <input type="number" class="form__field" placeholder="Evolve Level" name="Evolve Level" id='evolveLvl'
-                       v-model="mevolveLvl" :value="mevolveLvl" required/>
-                <label for="evolveLvl" class="form__label">Evolve Level</label>
-            </div>
-            <div class="form__group field">
-                <select id="rarity" v-model="mrarity" :value="mrarity">
-                    <option>normal</option>
-                    <option>epic</option>
-                    <option>legendary</option>
-                    <option>mystic</option>
-                </select>
-                <label for="rarity" class="form__label">Rarity</label>
-            </div>
-            <div class="form__group field">
-                <input type="checkbox" class="form__field" placeholder="Shown" name="Shown" id='shown' v-model="mshown"
-                       :value="mshown" required/>
-                <label for="shown" class="form__label">Shown</label>
-            </div>
-            <div class="listBody"><label>Monstertype:</label>
-                <div class="list" id="monstertype">
-                    <types v-for="it in types" :ev="it" :selected="mmonsterType" @clicked="clckType"></types>
+            <div>
+                <div class="form__group field">
+                    <input type="input" class="form__field" placeholder="Name" name="Name" id='name' v-model="mname" :value="mname" required/>
+                    <label for="name" class="form__label">Name</label>
                 </div>
-            </div>
-            <div class="listBody"><label>Evolves to:</label>
-                <div class="list" id="evList">
-                    <evolves v-for="it in monsters" :ev="it" :selected="mevolves" @clicked="clckEv"></evolves>
+                <div class="form__group field">
+                    <input type="input" class="form__field" placeholder="Image URL" name="Image URL" id='imageUrl'
+                           v-model="mimageUrl" :value="mimageUrl" required/>
+                    <label for="imageUrl" class="form__label">Image URL</label>
                 </div>
-            </div>
-            <div class="listBody">
-                <label>Attacks:</label>
-                <button @click="addAttack" class="acceptBtn material-icons">add</button>
-                <div class="list">
-                    <div style="display: table; gap: 1vmin; width: 100%; overflow-y: scroll;" id="attacksList">
-                        <attacks v-for="it in attacks" :ev="it" :selected="mattacks" :lvl="it.level" @clicked="clckAttack" @edit="editAttack"></attacks>
+                <div class="form__group field">
+                    <input type="number" class="form__field" placeholder="Base HP" name="Base HP" id='baseHp'
+                           v-model="mbaseHp" :value="mbaseHp" required/>
+                    <label for="baseHp" class="form__label">Base HP</label>
+                </div>
+                <div class="form__group field">
+                    <input type="number" class="form__field" placeholder="Initial Level" name="Initial Level"
+                           id='initialLevel' v-model="minitialLevel" :value="minitialLevel" required/>
+                    <label for="initialLevel" class="form__label">Initial Level</label>
+                </div>
+                <div class="form__group field">
+                    <input type="number" class="form__field" placeholder="Evolve Level" name="Evolve Level" id='evolveLvl'
+                           v-model="mevolveLvl" :value="mevolveLvl" required/>
+                    <label for="evolveLvl" class="form__label">Evolve Level</label>
+                </div>
+                <div class="form__group field">
+                    <select id="rarity" v-model="mrarity" :value="mrarity">
+                        <option>normal</option>
+                        <option>epic</option>
+                        <option>legendary</option>
+                        <option>mystic</option>
+                    </select>
+                    <label for="rarity" class="form__label">Rarity</label>
+                </div>
+                <div class="form__group field">
+                    <input type="checkbox" class="form__field" placeholder="Shown" name="Shown" id='shown' v-model="mshown"
+                           :value="mshown" required/>
+                    <label for="shown" class="form__label">Shown</label>
+                </div>
+                <div class="listBody"><label>Monstertype:</label>
+                    <div class="list" id="monstertype">
+                        <types v-for="it in types" :ev="it" :selected="mmonsterType" @clicked="clckType"></types>
                     </div>
                 </div>
-            </div>
-            <p class="message">{{submitmsg}}</p>
-            <div style="margin-top: 6em; display: inline-flex">
-                <button class="btn" type="button" @click="submit">Submit</button>
-                <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="deleteMonster(editingMonster)" v-if="editMode">delete</button>
+                <div class="listBody"><label>Evolves to:</label>
+                    <div class="list" id="evList">
+                        <evolves v-for="it in monsters" :ev="it" :selected="mevolves" @clicked="clckEv"></evolves>
+                    </div>
+                </div>
+                <div class="listBody">
+                    <label>Attacks:</label>
+                    <button @click="addAttack" class="acceptBtn material-icons">add</button>
+                    <div class="list">
+                        <div style="display: table; gap: 1vmin; width: 100%; overflow-y: scroll;" id="attacksList">
+                            <attacks v-for="it in attacks" :ev="it" :selected="mattacks" :lvl="it.level" @clicked="clckAttack" @edit="editAttack"></attacks>
+                        </div>
+                    </div>
+                </div>
+                <p id="msg" class="message">{{submitmsg}}</p>
+                <div style="margin-top: 6em; display: inline-flex">
+                    <button class="btn" type="button" @click="submit">Submit</button>
+                    <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="deleteMonster(editingMonster)" v-if="editMode">delete</button>
+                </div>
             </div>
         </div>
     </div>

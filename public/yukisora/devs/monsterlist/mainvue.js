@@ -47,8 +47,10 @@ var monster = new Vue({
         mmonsterType: []
     },
     created: async function () {
-        await loadMonsters()
-        await loadAttacks()
+        await loadMonsters();
+        await loadAttacks();
+
+        window.addEventListener('keypress', this.doCommand);
 
         this.filteredMonsters = monsters;
         const queryString = window.location.search;
@@ -59,6 +61,13 @@ var monster = new Vue({
         }
     },
     methods: {
+        doCommand(e) {
+            let cmd = e.keyCode;
+            if(cmd == 13){
+                if(this.creatMode || this.editMode)
+                    this.submit();
+            }
+        },
         deleteMonster: async function (id) {
             var answer = window.confirm("Delete?");
             if (!answer)
@@ -188,6 +197,7 @@ var monster = new Vue({
             };
         },
         submit: async function () {
+            location.replace("#" + "msg");
             var packedMonster = {
                 name: this.mname,
                 initialLevel: this.minitialLevel,
