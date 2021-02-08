@@ -876,6 +876,37 @@ img {
     line-height: 1em;
 }
 
+@-moz-document url-prefix() {
+    .advice {
+        width: -moz-fit-content;
+    }
+
+    button {
+        width: -moz-fit-content;
+    }
+
+    .previewBig {
+        width: -moz-fit-content;
+    }
+
+    .knockout {
+        width: -moz-fit-content;
+    }
+
+    .post {
+        width: -moz-fit-content;
+    }
+
+    .cartitems {
+        height: fit-content;
+    }
+
+    .cocartitems {
+        height: fit-content;
+        width: -moz-fit-content;
+    }
+}
+
 @media only screen and (max-width: 600px) {
     body {
         font-size: 2vmax;

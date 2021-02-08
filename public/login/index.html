@@ -24,10 +24,11 @@
             <label for="password" class="form__label">Password</label>
         </div>
         <button style="margin-top: 6em;" class="btn" id="loginBtn" type="button" onclick="login()">Login</button>
-        <button style="margin-top: 6em;" class="btn" type="button" href="/registertk">Register</button>
+        <button style="margin-top: 6em;" class="btn" type="button" onclick="window.location.replace('/register')">Register</button>
     </div>
     <div class="textview">
-        <p class="message" id="error">Forgot password? <a href="/profile/resetpw">Get a new one</a></p>
+        <p class="message" id="error"></p>
+        <p>Forgot password? <a href="/profile/resetpw">Get a new one</a></p>
     </div>
 <script type="text/javascript" src="/assets/script/navbar.js"></script>
 </body>
