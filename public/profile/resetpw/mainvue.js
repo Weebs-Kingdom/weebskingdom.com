@@ -73,6 +73,9 @@ var res = new Vue({
 
             if(json.status === 200){
                 this.msg = "A new password has been set to your account!";
+                setTimeout(() => {
+                    location.replace("/login");
+                }, 3000);
             } else if(json.status === 400){
                 this.msg = json.message;
             } else {

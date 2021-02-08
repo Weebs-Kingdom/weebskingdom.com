@@ -3,6 +3,8 @@ const User = require("../models/user/User");
 const Tokens = require("../models/tokens/LoginTokens");
 const AuthTokens = require("../models/tokens/EmailAuthTokens");
 const DiscTokens = require("../models/tokens/DiscConnectToken");
+const PsdwTokens = require("../models/tokens/PasswordResetToken");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const fetch = require('node-fetch');
@@ -354,14 +356,27 @@ router.post("/resetpw", async (req, res) => {
     //Check request
     if (pwpw != process.env.PW_SECRET) return res.status(401).json({status: 401, message: "Access Denied!"});
     //Check expire time
-    if (now > expireTime) return res.status(401).json({status: 401, message: "Token expired!"});
+    if (now > expireTime) {
+        const dbToken = await PsdwTokens.find({user: u._id, token: verified.token});
+        if(dbToken)
+            await dbToken.remove();
+        return res.status(401).json({status: 401, message: "Token expired!"});
+    }
 
     var u = await User.findOne({_id: verified._id});
     if (!u) return res.status(401).json({status: 401, message: "Access Denied! Not listed anymore!"});
 
+    const dbToken = await PsdwTokens.find({user: u._id, token: verified.token});
+    if(!dbToken) return res.status(401).json({status: 401, message: "Access Denied!"});
+    if(now > dbToken.created) {
+        await dbToken.remove();
+        return res.status(401).json({status: 401, message: "Token expired!"});
+    }
+
     //check password validity
     const {error} = passwordSch.validate(req.body.pw);
     if (error) return res.status(400).json({status: 400, message: error.details[0].message});
+    await dbToken.remove();
 
     const hpassword = await hashPw(req.body.pw);
     u.password = hpassword;
@@ -395,7 +410,13 @@ async function sendRegisterToken(u) {
 
 async function sendPwResetToken(u) {
     const time = Date.now();
-    const token = jwt.sign({_id: u._id, ctime: time, pw: process.env.PW_SECRET}, process.env.TOKEN_SECRET);
+    const tokenT = makeToken(30);
+    const tk = new PsdwTokens ({
+        token: tokenT,
+        user: u._id
+    });
+    await tk.save();
+    const token = jwt.sign({_id: u._id, ctime: time, pw: process.env.PW_SECRET, token: tokenT}, process.env.TOKEN_SECRET);
 
     const data = await ejs.renderFile("./views/resetPassword.ejs", {name: u.name, token: token});
     await sendEmail(u.email, data, 'Reset password');

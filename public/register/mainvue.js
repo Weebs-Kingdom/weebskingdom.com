@@ -38,7 +38,9 @@ var v = new Vue({
 
             if (json.status === 200) {
                 this.error = "Registration complete"
-                window.location.replace("/login");
+                setTimeout(() => {
+                    location.replace("/login");
+                }, 3000);
             } else {
                 this.error = json.message;
             }

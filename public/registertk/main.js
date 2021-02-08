@@ -18,7 +18,9 @@ async function register() {
     var error = document.getElementById('error');
     if (json.status === 200) {
         error.innerHTML = "Registrierung erfolgreich"
-        window.location.replace("/login");
+        setTimeout(() => {
+            location.replace("/login");
+        }, 3000);
     } else {
         error.innerHTML = json.message;
     }
