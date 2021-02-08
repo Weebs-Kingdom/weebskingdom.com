@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const schedule = require('node-schedule');
 const User = require("../models/user/User");
 const Tokens = require("../models/tokens/LoginTokens");
 const AuthTokens = require("../models/tokens/EmailAuthTokens");
@@ -353,22 +354,22 @@ router.post("/resetpw", async (req, res) => {
     const expireTime = time.setMinutes(time.getMinutes() + 15);
     const now = new Date();
     const pwpw = verified.pw;
+
+    var u = await User.findOne({_id: verified._id});
+    if (!u) return res.status(401).json({status: 401, message: "Access Denied! Not listed anymore!"});
     //Check request
     if (pwpw != process.env.PW_SECRET) return res.status(401).json({status: 401, message: "Access Denied!"});
     //Check expire time
     if (now > expireTime) {
-        const dbToken = await PsdwTokens.find({user: u._id, token: verified.token});
+        const dbToken = await PsdwTokens.findOne({user: u._id, token: verified.token});
         if(dbToken)
             await dbToken.remove();
         return res.status(401).json({status: 401, message: "Token expired!"});
     }
 
-    var u = await User.findOne({_id: verified._id});
-    if (!u) return res.status(401).json({status: 401, message: "Access Denied! Not listed anymore!"});
-
-    const dbToken = await PsdwTokens.find({user: u._id, token: verified.token});
+    const dbToken = await PsdwTokens.findOne({user: u._id, token: verified.token});
     if(!dbToken) return res.status(401).json({status: 401, message: "Access Denied!"});
-    if(now > dbToken.created) {
+    if(now > (dbToken.created + 15)) {
         await dbToken.remove();
         return res.status(401).json({status: 401, message: "Token expired!"});
     }
@@ -441,5 +442,30 @@ async function sendEmail(email, data, subject){
     });
 }
 
+async function cleanUp(){
+    var t = "";
+    const pswds = await PsdwTokens.find();
+    const time = Date.now();
+
+    for (const e of pswds) {
+        if(time > (e.created + 15)) {
+            await e.remove();
+            t += "[-] pswdtk\n";
+        }
+    }
+}
+
+function startSchedules() {
+    const job = schedule.scheduleJob({second: 30}, async function (fireDate) {
+        const t = await cleanUp();
+        if (t)
+            if (t.length > 1)
+                console.log(t);
+    });
+}
+
 
 module.exports = router;
+module.exports.startSchedules = function () {
+    startSchedules()
+};
