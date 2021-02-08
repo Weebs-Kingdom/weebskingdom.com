@@ -39,7 +39,7 @@ var attack = new Vue({
         aattackName: "undefined",
         amaxUsage: 20,
         astatusEffect: "",
-        aattackType: "normal",
+        aattackType: "",
     },
     created: async function () {
         this.attacks = await this.loadAttack();
@@ -142,7 +142,7 @@ var attack = new Vue({
             this.alevel = 1;
             this.amaxUsage = 20;
             this.astatusEffect = "";
-            this.aattackType = "normal";
+            this.aattackType = "";
         },
         setupEdit: function (id) {
             var attack = this.attacks.filter(el => el._id == id)[0];

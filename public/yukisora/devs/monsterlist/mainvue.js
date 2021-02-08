@@ -123,8 +123,8 @@ var monster = new Vue({
             this.mshown = true;
             this.mevolves = [];
             this.mattacks = [];
-            this.mrarity = "";
-            this.mmonsterType = ["normal"];
+            this.mrarity = "normal";
+            this.mmonsterType = [];
         },
         setupEdit: function (id) {
             var mnster = monsters.filter(el => el._id == id)[0];
