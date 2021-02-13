@@ -350,7 +350,7 @@ button:hover {
 }
 
 .textview .special {
-    background: linear-gradient(150deg, var(--color-font-highlight), var(--color-font-highlight-2));
+    background: linear-gradient(150deg, #ee8f2b, #e5ca2d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 8vmin;
