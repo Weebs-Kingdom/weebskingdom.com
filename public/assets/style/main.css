@@ -876,6 +876,82 @@ img {
     line-height: 1em;
 }
 
+.progressContainer {
+    left: 50%;
+    top: 80%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.steps {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 80vmin;
+}
+
+.step {
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #ACACA6;
+    border-radius: 50%;
+    transition: background 1s;
+}
+.step.selected {
+    border: 2px solid #4B81BD;
+}
+.step.completed {
+    border: 2px solid #4B81BD;
+    background: #4B81BD;
+}
+.progress {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    border-bottom: 2px solid #effcf4;
+    z-index: -1;
+}
+.percent {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    border-bottom: 2px solid #4df891;
+    z-index: 1;
+    transition: width 1s;
+}
+
+.labels {
+    margin-top: 4vmin;
+    font-size: 2vmin;
+    display: inline-flex;
+}
+
+.labels .label {
+    border: black solid;
+    padding: 0.5vmin;
+    border-radius: 6px;
+    background-color: var(--color-tertiary);
+}
+
+.labels .material-icons {
+    font-size: 2vmin !important;
+}
+
+.topics {
+    margin-top: 10vmin;
+    display: flex;
+    flex-flow: column;
+    padding: 2vmin;
+}
+
+.topic {
+    border: var(--color-dark) solid;
+    flex-flow: column;
+    padding: 2vmin;
+}
+
 @-moz-document url-prefix() {
     .advice {
         width: -moz-fit-content;

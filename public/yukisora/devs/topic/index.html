@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <title>Topic</title>
+    <link rel="stylesheet" href="/assets/style/main.css">
+    <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="text/javascript" src="/assets/script/auth.js"></script>
+    <meta name="title" content="Weebskingdom.com topic">
+    <meta name="description" content="You can create topics for Yuki here to talk about!">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+<script>auth(true)</script>
+<div id="navdiv" v-html="navbar"></div>
+<div id="topic">
+    <button class="fixedBtn" @click="toggleShow" v-if="!show">Create</button>
+    <div v-if="show" class="editbox">
+        <button class="fixedBtn denyBtn" @click="toggleShow">Close</button>
+        <div class="ct">
+            <div class="advice" style="top: 3%">
+                <a>{{modeTxt}}</a>
+            </div>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Topic" name="Topic" id='topicName'
+                       v-model="topicName" :value="topicName" required/>
+                <label for="topicName" class="form__label">Topic</label>
+            </div>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Description" name="Description" id='description'
+                       v-model="description" :value="description" required/>
+                <label for="description" class="form__label">Description</label>
+            </div>
+            <labels></labels>
+            <br>
+            <button style="margin-top: 5vmin" class="acceptBtn" @click="submit">Submit</button>
+            <br>
+            <br>
+            <a>{{submitmsg}}</a>
+        </div>
+    </div>
+
+    <div class="topics">
+        <div v-for="item in selectedTopics" class="topic">
+            <a>{{item.topic}}</a>
+            <details>
+                {{item.description}}
+                <br>
+                <br>
+                <div style="display: inline-flex">
+                    <a>Labels: </a>
+                    <a v-for="cat in item.category">{{cat.categoryName}} </a>
+                </div>
+            </details>
+            <button class="material-icons" @click="editTopic(item._id)">edit</button>
+            <button class="denyBtn material-icons" @click="deleteTopic(item._id)">delete</button>
+        </div>
+    </div>
+    <selected :num="sites"></selected>
+</div>
+
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
+<script type="text/javascript" src="mainvue.js"></script>
+</body>
+
+</html>

@@ -69,6 +69,38 @@ router.post("/jobs", verify, vDev, async (req, res) => {
     redirectPost(req.body, res, "job");
 });
 
+router.get("/topic", verify, vDev, async (req, res) => {
+    redirectGet(res, "topic");
+});
+
+router.delete("/topic", verify, vDev, async (req, res) => {
+    redirectDelete(req.body, res, "topic");
+});
+
+router.patch("/topic", verify, vDev, async (req, res) => {
+    redirectPatch(req.body, res, "topic");
+});
+
+router.post("/topic", verify, vDev, async (req, res) => {
+    redirectPost(req.body, res, "topic");
+});
+
+router.get("/topiccategory", verify, vDev, async (req, res) => {
+    redirectGet(res, "topiccategory");
+});
+
+router.delete("/topiccategory", verify, vDev, async (req, res) => {
+    redirectDelete(req.body, res, "topiccategory");
+});
+
+router.patch("/topiccategory", verify, vDev, async (req, res) => {
+    redirectPatch(req.body, res, "topiccategory");
+});
+
+router.post("/topiccategory", verify, vDev, async (req, res) => {
+    redirectPost(req.body, res, "topiccategory");
+});
+
 //all
 router.get("/discuser", verify, async (req, res) => {
     redirectPost({id: req.dbUser.discordId}, res, "getUser");

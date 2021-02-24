@@ -1,14 +1,14 @@
 Weebskingdom.com Website patched to version 1.0.4 <alpha>
 
 New features
-• Redeem page
-•
+• Implement of crafting
+• Developer topic page
 •
 •
 •
 
 Changes
-• Title and description of Checkout
+•
 •
 •
 
