@@ -51,7 +51,7 @@
                 <br>
                 <div style="display: inline-flex">
                     <a>Labels: </a>
-                    <a v-for="cat in item.category">{{cat.categoryName}} </a>
+                    <a style="border-left: var(--color-dark) solid" v-for="cat in item.category">{{cat.categoryName}}</a>
                 </div>
             </details>
             <button class="material-icons" @click="editTopic(item._id)">edit</button>
