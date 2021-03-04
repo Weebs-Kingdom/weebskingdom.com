@@ -220,7 +220,10 @@ var topic = new Vue({
             const json = await response.json();
             this.topics = json.data;
             console.log(json);
-            this.sites = parseInt(this.topics.length / 10 + 1);
+            try {
+                this.sites = parseInt(this.topics.length / 10 + 1);
+            } catch (e){
+            }
             if (this.topics.length === 0)
                 this.sites = 0;
             else
