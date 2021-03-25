@@ -952,6 +952,22 @@ img {
     padding: 2vmin;
 }
 
+.showcase {
+    left: 10vmin;
+    right: 10vmin;
+    top: -500vmin;
+
+    border-radius: 9rem;
+    z-index: 100;
+    position: absolute;
+    background-color: var(--color-tertiary);
+    text-align: center;
+}
+
+.showcase h1 {
+    font-size: 5vmin
+}
+
 @-moz-document url-prefix() {
     .advice {
         width: -moz-fit-content;

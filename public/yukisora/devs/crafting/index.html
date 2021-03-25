@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <title>Create Recipe</title>
+    <link rel="stylesheet" href="/assets/style/main.css">
+    <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="text/javascript" src="/assets/script/auth.js"></script>
+    <script type="text/javascript" src="/assets/script/maSearch.js"></script>
+    <meta name="title" content="Create Recipe">
+    <meta name="description" content="You can create recipes here">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+<script>auth(false);</script>
+<div id="navdiv" v-html="navbar"></div>
+<div id="recipe">
+    <button class="fixedBtn" v-if="!show" @click="create">Create</button>
+    <div class="editbox" v-if="show">
+        <div class="ct" >
+            <button class="fixedBtn denyBtn" @click="closeEd">Close</button>
+            <a class="advice">
+                {{modeinfo}}
+            </a>
+            <div>
+                <div class="form__group field">
+                    <input type="number" class="form__field" placeholder="Hammer punches" name="Hammer punches" id='hammerPunches'
+                           v-model="rHammerPunches" :value="rHammerPunches" required/>
+                    <label for="hammerPunches" class="form__label">Hammer punches</label>
+                </div>
+                <div class="form__group field">
+                    <input type="checkbox" class="form__field" placeholder="Common recipe" name="Common recipe" id='commonR'
+                           v-model="rCommonRecipe" :value="rCommonRecipe" required/>
+                    <label for="commonR" class="form__label">Common recipe</label>
+                </div>
+                <div class="listBody">
+                    <label>Items:</label>
+                    <div class="list">
+                        <div style="display: table; gap: 1vmin; width: 100%; overflow-y: scroll;" id="recipeList">
+                            <div v-for="item of items">
+                                <item :selected="rItems" :item="item" :w-amount="true" @clicked="clckItem"></item>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="listBody">
+                    <label>Crafts into:</label>
+                    <div class="list">
+                        <div style="display: table; gap: 1vmin; width: 100%; overflow-y: scroll;" id="intoList">
+                            <div v-for="item of items">
+                                <item :selected="[rResult]" :item="item" :w-amount="false" @clicked="selectResult"></item>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p id="msg" class="message">{{submitmsg}}</p>
+                <div style="margin-top: 6em; display: inline-flex">
+                    <button class="btn" type="button" @click="submit">Submit</button>
+                    <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="deleteRecipe(editingRecipe)" v-if="editMode">delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="advice">
+        <div class="txt">To search a specific recipe use the hotkey: CTRL + F</div>
+    </div>
+
+    <div class="listBody">
+        <recipe v-for="item in recipes" :recipe="item" @delete="deleteRecipe" @edit="edit"></recipe>
+    </div>
+</div>
+<script src="mainvue.js"></script>
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
+</body>
+</html>

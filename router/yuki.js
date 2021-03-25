@@ -101,6 +101,22 @@ router.post("/topiccategory", verify, vDev, async (req, res) => {
     redirectPost(req.body, res, "topiccategory");
 });
 
+router.get("/recipe", verify, vDev, async (req, res) => {
+    redirectGet(res, "recipe");
+});
+
+router.delete("/recipe", verify, vDev, async (req, res) => {
+    redirectDelete(req.body, res, "recipe");
+});
+
+router.patch("/recipe", verify, vDev, async (req, res) => {
+    redirectPatch(req.body, res, "recipe");
+});
+
+router.post("/recipe", verify, vDev, async (req, res) => {
+    redirectPost(req.body, res, "recipe");
+});
+
 //all
 router.get("/discuser", verify, async (req, res) => {
     redirectPost({id: req.dbUser.discordId}, res, "getUser");

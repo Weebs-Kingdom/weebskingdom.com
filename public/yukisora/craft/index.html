@@ -20,7 +20,11 @@
 <script>auth(true)</script>
 <div id="navdiv" v-html="navbar"></div>
 <div id="craft">
-    <div class="editbox">
+    <div id="showcase" class="showcase">
+        <h1>You've got {{selected.result.itemName}}</h1>
+        <img :src="selected.result.itemImageURL">
+    </div>
+    <div v-if="shown" class="editbox">
         <div class="ct">
             <div class="advice">
                 {{selected.result.itemName}}
@@ -46,6 +50,27 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="textview">
+        <div v-if="recipes.length > 0" v-for="r in recipes">
+            <div class="ct">
+                <div class="advice">
+                    {{r.result.itemName}}
+                </div>
+                <div style="position: absolute; left: 49%;">
+                    <i class="material-icons">construction</i> {{r.hammerPunches}}
+                </div>
+                <div class="listBody"><label>Needed:</label>
+                    <div class="list" style="height: fit-content">
+                        <div style="display: flex; flex-flow: wrap" v-for="item in r.items">
+                            {{item.itemName}} {{item.amount}}/{{getAmount(item._id)}}
+                        </div>
+                    </div>
+                </div>
+                <button @click="loadCraftingRecipe(r._id)">Craft</button>
+            </div>
+        </div>
+        <a style="margin-top: 10vmin; margin-bottom: 10vmin" class="advice" v-if="recipes.length <= 0">List is empty</a>
     </div>
 </div>
 

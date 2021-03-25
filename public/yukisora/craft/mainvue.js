@@ -1,30 +1,59 @@
 var craft = new Vue({
     el: "#craft",
     data: {
+        shown: false,
         count: 1,
         recipes: [],
         inventory: [],
         selected: {
-            result: {itemName: "Aluminium I guess"},
-            hammerPunches: 9,
+            result: {itemName: "Aluminium I guess",itemImageURL: "https://4.bp.blogspot.com/-XZTDJQBYjnU/V4NgajyzFYI/AAAAAAAAqWg/0asg0I-tzgYtAPTX6kSgKcKrya66P0OxgCKgB/s1600/coole-bilder-mit-apple-logo-im-weltraum-ein-schone-appel-wallpaper-fur-alle-apple-fans-hdhintergrundbilder.com.jpg",},
+            hammerPunches: 4,
             items: [{itemName: "Peace of alu", amount: 10}, {itemName: "Ass of alu", amount: 10}, {
                 itemName: "V of alu",
                 amount: 10
             }]
-        }
+        },
+    },
+    created: async function () {
+        await this.loadAllCraftingRecipes();
+        console.log(this.recipes.length);
     },
     methods: {
         loadAllCraftingRecipes: async function () {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': token
+                }
+            };
+
+            const response = await fetch('/api/yuki/recipe', options);
+            const json = await response.json();
+            if (json.status === 200) {
+                this.recipes = json.data;
+            }
         },
         loadCraftingRecipe: async function (id) {
-            fill(9);
+            var recipe = {};
+            for (const e of this.recipes) {
+                if(e._id == id) {
+                    recipe = e;
+                    break;
+                }
+            }
+            fill(recipe.hammerPunches);
+            this.selected = recipe;
         },
-        loadInventory: async function () {
-
-        },
-        click: function (){
-            document.getElementById(this.count).click();
-            this.count ++;
+        click: function () {
+            progress(this.count);
+            if (this.count >= this.selected.hammerPunches) {
+                console.log("crafted!")
+                this.count = 1;
+                showCase();
+                return;
+            }
+            this.count++;
         },
         getAmount: function (id) {
             for (const el of this.inventory) {
@@ -38,7 +67,36 @@ var craft = new Vue({
 
 let steps = [];
 
-function fill(num){
+function showCase() {
+    showCaseTL.play();
+}
+
+var showCaseTL = anime.timeline({
+    autoplay: false
+});
+
+showCaseTL
+    .add({
+        targets: ".showcase",
+        top: "-500",
+        duration: 1
+        }
+    )
+    .add({
+        targets: ".showcase",
+        top: "50",
+        duration: 600,
+        easing: "easeInOutSine"
+    })
+    .add({
+        targets: ".showcase",
+        top: "-500",
+        duration: 600,
+        delay: 5000,
+        easing: "easeInOutSine"
+    })
+
+function fill(num) {
     var c = document.getElementById("steps");
 
     for (let i = 0; i <= num; i++) {
@@ -58,7 +116,7 @@ function fill(num){
 }
 
 function progress(stepNum) {
-    let p = stepNum * (100/craft.selected.hammerPunches);
+    let p = stepNum * (100 / craft.selected.hammerPunches);
     document.getElementsByClassName('percent')[0].style.width = `${p}%`;
     steps.forEach((e) => {
         if (e.id === stepNum) {
