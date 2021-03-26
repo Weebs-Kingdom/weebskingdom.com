@@ -107,7 +107,7 @@ var attack = new Vue({
                 }
             }
             if (item != null && item != undefined) {
-                this.rResult = id;
+                this.rResult = item;
             }
         },
         closeEd: function () {
@@ -148,6 +148,7 @@ var attack = new Vue({
             this.rResult = recipe.result;
         },
         submit: async function () {
+            //todo: check if all are set correctly
             location.replace("#" + "msg");
             var packedAttack = {
                 items: this.rItems,
@@ -178,7 +179,7 @@ var attack = new Vue({
                 const json = await response.json();
                 if (json.status === 200) {
                     this.attacks = await this.loadRecipes();
-                    this.submitmsg = "Successfully updated attack!";
+                    this.submitmsg = "Successfully updated recipe!";
                     return json.message;
                 } else {
                     this.submitmsg = "An error occurred";
@@ -199,7 +200,7 @@ var attack = new Vue({
                 const json = await response.json();
                 if (json.status === 200) {
                     this.attacks = await this.loadRecipes();
-                    this.submitmsg = "Successfully created attack!";
+                    this.submitmsg = "Successfully created recipe!";
                     return json.message;
                 } else {
                     this.submitmsg = "An error occurred";

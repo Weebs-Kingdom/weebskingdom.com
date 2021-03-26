@@ -38,13 +38,13 @@
 }
 
 [data-theme="mystic"] {
-    --dotColor:  #ff9900;
-    --glitterColor: #eeba06;
-    --oclycolor1: #00f3cf;
-    --oclycolor2: #0485d9;
+    --dotColor: #91690e;
+    --glitterColor: #4f4f4f;
+    --oclycolor1: #4f4f4f;
+    --oclycolor2: #a4a4a4;
 
-    --iclycolor1: #50f69f;
-    --iclycolor2: #1eec7c;
+    --iclycolor1: #a27711;
+    --iclycolor2: #664303;
 
     --overlay: #690000;
     --bg-parts: #ffffff;
