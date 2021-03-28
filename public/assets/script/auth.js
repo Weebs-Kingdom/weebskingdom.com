@@ -1,7 +1,6 @@
 var loggedIn = false;
 var isAdmin = false;
 var token;
-var dbUser;
 
 function changeTheme(theme){
     document.documentElement.setAttribute('data-theme', theme);
@@ -30,10 +29,6 @@ async function auth(goToLoginOnFail) {
         if (json.status === 200) {
             loggedIn = true;
             console.log("logged in!");
-            try {
-                dbUser = await loadUser();
-            } catch (e){
-            }
             var login = document.getElementById('login');
             var regi = document.getElementById('regi');
             regi.remove();
@@ -68,6 +63,7 @@ async function setupLogin() {
     createLi(accSub, "/profile", "Profile");
     createLi(home, "/yukisora/shop", "Shop");
     createLi(home, "/yukisora/loot", "Lootbox");
+    createLi(home, "/yukisora/craft", "Craft");
 
     if (await getIsAdmin()){
         addAdmin();
@@ -99,6 +95,8 @@ function addAdmin() {
     var adminLi = createLi(menu, "/admin", "Admin");
     var ul = createSubMenu(adminLi);
     createLi(ul, "/admin/gentoken", "Token");
+    createLi(ul, "/yukisora/devs/shopItem", "Shop Item");
+    createLi(ul, "/admin/redeem", "Redeem");
 }
 
 function addDev() {
@@ -108,6 +106,7 @@ function addDev() {
     createLi(subMenu, "/yukisora/devs/topic", "Topics");
     createLi(subMenu, "/yukisora/devs/monsterlist", "Monster");
     createLi(subMenu, "/yukisora/devs/item", "Item");
+    createLi(subMenu, "/yukisora/devs/crafting", "Crafting");
     createLi(subMenu, "/yukisora/devs/attacklist", "Attack");
 }
 
@@ -138,22 +137,6 @@ function createLi(vin, href, inHtml) {
         vin.children[0].insertAdjacentElement("beforebegin", lis);
     }
     return lis;
-}
-
-async function loadUser(){
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': token
-            }
-        };
-
-        const response = await fetch('/api/yuki/discuser', options);
-        if(response.status === 200){
-            const json = await response.json();
-            return json.data;
-        }
 }
 
 

@@ -27,6 +27,26 @@ router.post("/items", verify, vDev, vAdmin, async (req, res) => {
     res.status(200).json({status: 200, message: "Added item!"});
 });
 
+router.delete("/items", verify, vDev, vAdmin, async (req, res) => {
+    var tk = await ShopItem.findOne({id: req.body._id});
+    await tk.remove();
+    res.status(200).json({status: 200, msg: "removed shop item"});
+});
+
+router.patch("/items",verify, vDev, vAdmin, async (req, res) => {
+    try {
+        const savedItem = await ShopItem.findOneAndUpdate({_id: req.body._id}, req.body.data);
+        res.status(200).json({status: 200, _id: savedItem._id, message: "patched shopitem"});
+    } catch (err) {
+        console.log("an error occured! " + err);
+        res.status(200).json({
+            status: 400,
+            message: "error while patching shopitem!",
+            error: err,
+        });
+    }
+});
+
 router.post("/checkout", verify, vActive, async (req, res) => {
     var sumPrice = 0;
     var items = [];

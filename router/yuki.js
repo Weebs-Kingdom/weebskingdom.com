@@ -117,9 +117,48 @@ router.post("/recipe", verify, vDev, async (req, res) => {
     redirectPost(req.body, res, "recipe");
 });
 
+
+//admin
+router.get("/redeem", verify, vAdmin, async (req, res) => {
+    redirectGet(res, "redeem");
+});
+
+router.delete("/redeem", verify, vAdmin, async (req, res) => {
+    redirectDelete(req.body, res, "redeem");
+});
+
+router.patch("/redeem", verify, vAdmin, async (req, res) => {
+    redirectPatch(req.body, res, "redeem");
+});
+
+router.post("/redeem", verify, vAdmin, async (req, res) => {
+    redirectPost(req.body, res, "redeem");
+});
+
+
 //all
 router.get("/discuser", verify, async (req, res) => {
     redirectPost({id: req.dbUser.discordId}, res, "getUser");
+});
+
+router.get("/getUserRecipes", verify, async (req, res) => {
+    redirectPost({id: req.dbUser.discordId}, res, "getUserRecipes");
+});
+
+router.get("/punch", verify, async (req, res) => {
+    redirectPost({id: req.dbUser.discordId}, res, "punch");
+});
+
+router.get("/getUserInventory", verify, async (req, res) => {
+    redirectPost({id: req.dbUser.discordId}, res, "getUserInventory");
+});
+
+router.post("/craft", verify, async (req, res) => {
+    redirectPost({id: req.dbUser.discordId, recipe: req.body.recipe}, res, "craft");
+});
+
+router.post("/redeemcode", verify, async (req, res) => {
+    redirectPost({id: req.dbUser.discordId, code: req.body.code}, res, "redeemcode");
 });
 
 async function redirectGet(res, api) {

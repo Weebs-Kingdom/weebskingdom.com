@@ -7,11 +7,12 @@ const shopItem = new mongoose.Schema({
     image: String,
     isItem: {type: Boolean, default: false},
     isRole: {type: Boolean, default: false},
+    isRoute: {type: Boolean, default: false},
     connectedItemId: String,
     connectedRole: String,
     connectedRoute: String,
     stock: Number,
-    hasStocks: Boolean,
+    hasStocks: {type: Boolean, default: false},
     rarity: String,
     category: String
 });

@@ -214,8 +214,8 @@ Vue.component('items', {
             <button style="margin-left: 1vmin" class="denyBtn material-icons" v-on:click="$emit('delete',item._id)">delete</button>
         </div>
         <div v-else>
-            <button @click="select(false)">Select</button>
-            <button v-if="selected" @click="select(true)" class="denyBtn">Unselect</button>
+            <button v-if="!selected" @click="select(false)">Select</button>
+            <button v-if="selected"  @click="select(true)" class="denyBtn">Unselect</button>
         </div>
     </div>
 </div>

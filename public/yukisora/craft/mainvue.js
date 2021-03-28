@@ -1,12 +1,14 @@
 var craft = new Vue({
     el: "#craft",
     data: {
+        msg: "",
         shown: false,
         count: 1,
         recipes: [],
         inventory: [],
+        blocked: false,
         selected: {
-            result: {itemName: "Aluminium I guess",itemImageURL: "https://4.bp.blogspot.com/-XZTDJQBYjnU/V4NgajyzFYI/AAAAAAAAqWg/0asg0I-tzgYtAPTX6kSgKcKrya66P0OxgCKgB/s1600/coole-bilder-mit-apple-logo-im-weltraum-ein-schone-appel-wallpaper-fur-alle-apple-fans-hdhintergrundbilder.com.jpg",},
+            result: {itemName: "Aluminium I guess", itemImageURL: "",},
             hammerPunches: 4,
             items: [{itemName: "Peace of alu", amount: 10}, {itemName: "Ass of alu", amount: 10}, {
                 itemName: "V of alu",
@@ -16,7 +18,8 @@ var craft = new Vue({
     },
     created: async function () {
         await this.loadAllCraftingRecipes();
-        console.log(this.recipes.length);
+        await this.loadInventory();
+        console.log(this.recipes);
     },
     methods: {
         loadAllCraftingRecipes: async function () {
@@ -28,39 +31,103 @@ var craft = new Vue({
                 }
             };
 
-            const response = await fetch('/api/yuki/recipe', options);
+            const response = await fetch('/api/yuki/getUserRecipes', options);
             const json = await response.json();
             if (json.status === 200) {
                 this.recipes = json.data;
             }
         },
-        loadCraftingRecipe: async function (id) {
-            var recipe = {};
-            for (const e of this.recipes) {
-                if(e._id == id) {
-                    recipe = e;
-                    break;
+        loadInventory: async function () {
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': token
+                }
+            };
+
+            const response = await fetch('/api/yuki/getUserInventory', options);
+            const json = await response.json();
+            if (json.status === 200) {
+                this.inventory = json.data;
+            }
+        },
+        loadCraftingRecipe: function (recipe) {
+            this.shown = true;
+            this.selected = recipe;
+            this.count = 1;
+            this.blocked = false;
+            this.msg = "";
+
+            for (const e of this.selected.items) {
+                var found = false;
+                for (const ee of this.inventory) {
+                    if (ee.item == e._id) {
+                        if (e.amount <= ee.amount) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                if (!found) {
+                    this.blocked = true;
+                    this.msg = "You don't have all the items you need!";
                 }
             }
-            fill(recipe.hammerPunches);
-            this.selected = recipe;
         },
-        click: function () {
-            progress(this.count);
-            if (this.count >= this.selected.hammerPunches) {
-                console.log("crafted!")
-                this.count = 1;
-                showCase();
+        click: async function () {
+            if (this.count > this.selected.hammerPunches || this.blocked) {
                 return;
             }
-            this.count++;
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': token
+                }
+            };
+
+            const response = await fetch('/api/yuki/punch', options);
+            const json = await response.json();
+            if (json.status == 200) {
+                progress(this.count);
+                if (this.count >= this.selected.hammerPunches) {
+                    this.blocked = true;
+                    if(await this.craft()){
+                        showCase();
+                    } else {
+                        this.msg = "Crafting failed!";
+                    }
+                    return;
+                }
+                this.count++;
+            } else {
+                this.msg = "You don't have enough energy to craft this item!";
+            }
         },
-        getAmount: function (id) {
+        getAmount: function (id, needed) {
             for (const el of this.inventory) {
-                if (el._id == id)
-                    return el.amount;
+                if (el.item == id){
+                    var am = el.amount;
+                    if(am > needed)
+                        return needed;
+                    return am;
+                }
             }
             return 0;
+        },
+        craft: async function () {
+            var options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': token
+                },
+                body: JSON.stringify({recipe: this.selected._id})
+            }
+            const response = await fetch('/api/yuki/craft', options);
+            const js = await response.json();
+            return js.status == 200;
         }
     }
 });
@@ -68,18 +135,21 @@ var craft = new Vue({
 let steps = [];
 
 function showCase() {
+    showCaseTL.reset();
     showCaseTL.play();
 }
 
 var showCaseTL = anime.timeline({
-    autoplay: false
+    autoplay: false,
+    direction: 'alternate'
+
 });
 
 showCaseTL
     .add({
-        targets: ".showcase",
-        top: "-500",
-        duration: 1
+            targets: ".showcase",
+            top: "-500",
+            duration: 1
         }
     )
     .add({
@@ -87,14 +157,9 @@ showCaseTL
         top: "50",
         duration: 600,
         easing: "easeInOutSine"
-    })
-    .add({
-        targets: ".showcase",
-        top: "-500",
-        duration: 600,
-        delay: 5000,
-        easing: "easeInOutSine"
-    })
+    }).add({
+    duration: 2000
+});
 
 function fill(num) {
     var c = document.getElementById("steps");

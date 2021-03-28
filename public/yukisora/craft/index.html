@@ -19,29 +19,32 @@
 <body>
 <script>auth(true)</script>
 <div id="navdiv" v-html="navbar"></div>
+<div id="userinfo" class="userinfo"><p>Coins: {{coins()}} 宅</p><p>Energy: {{energy()}} E</p></div>
 <div id="craft">
     <div id="showcase" class="showcase">
         <h1>You've got {{selected.result.itemName}}</h1>
         <img :src="selected.result.itemImageURL">
     </div>
-    <div v-if="shown" class="editbox">
+    <div v-if="shown" v-on:load="fill(recipe.hammerPunches)" class="editbox">
         <div class="ct">
             <div class="advice">
                 {{selected.result.itemName}}
             </div>
-            <div style="position: absolute; left: 49%;">
-                <i class="material-icons">construction</i> {{selected.hammerPunches}}
+            <div style="width: 100%; text-align: center; position: relative; top: 1vmin">
+                <div><i class="material-icons">construction</i> {{selected.hammerPunches}}</div>
             </div>
             <div class="listBody"><label>Needed:</label>
                 <div class="list" style="height: fit-content">
                     <div style="display: flex; flex-flow: wrap" v-for="item in selected.items">
-                        {{item.itemName}} {{item.amount}}/{{getAmount(item._id)}}
+                        {{item.itemName}} {{getAmount(item._id, item.amount)}} / {{item.amount}}
                     </div>
                 </div>
             </div>
-            <button style="margin-top: 4vmin" @click="click">
+            <button v-if="!blocked" style="margin-top: 4vmin" @click="click">
                 Craft
             </button>
+            <p>{{msg}}</p>
+            <button v-if="blocked" class="denyBtn" @click="shown = false">Close~</button>
             <div class="progressContainer">
                 <div class="progress">
                     <div class="percent"></div>
@@ -51,31 +54,34 @@
             </div>
         </div>
     </div>
-    <div class="textview">
-        <div v-if="recipes.length > 0" v-for="r in recipes">
-            <div class="ct">
+    <div class="listBody">
+        <div v-if="recipes.length > 0" v-for="r of recipes">
+            <div class="content">
                 <div class="advice">
-                    {{r.result.itemName}}
+                    <a>{{r.result.itemName}}</a>
+                    <br>
+                    {{r.resultAmount}}x
                 </div>
-                <div style="position: absolute; left: 49%;">
-                    <i class="material-icons">construction</i> {{r.hammerPunches}}
+                <div style="width: 100%; text-align: center; position: relative; top: 1vmin">
+                    <div><i class="material-icons">construction</i> {{r.hammerPunches}}</div>
                 </div>
                 <div class="listBody"><label>Needed:</label>
                     <div class="list" style="height: fit-content">
                         <div style="display: flex; flex-flow: wrap" v-for="item in r.items">
-                            {{item.itemName}} {{item.amount}}/{{getAmount(item._id)}}
+                            <a>{{item.itemName}} {{getAmount(item._id, item.amount)}} / {{item.amount}}</a>
                         </div>
                     </div>
                 </div>
-                <button @click="loadCraftingRecipe(r._id)">Craft</button>
+                <button @click="loadCraftingRecipe(r)">Craft</button>
             </div>
         </div>
-        <a style="margin-top: 10vmin; margin-bottom: 10vmin" class="advice" v-if="recipes.length <= 0">List is empty</a>
+        <a class="advice" v-if="recipes.length <= 0">List is empty</a>
     </div>
 </div>
 
 <script type="text/javascript" src="/assets/script/navbar.js"></script>
 <script type="text/javascript" src="mainvue.js"></script>
+<script src="/assets/script/userinfo.js"></script>
 </body>
 
 </html>

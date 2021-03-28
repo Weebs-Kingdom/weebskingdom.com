@@ -50,10 +50,15 @@
                     <div class="list">
                         <div style="display: table; gap: 1vmin; width: 100%; overflow-y: scroll;" id="intoList">
                             <div v-for="item of items">
-                                <item :selected="[rResult]" :item="item" :w-amount="false" @clicked="selectResult"></item>
+                                <item :selected="isSelected(item)" :item="item" :w-amount="false" @clicked="selectResult"></item>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="form__group field">
+                    <input type="number" class="form__field" placeholder="Result amount" name="Result amount" id='amount'
+                           v-model="rResultAmount" :value="rResultAmount" required/>
+                    <label for="amount" class="form__label">Result amount</label>
                 </div>
                 <p id="msg" class="message">{{submitmsg}}</p>
                 <div style="margin-top: 6em; display: inline-flex">

@@ -7,6 +7,11 @@ var redeem = new Vue({
     },
     methods: {
         submit: async function (){
+            this.message = "";
+            if(this.code == ""){
+                this.message = "There is no code...lol";
+                return;
+            }
             if(this.clicked)
                 return;
 
@@ -20,8 +25,7 @@ var redeem = new Vue({
                 body: JSON.stringify({code: this.code})
             };
             var json = {};
-            var oke = false;
-            await fetch('/api/shop/redeem', options).then(res => res.json())
+            await fetch('/api/yuki/redeemcode', options).then(res => res.json())
                 .then(res => {
                     json = res;
                     return res;
@@ -31,22 +35,14 @@ var redeem = new Vue({
                 this.message = "While connection to the server an error occurred";
                 return;
             }
+            console.log(json);
             if(json.status === 200){
                 submitBtn.play();
-                this.message = "The items are now activated and you can find them in your account";
-                oke = true;
+                this.message = json.data;
             } else if(json.status === 400 ||json.status === 401){
                 this.message = json.message;
             } else {
                 this.message = "While connection to the server a error occurred";
-            }
-
-            if(oke){
-                setTimeout(() => {
-                    this.complexCart = [];
-                    this.shoppingcart = [];
-                    this.saveShop();
-                }, 4000)
             }
         }
     }

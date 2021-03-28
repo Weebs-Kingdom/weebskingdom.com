@@ -234,25 +234,23 @@ var shop = new Vue({
 })
 
 Vue.component('cartitem', {
-    template: `<div class="cart-item">
-                    <div class="cart-item-description">
-                        <div class="img"><img v-if="image != undefined && image != ''" :src="image"><a v-else>No product image</a></div>
-                        <div class="name"><a class="cart-item-label">{{name}}</a></div>
-                        <div class="amount unselectable" style="vertical-align: middle; display: inline-block; text-align: center">
-                            <a style="vertical-align: middle" v-on:click="$emit('deleteone',id)"> <i class="material-icons">remove</i> </a>
-                            <a class="cart-item-amount">{{amount}}</a>
-                            <a style="vertical-align: middle" v-on:click="$emit('add',id)"> <i class="material-icons">add</i> </a>
+    template: `<div class="cart-item cart-item-description">
+                        <div class="img cart-item-description"><img v-if="image != undefined && image != ''" :src="image"><a v-else>No product image</a></div>
+                        <div class="name cart-item-description"><a class="cart-item-label">{{name}}</a></div>
+                        <div class="amount unselectable cart-item-description">
+                            <a class="center" v-on:click="$emit('deleteone',id)"><i class="material-icons">remove</i></a>
+                            {{amount}}
+                            <a class="center" v-on:click="$emit('add',id)"><i class="material-icons">add</i></a>
                         </div>
-                        <div class="price">
-                            <a class="cart-item-price">{{price}} 宅 <i v-on:click="$emit('delete',id)" class="material-icons unselectable">delete</i></a>
+                        <div class="price cart-item-description">
+                            <a class="cart-item-price cart-item-description">{{price}} 宅 <i v-on:click="$emit('delete',id)" class="material-icons unselectable">delete</i></a>
                         </div>
-                    </div>
                  </div>`,
     props: ['amount', 'name', 'price', 'id', 'image']
 });
 
 Vue.component('cart', {
-    template: '<div class="cart"> <div class="blur" v-if="show"></div> <button class="cart-btn" @click="toggle"> <i class="material-icons">shopping_cart</i></button> <div class="cartitems" v-if="show"> <cartitem v-if="items.length > 0" v-for="item in items" :amount="item.amount" :image="item.image" :name="item.name" :price="item.price" :id="item._id" @add="addToCart" @deleteone="deleteOneFromCart" @delete="deleteFromCart"></cartitem> <p v-if="items.length <= 0">Nothing here</p> <div style="margin-top: 4vmin; text-align: right"> <a v-if="items.length > 0">Total: {{getTotal()}} 宅</a> <button v-if="items.length > 0" style="margin-left: 2vmin" class="acceptBtn" @click="window.location.assign(`checkout`)">Checkout</button> </div> </div></div>',
+    template: '<div class="cart"> <div class="blur" v-if="show"></div> <div class="over-blur"><button class="cart-btn" @click="toggle"> <i class="material-icons">shopping_cart</i></button> <div class="cart-showcase" v-if="show"><div class="cart-items"> <cartitem v-if="items.length > 0" v-for="item in items" :amount="item.amount" :image="item.image" :name="item.name" :price="item.price" :id="item._id" @add="addToCart" @deleteone="deleteOneFromCart" @delete="deleteFromCart"></cartitem> </div> <p v-if="items.length <= 0">Nothing here</p> <div style="margin-top: 4vmin; text-align: right"> <a v-if="items.length > 0">Total: {{getTotal()}} 宅</a> <button v-if="items.length > 0" style="margin-left: 2vmin" class="acceptBtn" @click="window.location.assign(`checkout`)">Checkout</button> </div> </div></div></div>',
     props: ['items'],
     data() {
         return {show: false}

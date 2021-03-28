@@ -4,76 +4,90 @@
     <title>Create Shop Item</title>
     <link rel="stylesheet" href="/assets/style/main.css">
     <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="/assets/script/auth.js"></script>
     <meta name="title" content="Create Shop Item">
     <meta name="description" content="You can create items for the shop here">
     <meta name="theme-color" content="#ffffff">
 </head>
 
-<body onload="auth(true), init()">
+<body>
+<script>auth(false)</script>
 <div id="navdiv" v-html="navbar"></div>
-<div id="item">
-    <div class="textview" id="createMonster">
-        <div id="divParent" class="listBody"><label>Parent Item</label>
-            <div class="list" id="parent"></div>
+<div id="shopItems">
+    <button class="fixedBtn" v-if="!show" @click="create">Create</button>
+    <div v-show="show" class="editbox">
+        <div class="ct">
+            <button class="fixedBtn denyBtn" @click="closeEd">Close</button>
+            <a class="advice">
+                {{modeinfo}}
+            </a>
+            <div class="listBody">
+                <label>Parent Item</label>
+                <item v-for="item of items" @select="selectItem" :item="item" :selected="isSelected(item)"></item>
+            </div>
+            <div class="form__group field">
+                <select id="role" v-model="iRole">
+                    <option></option>
+                    <option>Prime</option>
+                    <option>VIP</option>
+                </select>
+                <label for="role" class="form__label">Role</label>
+            </div>
+            <div class="form__group field">
+                <select id="route" v-model="iRoute">
+                    <option></option>
+                    <option>getLootBoxKey</option>
+                </select>
+                <label for="route" class="form__label">Route</label>
+            </div>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Name" name="Name" id='name' v-model="iName" required/>
+                <label for="name" class="form__label">Name</label>
+            </div>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Image URL" name="Image URL" id='imageUrl' v-model="iImageUrl" required/>
+                <label for="imageUrl" class="form__label">Image URL</label>
+            </div>
+            <div class="form__group field">
+                <input type="input" class="form__field" placeholder="Description" name="Description" id='description' v-model="iDescription" required/>
+                <label for="description" class="form__label">Description</label>
+            </div>
+            <div class="form__group field">
+                <input type="number" class="form__field" placeholder="Price" name="Price" id='price' v-model="iPrice" required/>
+                <label for="price" class="form__label">Price</label>
+            </div>
+            <div class="form__group field">
+                <input type="checkbox" class="form__field" placeholder="Is stocked" name="Is stocked" id='isStocked' v-model="iIsStocked" required/>
+                <label for="isStocked" class="form__label">Is stocked</label>
+            </div>
+            <div v-if="iIsStocked" class="form__group field">
+                <input type="number" class="form__field" placeholder="Stock" name="Stock" id='stock' v-model="iStock" required/>
+                <label for="stock" class="form__label">Stock</label>
+            </div>
+            <div class="form__group field">
+                <select id="rarity" v-model="iRarity">
+                    <option>normal</option>
+                    <option>epic</option>
+                    <option>legendary</option>
+                    <option>mystic</option>
+                </select>
+                <label for="rarity" class="form__label">Rarity</label>
+            </div>
+            <p id="msg" class="message">{{msg}}</p>
+            <div style="margin-top: 6em; display: inline-flex">
+                <button class="btn" type="button" @click="submit">Submit</button>
+                <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="deleteItem(editingItem)" v-if="editMode">delete</button>
+            </div>
         </div>
-        <div class="form__group field">
-            <select id="role">
-                <option></option>
-                <option>Prime</option>
-                <option>VIP</option>
-            </select>
-            <label for="role" class="form__label">Role</label>
-        </div>
-        <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Route" name="Route" id='route'
-                   required/>
-            <label for="route" class="form__label">Route</label>
-        </div>
-        <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Name" name="Name" id='name' required/>
-            <label for="name" class="form__label">Name</label>
-        </div>
-        <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Image URL" name="Image URL" id='imageUrl' required/>
-            <label for="imageUrl" class="form__label">Image URL</label>
-        </div>
-        <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Description" name="Description" id='description'
-                   required/>
-            <label for="description" class="form__label">Description</label>
-        </div>
-        <div class="form__group field">
-            <input type="number" class="form__field" placeholder="Price" name="Price" id='price'
-                   required/>
-            <label for="price" class="form__label">Price</label>
-        </div>
-        <div class="form__group field">
-            <input type="checkbox" class="form__field" placeholder="Is stocked" name="Is stocked" id='isStocked'
-                   required/>
-            <label for="isStocked" class="form__label">Is stocked</label>
-        </div>
-        <div class="form__group field">
-            <input type="number" class="form__field" placeholder="Stock" name="Stock" id='stock'
-                   required/>
-            <label for="stock" class="form__label">Stock</label>
-        </div>
-        <div class="form__group field">
-            <select id="rarity">
-                <option>normal</option>
-                <option>epic</option>
-                <option>legendary</option>
-                <option>mystic</option>
-            </select>
-            <label for="rarity" class="form__label">Rarity</label>
-        </div>
-        <p class="message" id="error"></p>
-        <button style="margin-top: 6em;" class="btn" id="submitBtn" type="button" onclick="submit()">Submit</button>
+    </div>
+    <div class="listBody">
+        <shop-item v-for="item of shopItems" :item="item" @edit="edit" @delete="deleteItem"></shop-item>
     </div>
 </div>
 <script type="text/javascript" src="/assets/script/navbar.js"></script>
+<script type="text/javascript" src="mainVue.js"></script>
 </body>
 
 </html>

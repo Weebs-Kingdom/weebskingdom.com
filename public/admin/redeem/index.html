@@ -1,0 +1,98 @@
+<html>
+
+<head>
+    <title>Create Redeem</title>
+    <link rel="stylesheet" href="/assets/style/main.css">
+    <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="text/javascript" src="/assets/script/auth.js"></script>
+    <meta name="title" content="Create Recipe">
+    <meta name="description" content="You can create redeem codes here">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+<script>auth(false);</script>
+<div id="navdiv" v-html="navbar"></div>
+<div id="redeem">
+    <button class="fixedBtn" v-if="!show" @click="create">Create</button>
+    <div class="editbox" v-if="show">
+        <div class="ct" >
+            <button class="fixedBtn denyBtn" @click="closeEd">Close</button>
+            <a class="advice">
+                {{modeinfo}}
+            </a>
+            <div>
+                <div class="form__group field">
+                    <input type="input" class="form__field" placeholder="Code" name="Code" id='code'
+                           v-model="rCode" :value="rCode" required/>
+                    <label for="code" class="form__label">Code</label>
+                </div>
+                <div class="form__group field">
+                    <input type="input" class="form__field" placeholder="Instruction" name="Instruction" id='inst'
+                           v-model="rInstruction" :value="rInstruction" required/>
+                    <label for="inst" class="form__label">Instruction</label>
+                </div>
+                <div class="form__group field">
+                    <input type="checkbox" class="form__field" placeholder="Do Expire" name="Do Expire" id='dexpires'
+                           v-model="rDoExpire" :value="rDoExpire" required/>
+                    <label for="dexpires" class="form__label">Do Expire</label>
+                </div>
+                <div v-if="rDoExpire" class="form__group field">
+                    <input type="date" class="form__field" placeholder="Expires" name="Expires" id='expires'
+                           v-model="rExpire" :value="rExpire" required/>
+                    <label for="expires" class="form__label">Expires</label>
+                </div>
+                <div class="form__group field">
+                    <input type="checkbox" class="form__field" placeholder="MHas max usage" name="Has max usage" id='hmaxUsage'
+                           v-model="rHasMaxUsage" :value="rHasMaxUsage" required/>
+                    <label for="hmaxUsage" class="form__label">Has max usage</label>
+                </div>
+                <div v-if="rHasMaxUsage" class="form__group field">
+                    <input type="input" class="form__field" placeholder="Max usage" name="Max usage" id='maxUsage'
+                           v-model="rMaxUsage" :value="rMaxUsage" required/>
+                    <label for="maxUsage" class="form__label">Max usage</label>
+                </div>
+                <div v-if="rDoExpire || rHasMaxUsage" class="form__group field">
+                    <input type="checkbox" class="form__field" placeholder="Auto delete" name="Auto delete" id='autodel'
+                           v-model="rAutoDelete" :value="rAutoDelete" required/>
+                    <label for="autodel" class="form__label">Auto delete</label>
+                </div>
+                <div class="form__group field">
+                    <input type="input" class="form__field" placeholder="Max user usage" name="Max user usage" id='maxUUsage'
+                           v-model="rMaxUserUsage" :value="rMaxUserUsage" required/>
+                    <label for="maxUUsage" class="form__label">Max user usage</label>
+                </div>
+                <p id="msg" class="message">{{submitmsg}}</p>
+                <div style="margin-top: 6em; display: inline-flex">
+                    <button class="btn" type="button" @click="submit">Submit</button>
+                    <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="deleteCode(editingRecipe)" v-if="editMode">delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="advice">
+        <div class="txt">To search a specific code use the hotkey: CTRL + F</div>
+    </div>
+
+    <div class="listBody">
+        <div class="content" v-for="code of codes">
+            <h1>{{code.code}}</h1>
+            <p v-if="code.doExpire">This code can expire!</p>
+            <p v-if="code.hasMaxUsage">This code can be used {{code.maxUsage}}</p>
+            <p>This code was used {{code.used}} times</p>
+            <p>A user can use this code {{code.maxUserUsage}} times</p>
+            <div style="display: inline-flex"><a>{{code.instruction}}</a></div>
+            <div style="display: inline-flex">
+                <button class="material-icons" @click="edit(code)">edit</button>
+                <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="deleteCode(code._id)">delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="mainVue.js"></script>
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
+</body>
+</html>

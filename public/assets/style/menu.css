@@ -23,6 +23,7 @@
     transition: left 0s calc(var(--td) * 2), transform 0s calc(var(--td) * 2);
     width: 100%;
     z-index: 1000;
+    top:0;
 }
 
 .nav-main::before,
@@ -64,16 +65,16 @@
     position: fixed;
     right: 1rem;
     top: 1rem;
-    z-index: 100;
+    z-index: 1001;
 }
 
 [id=main-navigation-toggle]~label span {
     display: block;
-    height: 2rem;
+    height: 2.5vmax;
     padding: 0.5rem;
     position: relative;
     transition: transform calc(var(--td) * 3) var(--te);
-    width: 2rem;
+    width: 2.5vmax;
 }
 
 [id=main-navigation-toggle]~label span::before,
@@ -81,7 +82,7 @@
     background-color: var(--color-dark);
     bottom: 0;
     content: "";
-    height: 4px;
+    height: 0.3vmax;
     left: 0;
     margin: auto;
     position: absolute;
@@ -89,6 +90,7 @@
     transition: transform calc(var(--td) * 3) var(--te);
     top: 0;
     width: calc(100% - 1rem);
+
 }
 
 [id=main-navigation-toggle]~label span::before {
@@ -291,5 +293,11 @@
     50%,
     100% {
         opacity: 0;
+    }
+}
+
+@media only screen and (max-width: 1367px) {
+    [id=main-navigation-toggle] ~ label {
+        right: 3rem;
     }
 }

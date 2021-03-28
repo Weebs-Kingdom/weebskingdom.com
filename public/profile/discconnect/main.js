@@ -46,7 +46,7 @@ async function submit(){
             document.getElementById("msg").innerHTML = "Your profile is now connected with your Discord Account!";
             setTimeout(() => {
                 window.location.replace("/yukisora/loot?first=true");
-            }, 10000)
+            },  6000)
         } else {
             document.getElementById("msg").innerHTML = "This token is invalid!";
         }

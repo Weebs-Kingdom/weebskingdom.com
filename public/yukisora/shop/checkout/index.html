@@ -19,14 +19,17 @@
 <body>
 <script>auth(true)</script>
 <div id="navdiv" v-html="navbar"></div>
+<div id="userinfo" class="userinfo"><a>Coins: {{coins()}} 宅</a></div>
 <div id="shop">
     <div class="checkout">
         <div class="buylist textview">
             <div v-if="itemsTotal >= 1" class="cocartitems">
-                <cartitem v-for="item in complexCart" @add="addToCart" @deleteone="deleteOneFromCart"
-                          @delete="deleteFromCart"
-                          :amount="item.amount" :name="item.name" :price="item.price" :id="item._id"
-                          :image="item.image"></cartitem>
+                <div>
+                    <cartitem v-for="item in complexCart" @add="addToCart" @deleteone="deleteOneFromCart"
+                              @delete="deleteFromCart"
+                              :amount="item.amount" :name="item.name" :price="item.price" :id="item._id"
+                              :image="item.image"></cartitem>
+                </div>
             </div>
             <div v-else style="display: flex; align-items: center; height: 100%; justify-content: center">
                 <a class="link">
@@ -42,11 +45,12 @@
                 <a v-else-if="itemsTotal >= 10">You are just about to buy many items</a>
                 <a v-else-if="itemsTotal >= 5">You are just about to buy some stuff</a>
                 <a v-else-if="itemsTotal > 1">You are just about to buy a few items</a>
-                <a v-else>You are just about to buy an item</a>
+                <a v-else-if="itemsTotal == 1">You are just about to buy an item</a>
+
             </div>
 
             <div class="text">
-                <a class="link">Total: {{getTotal()}} 宅</a>
+                <a v-if="getTotal() > 0" class="link">Total: {{getTotal()}} 宅</a>
             </div>
 
             <div class="checkoutbtn">
@@ -76,6 +80,7 @@
 
 <script type="text/javascript" src="/assets/script/navbar.js"></script>
 <script type="text/javascript" src="/assets/script/shop.js"></script>
+<script src="/assets/script/userinfo.js"></script>
 </body>
 
 </html>

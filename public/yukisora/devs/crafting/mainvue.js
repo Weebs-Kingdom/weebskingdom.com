@@ -15,6 +15,7 @@ var attack = new Vue({
         rCommonRecipe: false,
         rHammerPunches: 10,
         rResult: "",
+        rResultAmount: 1
     },
     created: async function () {
         this.recipes = await this.loadRecipes();
@@ -98,7 +99,13 @@ var attack = new Vue({
                 }
             }
         },
-        selectResult: function (id){
+        selectResult: function (id) {
+            if (this.rResult != null && this.rResult != undefined)
+                if (id == this.rResult._id) {
+                    this.rResult = undefined;
+                    return;
+                }
+
             var item = undefined;
             for (const e of this.items) {
                 if (e._id == id) {
@@ -137,6 +144,7 @@ var attack = new Vue({
             this.rCommonRecipe = false;
             this.rHammerPunches = 10;
             this.rResult = "";
+            this.rResultAmount = 1;
         },
         setupEdit: function (id) {
             var recipe = this.recipes.filter(el => el._id == id)[0];
@@ -146,23 +154,33 @@ var attack = new Vue({
             this.rCommonRecipe = recipe.commonRecipe;
             this.rHammerPunches = recipe.hammerPunches;
             this.rResult = recipe.result;
+            this.rResultAmount = recipe.resultAmount;
         },
         submit: async function () {
-            //todo: check if all are set correctly
+            if (this.rResult == undefined || this.rResult == null) {
+                this.msg = "You have to select a result!";
+                return;
+            }
+
+            if (this.rItems.length == 0) {
+                this.msg = "You have to select a item!";
+                return;
+            }
             location.replace("#" + "msg");
             var packedAttack = {
                 items: this.rItems,
                 itemCount: this.rItemCount,
                 commonRecipe: this.rCommonRecipe,
                 hammerPunches: this.rHammerPunches,
-                result: this.rResult._id
+                result: this.rResult._id,
+                resultAmount: this.rResultAmount
             };
 
             console.log(packedAttack);
 
             if (this.editMode) {
                 var pack = {
-                    _id: this.edetingAttack,
+                    _id: this.editingRecipe,
                     data: packedAttack
                 }
 
@@ -208,6 +226,13 @@ var attack = new Vue({
                     return undefined;
                 }
             }
+        },
+        isSelected: function (item) {
+            if (this.rResult != null && this.rResult != undefined) {
+                return item._id == this.rResult._id;
+            } else {
+                return false;
+            }
         }
     }
 });
@@ -217,8 +242,9 @@ Vue.component('item', {
    <div style="display: inline-table">
    <input v-if="wAmount" style="display: table-cell" type="checkbox" v-model.checked="checked" @change="change()"/>
    <a style="display: table-cell">{{item.itemName}}</a>
-   <button v-if="!wAmount" style="display: table-cell" @click="clck()">Select</button>
-   <input v-if="wAmount" style="display: table-cell" type="number" v-model.number="amount" @change="change()" @keyup="change()"/>
+   <button v-if="!wAmount && !selected" style="display: table-cell" @click="clck()">Select</button>
+   <button v-if="!wAmount && selected" class="denyBtn" style="display: table-cell" @click="clck()">Unselect</button>
+   <input v-if="wAmount && checked" style="display: table-cell" type="number" v-model.number="amount" @change="change()" @keyup="change()"/>
 </div>
 `,
     data: function () {
@@ -228,6 +254,9 @@ Vue.component('item', {
         }
     },
     created: function () {
+        if (!this.wAmount)
+            return;
+
         if (this.isSelected()) {
             this.amount = this.selected.filter(e => e._id == this.item._id)[0].amount;
             if (!this.amount || this.amount == undefined || this.amount === 0)
@@ -237,7 +266,7 @@ Vue.component('item', {
     props: ['item', 'selected', 'wAmount'],
     methods: {
         change: function () {
-            if(this.wAmount){
+            if (this.wAmount) {
                 this.$emit('clicked', this.item._id, this.checked, this.amount);
             }
         },
@@ -250,7 +279,7 @@ Vue.component('item', {
             }
             return false;
         },
-        clck: function (){
+        clck: function () {
             this.$emit('clicked', this.item._id);
         }
     }
