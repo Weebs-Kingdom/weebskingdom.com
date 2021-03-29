@@ -25,7 +25,9 @@
             </a>
             <div class="listBody">
                 <label>Parent Item</label>
-                <item v-for="item of items" @select="selectItem" :item="item" :selected="isSelected(item)"></item>
+                <div class="list" id="monstertype">
+                    <item v-for="item of items" @select="selectItem" :item="item" :selected="isSelected(item)"></item>
+                </div>
             </div>
             <div class="form__group field">
                 <select id="role" v-model="iRole">
