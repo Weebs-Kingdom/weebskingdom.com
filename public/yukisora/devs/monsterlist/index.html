@@ -21,9 +21,12 @@
     <div class="editbox" v-if="show">
         <div class="ct" >
             <button class="fixedBtn denyBtn" @click="closeEd">Close</button>
-            <a class="advice">
-                {{modeinfo}}
-            </a>
+            <div class="advice">
+                <a>
+                    {{modeinfo}}
+                </a>
+                <p v-if="editingMonster != ''">id: {{editingMonster}}</p>
+            </div>
             <div>
                 <div class="form__group field">
                     <input type="input" class="form__field" placeholder="Name" name="Name" id='name' v-model="mname" :value="mname" required/>

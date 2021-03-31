@@ -4,10 +4,11 @@
     <title>Home</title>
     <link rel="stylesheet" href="/assets/style/main.css">
     <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script type="text/javascript" src="/assets/script/auth.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <meta name="title" content="Weebskingdom.com Homepage">
-    <meta name="description" content="Meine Homepage über Projecte usw.">
+    <meta name="description" content="The homepage of Weebs Kingdom">
     <meta name="theme-color" content="#ffffff">
 
 </head>
@@ -17,12 +18,20 @@
 <div id="navdiv">
     <div v-html="navbar"></div>
 </div>
+<div id="userinfo" class="userinfo"><div v-if="user != undefined"><a>Coins: {{coins()}} 宅</a><br><a>Energy: {{energy()}} <i class="material-icons">construction</i></a></div></div>
 
-<div class="advice">
-    <div class="txt">This homepage is boring...</div>
-    <div class="txt">Still in developing phase, but the developer is <a>lazy</a> :333</div>
+<div id="index">
+    <div class="advice">
+        <div class="txt">Welcome to <a>WeebsKingdom.com</a></div>
+        <div class="txt"></div>
+    </div>
+    <div class="advice">
+        <div class="txt"><a href="/disc">Here</a> you can join the <a href="/disc">Discord Server</a> if you don't have yet</div>
+    </div>
 </div>
 <script type="text/javascript" src="/assets/script/navbar.js"></script>
+<script src="mainVue.js"></script>
+<script src="/assets/script/userinfo.js"></script>
 </body>
 
 </html>

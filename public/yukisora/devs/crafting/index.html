@@ -21,9 +21,12 @@
     <div class="editbox" v-if="show">
         <div class="ct" >
             <button class="fixedBtn denyBtn" @click="closeEd">Close</button>
-            <a class="advice">
-                {{modeinfo}}
-            </a>
+            <div class="advice">
+                <a>
+                    {{modeinfo}}
+                </a>
+                <p v-if="editingRecipe != ''">id: {{editingRecipe}}</p>
+            </div>
             <div>
                 <div class="form__group field">
                     <input type="number" class="form__field" placeholder="Hammer punches" name="Hammer punches" id='hammerPunches'

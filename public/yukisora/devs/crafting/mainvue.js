@@ -74,7 +74,7 @@ var attack = new Vue({
             const response = await fetch('/api/yuki/recipe', options);
             const json = await response.json();
             if (json.status === 200) {
-                this.attacks = await this.loadAttack();
+                this.recipes = await this.loadRecipes();
                 this.searchFc();
             }
         },
@@ -196,7 +196,7 @@ var attack = new Vue({
                 const response = await fetch('/api/yuki/recipe', options);
                 const json = await response.json();
                 if (json.status === 200) {
-                    this.attacks = await this.loadRecipes();
+                    this.recipes = await this.loadRecipes();
                     this.submitmsg = "Successfully updated recipe!";
                     return json.message;
                 } else {
@@ -217,7 +217,7 @@ var attack = new Vue({
                 const response = await fetch('/api/yuki/recipe', options);
                 const json = await response.json();
                 if (json.status === 200) {
-                    this.attacks = await this.loadRecipes();
+                    this.recipes = await this.loadRecipes();
                     this.submitmsg = "Successfully created recipe!";
                     return json.message;
                 } else {

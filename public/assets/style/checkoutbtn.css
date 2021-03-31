@@ -1,5 +1,10 @@
 :root {
-    --top: 85%;
+    --top: 98%;
+}
+.checkoutbtn {
+    margin-top: 10vmin;
+    position: relative;
+    width: 100%;
 }
 
 .checkoutbtn .button {

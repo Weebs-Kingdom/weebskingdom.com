@@ -19,12 +19,11 @@
 <body>
 <script>auth(true)</script>
 <div id="navdiv" v-html="navbar"></div>
-<div id="userinfo" class="userinfo"><a>Coins: {{coins()}} 宅</a></div>
 <div id="shop">
     <div class="checkout">
         <div class="buylist textview">
             <div v-if="itemsTotal >= 1" class="cocartitems">
-                <div>
+                <div style="height: 100%; width: 95%">
                     <cartitem v-for="item in complexCart" @add="addToCart" @deleteone="deleteOneFromCart"
                               @delete="deleteFromCart"
                               :amount="item.amount" :name="item.name" :price="item.price" :id="item._id"
@@ -39,7 +38,7 @@
         </div>
         <div class="buyarea textview">
             <div class="text">
-                <h1 class="headline">Checkout</h1>
+                <h1 class="headline" style="margin-left: 7vmin; margin-right: 7vmin">Checkout</h1>
                 <a v-if="itemsTotal >= 50">You are just about to buy a shit load of stuff OWO</a>
                 <a v-else-if="itemsTotal >= 30">You are just about to buy a lot of stuff</a>
                 <a v-else-if="itemsTotal >= 10">You are just about to buy many items</a>
@@ -49,8 +48,12 @@
 
             </div>
 
-            <div class="text">
-                <a v-if="getTotal() > 0" class="link">Total: {{getTotal()}} 宅</a>
+            <div v-if="getTotal() > 0" class="text" style="background: var(--color-primary); border-radius: 10px; padding: 2vmin; box-shadow: inset 0 0 0.6em var(--color-shadow); margin-top: 10vmin; margin-right: 3vmin; margin-left: 3vmin;">
+                <a class="link">Coins: {{info.user.coins}} 宅</a>
+                <br>
+                <a class="link">Total: {{getTotal()}} 宅</a>
+                <div class="separator"></div>
+                <a class="link">New balance: {{(info.user.coins - getTotal())}} 宅</a>
             </div>
 
             <div class="checkoutbtn">
@@ -66,7 +69,7 @@
                 </main>
             </div>
 
-            <div style="justify-content: end">
+            <div style="margin-top: 25vmin">
                 <h1 class="ml11">
                     <span class="text-wrapper">
                         <span class="line line1"></span>
@@ -78,9 +81,9 @@
     </div>
 </div>
 
+<script src="/assets/script/userinfo.js"></script>
 <script type="text/javascript" src="/assets/script/navbar.js"></script>
 <script type="text/javascript" src="/assets/script/shop.js"></script>
-<script src="/assets/script/userinfo.js"></script>
 </body>
 
 </html>

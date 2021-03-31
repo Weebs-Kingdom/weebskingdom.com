@@ -304,13 +304,13 @@ button:hover {
 }
 
 .textview .text {
-    margin-bottom: 4em;
+    margin-bottom: 2em;
 }
 
 .textview .headline {
     transition: all 250ms ease;
     display: block;
-    font-size: 2em;
+    font-size: 7vmin;
     margin-block-start: 0.67em;
     margin-block-end: 0.67em;
     margin-inline-start: 0px;
@@ -694,6 +694,7 @@ img {
     align-content: center;
     flex-wrap: wrap;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .cart-item-description .img {
@@ -791,20 +792,22 @@ img {
     margin-left: 4vmin;
     background: var(--color-secondary);
     position: relative;
-    top: 10%;
-    height: 70%;
+    top: 5%;
+    height: 75%;
     width: 40%;
     justify-content: center;
+    overflow-y: auto;
 }
 
 .checkout .buyarea {
+    overflow-y: auto;
     text-align: center;
     background: var(--color-secondary);
     padding: 2vmin;
     position: relative;
-    top: 10%;
-    height: 70%;
-    width: 30%;
+    top: 5%;
+    height: 80%;
+    width: 35%;
 }
 
 .ml11 {
@@ -987,7 +990,7 @@ img {
 
     .material-icons {
         cursor: pointer;
-        font-size: 3vmax !important;
+        font-size: 3vmin !important;
     }
 
     .checkout{
@@ -1000,15 +1003,15 @@ img {
     .checkout .buylist {
         top: 10%;
         height: 40%;
-        width: 60%;
+        width: 90%;
         margin: 0;
     }
 
     .checkout .buyarea {
-        top: 10%;
-        height: 40%;
-        width: 90%;
         margin: 0;
+        top: 15%;
+        height: 60%;
+        width: 90%;
     }
 
     .cart-btn {
@@ -1043,6 +1046,6 @@ img {
     }
 
     .cart-item-description {
-        font-size: 2vmax;
+        font-size: 3vmin;
     }
 }

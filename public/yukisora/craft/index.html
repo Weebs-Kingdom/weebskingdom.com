@@ -19,7 +19,7 @@
 <body>
 <script>auth(true)</script>
 <div id="navdiv" v-html="navbar"></div>
-<div id="userinfo" class="userinfo"><p>Coins: {{coins()}} 宅</p><p>Energy: {{energy()}} E</p></div>
+<div id="userinfo" class="userinfo"><a>Coins: {{coins()}} 宅</a><a>Energy: {{energy()}} <i class="material-icons">construction</i></a></div>
 <div id="craft">
     <div id="showcase" class="showcase">
         <h1>You've got {{selected.result.itemName}}</h1>
@@ -31,7 +31,7 @@
                 {{selected.result.itemName}}
             </div>
             <div style="width: 100%; text-align: center; position: relative; top: 1vmin">
-                <div><i class="material-icons">construction</i> {{selected.hammerPunches}}</div>
+                <div>{{selected.hammerPunches}} <i class="material-icons">construction</i></div>
             </div>
             <div class="listBody"><label>Needed:</label>
                 <div class="list" style="height: fit-content">
@@ -63,7 +63,7 @@
                     {{r.resultAmount}}x
                 </div>
                 <div style="width: 100%; text-align: center; position: relative; top: 1vmin">
-                    <div><i class="material-icons">construction</i> {{r.hammerPunches}}</div>
+                    <div>{{r.hammerPunches}}<i class="material-icons">construction</i></div>
                 </div>
                 <div class="listBody"><label>Needed:</label>
                     <div class="list" style="height: fit-content">

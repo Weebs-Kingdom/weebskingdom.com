@@ -20,9 +20,12 @@
     <div v-show="show" class="editbox">
         <div class="ct">
             <button class="fixedBtn denyBtn" @click="closeEd">Close</button>
-            <a class="advice">
-                {{modeinfo}}
-            </a>
+            <div class="advice">
+                <a>
+                    {{modeinfo}}
+                </a>
+                <p v-if="editingItem != ''">id: {{editingItem}}</p>
+            </div>
             <div class="listBody">
                 <label>Parent Item</label>
                 <div class="list" id="monstertype">

@@ -22,6 +22,7 @@
         <div class="ct">
             <div class="advice" style="top: 3%">
                 <a>{{modeTxt}}</a>
+                <p v-if="editId != ''">id: {{editId}}</p>
             </div>
             <div class="form__group field">
                 <input type="input" class="form__field" placeholder="Topic" name="Topic" id='topicName'
