@@ -75,7 +75,6 @@ var attack = new Vue({
             const json = await response.json();
             if (json.status === 200) {
                 this.recipes = await this.loadRecipes();
-                this.searchFc();
             }
         },
         clckItem: function (id, add, amount) {
