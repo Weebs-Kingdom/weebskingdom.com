@@ -296,7 +296,7 @@ Vue.component('recipe', {
         <a>Needed: {{item.amount}}</a>
     </div>
     <button class="material-icons" @click="$emit('edit', recipe._id)">edit</button>
-    <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="$emit('delete')">delete</button>
+    <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="$emit('delete', recipe._id)">delete</button>
     </div>
     `,
     props: ['recipe']
