@@ -123,7 +123,8 @@ var topic = new Vue({
         sites: 1,
         editMode: false,
         editId: "",
-        modeTxt: ""
+        modeTxt: "",
+        lastSite: 1
     },
     created: function () {
         this.loadTopics();
@@ -136,6 +137,8 @@ var topic = new Vue({
             this.selected = [];
             this.description = "";
             this.modeTxt = "Create mode";
+            this.submitmsg = "";
+            this.editId = "";
         },
         deleteTopic: async function (id) {
             const options = {
@@ -227,9 +230,10 @@ var topic = new Vue({
             if (this.topics.length === 0)
                 this.sites = 0;
             else
-                this.switchSite(1);
+                this.switchSite(this.lastSite);
         },
         switchSite: function (num) {
+            this.lastSite = num;
             this.selectedTopics = [];
             for (let i = 1 + (10 * (num - 1)) - 1; i < 10 + (10 * (num - 1)) - 1; i++) {
                 if (this.topics[i])
