@@ -13,7 +13,8 @@
     <meta name="theme-color" content="#ffffff">
 </head>
 
-<body onload="auth(true), init()">
+<body onload="init()">
+<script>auth(true)</script>
 <div id="navdiv" v-html="navbar"></div>
 <div id="userinfo" class="userinfo"><a>Coins: {{coins()}} 宅</a><a>Energy: {{energy()}} <i class="material-icons">construction</i></a></div>
     <div class="textview" style="display: flex;">
@@ -36,8 +37,8 @@
         <button id="submitBtn" class="btn" type="button" id="submitButton" onclick="submit()">Submit</button>
         <p class="message" id="error"></p>
     </div>
-<script type="text/javascript" src="/assets/script/navbar.js"></script>
 <script src="/assets/script/userinfo.js"></script>
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
 </body>
 
 </html>
