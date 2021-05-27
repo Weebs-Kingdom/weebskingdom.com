@@ -16,14 +16,13 @@ router.post("/getLevelInfo", verifyApi, async (req, res) => {
     nodeHtmlToImage({
         output: savepath,
         html: data
-    })
-
-        .then(() => res.status(200).json({data: "https://weebskingdom.com/img/info/" + url, message: "complete"}));
+    }).then(() => res.status(200).json({data: "https://weebskingdom.com/img/info/" + url, message: "complete"}));
 
     const job = schedule.scheduleJob({second: 10}, async function (fireDate) {
         try {
             fs.unlinkSync(savepath);
         } catch (e){
+            console.log(e);
         }
 
 
