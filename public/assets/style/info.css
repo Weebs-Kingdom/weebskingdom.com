@@ -1,0 +1,104 @@
+:root {
+    --color-primary: #1c1c1f;
+    --color-secondary: #202022;
+    --color-tertiary: #1e1e21;
+    --color-glass: rgba(31, 31, 31, 0.6);
+    --color-scrollbar: #7289da;
+
+    --color-bg: #1a1a1c;
+    --color-backdrop: rgba(0, 0, 51, 0.4);
+
+    --button-0: #7289da;
+    --button-0-2: #7289da;
+    --button-0-hover: #7289da;
+    --button-0-2-hover: #7289da;
+
+    --button-decline: #DA7289;
+    --button-decline-2: #DA7289;
+    --button-decline-hover: #DA7289;
+    --button-decline-2-hover: #DA7289;
+
+    --button-accept: #89DA72;
+    --button-accept-2: #89DA72;
+    --button-accept-hover: #89DA72;
+    --button-accept-2-hover: #89DA72;
+
+    --color-headline: #dddddd;
+    --color-shadow: rgba(0, 0, 0, .4);
+    --color-shadow-hover: #36393e;
+    --color-shadow-highlight: rgba(33, 0, 255, 0.3);
+
+    --color-dark: #364C62;
+    --color-light: #F5F5F5;
+    --font-family-primary: "Roboto Mono", monospace;
+    --font-family-secondary: "Rubik Mono One", sans-serif;
+
+    --color-font-primary: #ababab;
+    --color-font-primary-hover: var(--color-font-primary);
+    --color-font-primary-2: var(--color-font-primary);
+    --color-font-primary-hover-2: var(--color-font-primary);
+
+    --color-font-secondary: #ffffff;
+    --color-font-secondary-hover: #ffffff;
+    --color-font-secondary-2: #ffffff;
+    --color-font-secondary-hover-2: #ffffff;
+
+    --color-font-highlight: #7289da;
+    --color-font-highlight-2: #a46ed4;
+    --color-font-highlight-hover: #5d70b1;
+    --color-font-highlight-hover-2: #744c94;
+
+    --td: 100ms;
+    --te: cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+body {
+    height: 260px;
+    width: 1000px;
+    font-size: 3vmin;
+    font-family: "Roboto", sans-serif;
+    color: var(--color-font-primary);
+    background-color: var(--color-bg);
+    padding: 15px;
+}
+
+.box {
+    height: 130px;
+    width: 700px;
+    padding: 10px;
+    background: var(--color-secondary);
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, .4);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.img {
+    clip-path: ellipse(60px 60px at 60px 60px);
+}
+
+.img img {
+    width: 120px;
+    height: auto;
+}
+
+.name {
+    position: relative;
+    top: -40px
+}
+
+.info {
+    top: 80px;
+    position: absolute;
+    left: 260px;
+    display: flex;
+    flex-direction: column;
+}
+
+.info a {
+    text-decoration-style: solid;
+    background: linear-gradient(150deg, var(--color-font-highlight), var(--color-font-highlight-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}

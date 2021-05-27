@@ -226,6 +226,7 @@ function redirectDelete(jjson, res, api) {
 }
 
 module.exports = router;
+
 module.exports.getItems = async function () {
     var res = await redirectGet("override", "item");
     return res;

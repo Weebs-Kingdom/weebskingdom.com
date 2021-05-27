@@ -14,7 +14,7 @@ const vAdmin = require("../middleware/verifyAdminAcces");
 const vDev = require("../middleware/verifyDev");
 const vActive = require("../middleware/verifyActivatedAcount");
 const Mailer = require("../middleware/mailer");
-const ejs = require("ejs")
+const ejs = require("ejs");
 
 //VALIDATION
 const Joi = require("joi");
