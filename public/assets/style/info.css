@@ -8,21 +8,6 @@
     --color-bg: #1a1a1c;
     --color-backdrop: rgba(0, 0, 51, 0.4);
 
-    --button-0: #7289da;
-    --button-0-2: #7289da;
-    --button-0-hover: #7289da;
-    --button-0-2-hover: #7289da;
-
-    --button-decline: #DA7289;
-    --button-decline-2: #DA7289;
-    --button-decline-hover: #DA7289;
-    --button-decline-2-hover: #DA7289;
-
-    --button-accept: #89DA72;
-    --button-accept-2: #89DA72;
-    --button-accept-hover: #89DA72;
-    --button-accept-2-hover: #89DA72;
-
     --color-headline: #dddddd;
     --color-shadow: rgba(0, 0, 0, .4);
     --color-shadow-hover: #36393e;
@@ -53,9 +38,10 @@
 }
 
 body {
-    height: 260px;
-    width: 1000px;
-    font-size: 3vmin;
+    place-items: center;
+    height: 180px;
+    width: 820px;
+    font-size: 20px;
     font-family: "Roboto", sans-serif;
     color: var(--color-font-primary);
     background-color: var(--color-bg);
@@ -63,8 +49,8 @@ body {
 }
 
 .box {
-    height: 130px;
-    width: 700px;
+    height: 160px;
+    width: 800px;
     padding: 10px;
     background: var(--color-secondary);
     box-shadow: 0 2px 15px 0 rgba(0, 0, 0, .4);
@@ -74,25 +60,39 @@ body {
 }
 
 .img {
-    clip-path: ellipse(60px 60px at 60px 60px);
+    clip-path: circle(55px at 60px -42px);
 }
 
-.img img {
+.img-wrap {
+    position: relative;
+    top: 10px;
+    filter: drop-shadow(0 .1px 5px rgba(0, 0, 0, .4));
+}
+
+.img-wrap img {
     width: 120px;
     height: auto;
 }
 
 .name {
-    position: relative;
-    top: -40px
+    position: absolute;
+    top: 30px;
+    left: 80px;
 }
 
 .info {
-    top: 80px;
-    position: absolute;
-    left: 260px;
-    display: flex;
-    flex-direction: column;
+    font-size: 13px;
+    top: 10px;
+    left: 30px;
+    position: relative;
+    display: table;
+    background: var(--color-tertiary);
+    padding: 10px;
+    border-spacing: 4px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, .4);
+    margin-left: 20px;
+    width: 270px;
 }
 
 .info a {
@@ -101,4 +101,19 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
+}
+
+.infr {
+    display: table-row;
+    box-shadow: inset 0 0 .5em var(--color-shadow);
+    border-radius: 5px;
+}
+
+.infc {
+    display: table-cell;
+    padding: 5px;
+}
+
+.info .material-icons {
+    font-size: 12px !important;
 }
