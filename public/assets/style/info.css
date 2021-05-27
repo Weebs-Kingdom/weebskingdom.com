@@ -65,7 +65,8 @@ body {
 
 .img-wrap {
     position: relative;
-    top: 10px;
+    top: -15px;
+    left: 13px;
     filter: drop-shadow(0 .1px 5px rgba(0, 0, 0, .4));
 }
 
@@ -76,13 +77,15 @@ body {
 
 .name {
     position: absolute;
-    top: 30px;
-    left: 80px;
+    top: 170px;
+    left: 30px;
+    text-align: center;
+    width: 160px;
 }
 
 .info {
     font-size: 13px;
-    top: 10px;
+    top: 0;
     left: 30px;
     position: relative;
     display: table;

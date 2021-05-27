@@ -1,18 +1,16 @@
-Weebskingdom.com Website patched to version 1.0.4
+Weebskingdom.com Website patched to version 1.0.5
 
 New features
-• Redeem codes
-• Developer pages have database id included now
-•
+• User info
 •
 •
 
 Changes
-• Overall css improvement
+•
 •
 •
 
 Bugfix
-• A LOT
+•
 •
 •

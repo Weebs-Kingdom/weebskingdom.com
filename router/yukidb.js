@@ -2,21 +2,28 @@ const router = require("express").Router();
 
 const verifyApi = require("../middleware/verifyInternApi");
 
-const User = require("../models/user/User");
-const nodeHtmlToImage = require('node-html-to-image')
-const ejs = require("ejs")
+const nodeHtmlToImage = require('node-html-to-image');
+const ejs = require("ejs");
+var fs = require('fs');
+const schedule = require('node-schedule');
 
 router.post("/getLevelInfo", verifyApi, async (req, res) => {
-
-    const data = await ejs.renderFile("./views/userprofile.ejs", {name: "Test name", level: "100", xp: "100", weboos: "100", jlevel: "100", jxp: "50", energy: "50", job: "Worker", jobpos: "Trainee"});
+    const data = await ejs.renderFile("./views/userprofile.ejs", req.body);
 
     const url = makeToken(10) + "-img.png";
+    const savepath = "./public/img/info/" + url;
 
     nodeHtmlToImage({
-        output: "./" + url,
+        output: savepath,
         html: data
     })
+
         .then(() => res.status(200).json({data: "https://weebskingdom.com/img/info/" + url, message: "complete"}));
+
+    const job = schedule.scheduleJob({second: 10}, async function (fireDate) {
+        fs.unlinkSync(savepath);
+        job.cancel();
+    });
 });
 
 function makeToken(length) {
