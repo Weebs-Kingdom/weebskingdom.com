@@ -21,7 +21,12 @@ router.post("/getLevelInfo", verifyApi, async (req, res) => {
         .then(() => res.status(200).json({data: "https://weebskingdom.com/img/info/" + url, message: "complete"}));
 
     const job = schedule.scheduleJob({second: 10}, async function (fireDate) {
-        fs.unlinkSync(savepath);
+        try {
+            fs.unlinkSync(savepath);
+        } catch (e){
+        }
+
+
         job.cancel();
     });
 });
