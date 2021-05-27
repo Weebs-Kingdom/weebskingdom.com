@@ -18,7 +18,7 @@ router.post("/getLevelInfo", verifyApi, async (req, res) => {
         html: data
     }).then(() => res.status(200).json({data: "https://weebskingdom.com/img/info/" + url, message: "complete"}));
 
-    const job = schedule.scheduleJob({second: 10}, async function (fireDate) {
+    const job = schedule.scheduleJob({second: 30}, async function (fireDate) {
         try {
             fs.unlinkSync(savepath);
         } catch (e){
