@@ -409,6 +409,10 @@ async function sendRegisterToken(u) {
     await sendEmail(u.email, data, 'Verify your account');
 }
 
+async function getUserInfoImage(u){
+    const data = await ejs.renderFile("./views/verifyMail.ejs", {name: u.name, token: token});
+}
+
 async function sendPwResetToken(u) {
     const time = Date.now();
     const tokenT = makeToken(30);
