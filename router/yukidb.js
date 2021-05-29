@@ -16,17 +16,17 @@ router.post("/getLevelInfo", verifyApi, async (req, res) => {
     nodeHtmlToImage({
         output: savepath,
         html: data
-    }).then(() => res.status(200).json({data: "https://weebskingdom.com/img/info/" + url, message: "complete"}));
+    }).then(() => {
+        const job = schedule.scheduleJob({second: 10}, async function (fireDate) {
+            try {
+                fs.unlinkSync(savepath);
+            } catch (e){
+                console.log(e);
+            }
+            job.cancel();
+        });
 
-    const job = schedule.scheduleJob({second: 30}, async function (fireDate) {
-        try {
-            fs.unlinkSync(savepath);
-        } catch (e){
-            console.log(e);
-        }
-
-
-        job.cancel();
+        res.status(200).json({data: "https://weebskingdom.com/img/info/" + url, message: "complete"})
     });
 });
 
