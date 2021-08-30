@@ -4,22 +4,16 @@ const ApiToken = require("../models/ApiTokens");
 const verifyApi = require('../middleware/verifyApiToken')
 const verifyIntern = require("../middleware/verifyInternApi");
 
-router.post("/dispatchCommand", verifyApi, async (req, res) => {
-    const jjson = {
-        cmd: req.body.cmd,
-        user: req.user
-    }
-
+router.post("/dispatchYukiCommand", verifyApi, async (req, res) => {
     const options = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'api-token': process.env.YUKIDB_API_TOKEN
         },
-        body: JSON.stringify(jjson)
+        body: JSON.stringify({instruction: "dispatchCommand", data: {cmd: req.cmd, user: req.apiUser}})
     };
 
-    const json = await fetch('http://127.0.0.1:5004/api/yuki/dispatchYukiCommand', options).then(res => res.json()).then(json => {
+    fetch('http://127.0.0.1:5003/api', options).then(res => res.json()).then(json => {
         res.status(200).json(json);
     });
 });
