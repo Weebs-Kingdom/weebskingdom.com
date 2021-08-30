@@ -10,7 +10,7 @@ router.post("/dispatchYukiCommand", verifyApi, async (req, res) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({instruction: "dispatchCommand", data: {cmd: req.cmd, user: req.apiUser}})
+        body: JSON.stringify({instruction: "dispatchCommand", data: {cmd: req.body.cmd, user: req.apiUser}})
     };
 
     fetch('http://127.0.0.1:5003/api', options).then(res => res.json()).then(json => {
