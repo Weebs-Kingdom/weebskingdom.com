@@ -41,7 +41,7 @@ router.get("/createVerifyToken", async (req, res) => {
 router.post("/verifyToken", async (req, res) => {
     var token = await ApiToken.findOne({regToken: req.body.token});
 
-    if (!token) res.status(400).json({message: "Token doesnt exist!", status: 400});
+    if (!token) return res.status(400).json({message: "Token doesnt exist!", status: 400});
     if(token.setup) return res.status(401).json({message: "Token expired!", status: 401});
     if(!token.user)return res.status(401).json({message: "Token not setup!", status: 401});
 
