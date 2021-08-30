@@ -19,7 +19,7 @@ router.post("/dispatchCommand", verifyApi, async (req, res) => {
         body: JSON.stringify(jjson)
     };
 
-    const json = await fetch('http://127.0.0.1:5004/api/yuki/dispatchCommand', options).then(res => res.json()).then(json => {
+    const json = await fetch('http://127.0.0.1:5004/api/yuki/dispatchYukiCommand', options).then(res => res.json()).then(json => {
         res.status(200).json(json);
     });
 });
