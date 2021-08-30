@@ -28,7 +28,7 @@ router.get("/createVerifyToken", async (req, res) => {
     var tokn = makeToken(30, true, true, true);
     var regToken = makeToken(5, true, false, false);
 
-    while (!await ApiToken.find({token: token}))
+    while (!await ApiToken.find({token: tokn}))
         tokn = makeToken(30, true, true, true);
 
     while (!await ApiToken.find({regToken: regToken}))
