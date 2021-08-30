@@ -24,7 +24,7 @@ router.post("/dispatchCommand", verifyApi, async (req, res) => {
     });
 });
 
-router.get("/verify", async (req, res) => {
+router.get("/createVerifyToken", async (req, res) => {
     var tokn = makeToken(30, true, true, true);
     var regToken = makeToken(5, true, false, false);
 
@@ -40,9 +40,11 @@ router.get("/verify", async (req, res) => {
     });
 
     await tk.save();
+
+    res.status(200).json({token: regToken});
 });
 
-router.post("/tokenVerify", async (req, res) => {
+router.post("/verifyToken", async (req, res) => {
     var token = await ApiToken.findOne({regToken: req.body.token});
 
     if (!token) res.status(400).json({message: "Token doesnt exist!", status: 400});
