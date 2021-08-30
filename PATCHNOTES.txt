@@ -1,7 +1,7 @@
-Weebskingdom.com Website patched to version 1.0.5
+Weebskingdom.com Website patched to version 1.0.6
 
 New features
-• User info
+• Alexa integration
 •
 •
 
