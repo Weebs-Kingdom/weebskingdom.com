@@ -363,14 +363,14 @@ router.post("/resetpw", async (req, res) => {
     //Check expire time
     if (now > expireTime) {
         const dbToken = await PsdwTokens.findOne({user: u._id, token: verified.token});
-        if(dbToken)
+        if (dbToken)
             await dbToken.remove();
         return res.status(401).json({status: 401, message: "Token expired!"});
     }
 
     const dbToken = await PsdwTokens.findOne({user: u._id, token: verified.token});
-    if(!dbToken) return res.status(401).json({status: 401, message: "Access Denied!"});
-    if(now > (dbToken.created + 15)) {
+    if (!dbToken) return res.status(401).json({status: 401, message: "Access Denied!"});
+    if (now > (dbToken.created + 15)) {
         await dbToken.remove();
         return res.status(401).json({status: 401, message: "Token expired!"});
     }
@@ -410,25 +410,30 @@ async function sendRegisterToken(u) {
     await sendEmail(u.email, data, 'Verify your account');
 }
 
-async function getUserInfoImage(u){
+async function getUserInfoImage(u) {
     const data = await ejs.renderFile("./views/verifyMail.ejs", {name: u.name, token: token});
 }
 
 async function sendPwResetToken(u) {
     const time = Date.now();
     const tokenT = makeToken(30);
-    const tk = new PsdwTokens ({
+    const tk = new PsdwTokens({
         token: tokenT,
         user: u._id
     });
     await tk.save();
-    const token = jwt.sign({_id: u._id, ctime: time, pw: process.env.PW_SECRET, token: tokenT}, process.env.TOKEN_SECRET);
+    const token = jwt.sign({
+        _id: u._id,
+        ctime: time,
+        pw: process.env.PW_SECRET,
+        token: tokenT
+    }, process.env.TOKEN_SECRET);
 
     const data = await ejs.renderFile("./views/resetPassword.ejs", {name: u.name, token: token});
     await sendEmail(u.email, data, 'Reset password');
 }
 
-async function sendEmail(email, data, subject){
+async function sendEmail(email, data, subject) {
     const mailData = {
         from: 'Weebs Kingdome Team <info@weebskingdom.com>',  // sender address
         to: email,   // list of receivers
@@ -447,25 +452,26 @@ async function sendEmail(email, data, subject){
     });
 }
 
-async function cleanUp(){
+async function cleanUp() {
     var t = "";
     const pswds = await PsdwTokens.find();
     const time = Date.now();
 
     for (const e of pswds) {
-        if(time > (e.created + 15)) {
+        if (time > (e.created + 15)) {
             await e.remove();
             t += "[-] pswdtk\n";
         }
     }
 
     const apiTks = await ApiToken.find();
-    for(const e of apiTks){
+    for (const e of apiTks) {
         const expireTime = e.created.setMinutes(e.created.getMinutes() + 2);
-        if (time > expireTime){
-            await e.remove();
-            t += "[-] api\n";
-        }
+        if (!e.setup)
+            if (time > expireTime) {
+                await e.remove();
+                t += "[-] api\n";
+            }
     }
 }
 
