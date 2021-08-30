@@ -5,6 +5,7 @@ const Tokens = require("../models/tokens/LoginTokens");
 const AuthTokens = require("../models/tokens/EmailAuthTokens");
 const DiscTokens = require("../models/tokens/DiscConnectToken");
 const PsdwTokens = require("../models/tokens/PasswordResetToken");
+const ApiToken = require("../models/ApiTokens");
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -455,6 +456,15 @@ async function cleanUp(){
         if(time > (e.created + 15)) {
             await e.remove();
             t += "[-] pswdtk\n";
+        }
+    }
+
+    const apiTks = await ApiToken.find();
+    for(const e of apiTks){
+        const expireTime = e.created.setMinutes(e.created.getMinutes() + 2);
+        if (time > expireTime){
+            await e.remove();
+            t += "[-] api\n";
         }
     }
 }
