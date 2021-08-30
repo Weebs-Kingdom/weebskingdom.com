@@ -56,7 +56,7 @@ router.post("/verifyToken", async (req, res) => {
     if (now > expireTime) return res.status(401).json({status: 401, message: "Token expired!"});
     token.setup = true;
     await token.save();
-    res.status(200).json({token: token.token});
+    res.status(200).json({token: token.token, status: 200});
 });
 
 router.post("/userVerify", verifyIntern, async (req, res) => {
