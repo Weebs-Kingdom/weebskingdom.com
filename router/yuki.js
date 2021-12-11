@@ -143,6 +143,14 @@ router.delete("/user", verify, vAdmin, async (req, res) => {
     redirectDelete(req.body, res, "user");
 });
 
+router.patch("/user", verify, vAdmin, async (req, res) => {
+    redirectPatch(req.body, res, "user");
+});
+
+router.post("/getUser", verify, vAdmin, async (req, res) => {
+    redirectPost(req.body, res, "getUser");
+});
+
 
 //all
 router.get("/discuser", verify, async (req, res) => {
