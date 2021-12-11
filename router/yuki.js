@@ -135,6 +135,14 @@ router.post("/redeem", verify, vAdmin, async (req, res) => {
     redirectPost(req.body, res, "redeem");
 });
 
+router.post("/getAllUsers", verify, vAdmin, async (req, res) => {
+    redirectPost(req.body, res, "getAllUsers");
+});
+
+router.delete("/user", verify, vAdmin, async (req, res) => {
+    redirectDelete(req.body, res, "user");
+});
+
 
 //all
 router.get("/discuser", verify, async (req, res) => {

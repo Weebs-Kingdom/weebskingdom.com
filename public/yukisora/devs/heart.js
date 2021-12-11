@@ -2,7 +2,7 @@ var clicked = 0;
 
 function init() {
     document.getElementById("heart")
-        .addEventListener('click', function(event) {
+        .addEventListener('click', function (event) {
             click();
         });
 }
@@ -33,11 +33,10 @@ function getT() {
 
         case 5:
             return "ULTRA MEGA UWU LOVE!";
-
-        case 20:
-            return "LOOOOOOOOOOOOOOOOOOOOVE BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOMB O.O!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-
-        default:
-            return "ULTRA MEGA SUPER UWU LOVE!!!!!";
     }
+
+    if (clicked > 20)
+        return "LOOOOOOOOOOOOOOOOOOOOVE BOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOMB O.O!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+    else
+        return "ULTRA MEGA SUPER UWU LOVE!!!!!";
 }

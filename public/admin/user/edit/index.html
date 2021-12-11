@@ -1,0 +1,97 @@
+<html>
+
+<head>
+    <title>Create Redeem</title>
+    <link rel="stylesheet" href="/assets/style/main.css">
+    <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/error/502/502.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="text/javascript" src="/assets/script/auth.js"></script>
+    <meta name="title" content="Edit users">
+    <meta name="description" content="You can edit users here">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+<script>auth(false);</script>
+<div id="navdiv" v-html="navbar"></div>
+<div id="usr">
+    <div v-if="!editMode">
+        <div id="wrapper">
+            <div class="grid">
+                <span class="server"></span>
+                <span class="server"></span>
+                <span class="server"></span>
+                <span class="server"></span>
+                <span class="server"></span>
+            </div>
+
+            <div class="content">
+                <h1>User not found</h1>
+            </div>
+        </div>
+    </div>
+    <div class="advice" v-if="editMode">
+        <div class="advice">
+            <div class="text">
+                {{user._id}}
+            </div>
+        </div>
+        <div v-if="!finished">
+            <div class="form__group field">
+                <input type="text" class="form__field" placeholder="Username" name="Username" id='d' v-model="user.username"
+                       :value="user.username" required/>
+                <label for="d" class="form__label">Username</label>
+            </div>
+            <div class="form__group field">
+                <input type="text" class="form__field" placeholder="Discord ID" name="Discord ID" id='s' v-model="user.userID"
+                       :value="user.userID" required/>
+                <label for="s" class="form__label">Discord ID</label>
+            </div>
+            <div class="form__group field">
+                <input type="text" class="form__field" placeholder="Coins" name="Coins" id='c' v-model="user.coins"
+                       :value="user.coins" required/>
+                <label for="c" class="form__label">Coins</label>
+            </div>
+            <div class="form__group field">
+                <input type="text" class="form__field" placeholder="XP" name="XP" id='x' v-model="user.xp"
+                       :value="user.xp" required/>
+                <label for="x" class="form__label">XP</label>
+            </div>
+            <div class="form__group field">
+                <input type="text" class="form__field" placeholder="Level" name="Level" id='l' v-model="user.level"
+                       :value="user.level" required/>
+                <label for="x" class="form__label">Level</label>
+            </div>
+            <div class="form__group field">
+                <input type="text" class="form__field" placeholder="Max Monsters" name="Max Monsters" id='max' v-model="user.maxMonsters"
+                       :value="user.maxMonsters" required/>
+                <label for="max" class="form__label">Max Monsters</label>
+            </div>
+            <div class="form__group field">
+                <input type="text" class="form__field" placeholder="Max Items" name="Max Items" id='mmx' v-model="user.maxItems"
+                       :value="user.maxItems" required/>
+                <label for="mmx" class="form__label">Max Items</label>
+            </div>
+            <div class="form__group field">
+                <input type="text" class="form__field" placeholder="Max Energy" name="Max Energy" id='mmxx' v-model="user.maxEnergy"
+                       :value="user.maxEnergy" required/>
+                <label for="mmxx" class="form__label">Max Energy</label>
+            </div>
+        </div>
+        <div v-if="!finished" style="margin-top: 3vmax">
+            <button class="acceptBtn" @click="editUser()">Update</button>
+            <button class="denyBtn" @click="deleteUser(user._id)">Delete</button>
+        </div>
+        <div class="advice" v-if="submitmsg.length > 0">
+            <div class="text">
+                {{submitmsg}}
+            </div>
+        </div>
+    </div>
+</div>
+<script src="mainVue.js"></script>
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
+</body>
+</html>

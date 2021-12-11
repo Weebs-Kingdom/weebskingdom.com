@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <title>Create Redeem</title>
+    <link rel="stylesheet" href="/assets/style/main.css">
+    <link rel="stylesheet" href="/assets/style/menu.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script type="text/javascript" src="/assets/script/auth.js"></script>
+    <meta name="title" content="Edit users">
+    <meta name="description" content="You can edit users here">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+<script>auth(false);</script>
+<div id="navdiv" v-html="navbar"></div>
+<div id="usr">
+    <div>
+        <div class="advice">
+            <div class="text">Search for a user</div>
+        </div>
+
+        <div class="advice">
+            <div>
+                <button @click="dataType = 'name'">Username</button>
+                <button @click="dataType = 'id'">Discord ID</button>
+                <button @click="dataType = '_id'">Database ID</button>
+            </div>
+            <div class="form__group field" style="width: 50vmax">
+                <input type="text" class="form__field" placeholder="Search" name="Search" id='search' v-model="field"
+                       :value="field" required/>
+                <label for="search" class="form__label">Search</label>
+            </div>
+            <button class="acceptBtn" style="margin-top: 4vmax" @click="findUser()">Search</button>
+            <div class="text" v-if="submitmsg != ''" style="margin-top: 3vmax">{{submitmsg}}</div>
+        </div>
+
+        <div class="listBody" v-if="users.length > 0">
+            <div class="content" v-for="user of users">
+                <h1>{{user.username}}</h1>
+                <div class="advice">
+                    _id: {{user._id}}
+                    <br>
+                    Discord ID: {{user.userID}}
+                </div>
+                Coins: {{user.coins}}
+                <br>
+                Last work time: {{user.lastWorkTime}}
+                <button class="acceptBtn" @click="loadEdit()">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="mainVue.js"></script>
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
+</body>
+</html>
