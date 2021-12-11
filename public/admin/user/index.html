@@ -47,7 +47,9 @@
                 Coins: {{user.coins}}
                 <br>
                 Last work time: {{user.lastWorkTime}}
-                <button class="acceptBtn" @click="loadEdit()">Edit</button>
+                <div>
+                    <button class="acceptBtn" @click="loadEdit(user._id)">Edit</button>
+                </div>
             </div>
         </div>
     </div>

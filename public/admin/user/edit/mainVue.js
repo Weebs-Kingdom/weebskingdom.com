@@ -28,7 +28,6 @@ var usr = new Vue({
         if (edit) {
             this.id = edit;
             await this.loadData();
-            this.editMode = true;
         }
     },
     methods: {
@@ -48,7 +47,10 @@ var usr = new Vue({
             if (json.status === 200) {
                 this.user = json.data;
                 console.log(this.user);
+                this.editMode = true;
             } else {
+                this.finished = true;
+                this.editMode = true;
                 this.submitmsg = "Can't find shit...";
             }
         },

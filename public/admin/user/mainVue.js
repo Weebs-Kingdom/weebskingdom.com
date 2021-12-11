@@ -1,4 +1,4 @@
-var redeem = new Vue({
+var usr = new Vue({
     el: '#usr',
     data: {
         submitmsg: "",
@@ -32,6 +32,9 @@ var redeem = new Vue({
             } else {
                 this.submitmsg = "Can't find shit...";
             }
+        },
+        loadEdit(id){
+            window.location.href= "/admin/user/edit?id=" + id;
         }
     }
 });
