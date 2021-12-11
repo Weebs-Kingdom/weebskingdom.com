@@ -45,7 +45,16 @@ var usr = new Vue({
             const response = await fetch('/api/yuki/getUser', options);
             const json = await response.json();
             if (json.status === 200) {
-                this.user = json.data;
+                this.user._id = json.data._id;
+                this.user.username = json.data.username;
+                this.user.userID = json.data.userID;
+                this.user.coins = json.data.coins;
+                this.user.xp = json.data.xp;
+                this.user.level = json.data.level;
+                this.user.maxMonsters = json.data.maxMonsters;
+                this.user.maxItems = json.data.maxItems;
+                this.user.maxEnergy = json.data.maxEnergy;
+
                 console.log(this.user);
                 this.editMode = true;
             } else {
@@ -71,6 +80,7 @@ var usr = new Vue({
 
             const response = await fetch('/api/yuki/user', options);
             const json = await response.json();
+            console.log(json);
             if (json.status === 200) {
                 this.submitmsg = "Deleted user!";
             } else {
@@ -93,6 +103,7 @@ var usr = new Vue({
 
             const response = await fetch('/api/yuki/user', options);
             const json = await response.json();
+            console.log(json);
             if (json.status === 200) {
                 this.submitmsg = "Successfully updated user!";
             } else {
