@@ -91,6 +91,9 @@ var usr = new Vue({
             }
         },
         editUser: async function(){
+            const id = this.user._id;
+            delete this.user._id;
+
             this.finished = true;
             const options = {
                 method: 'PATCH',
@@ -98,7 +101,7 @@ var usr = new Vue({
                     'Content-Type': 'application/json',
                     'auth-token': token
                 },
-                body: JSON.stringify({_id: this.user._id, data: "{$set: {" + this.user + "}}"})
+                body: JSON.stringify({_id: id, data: "{$set: "+ this.user + "}"})
             };
 
             const response = await fetch('/api/yuki/user', options);
