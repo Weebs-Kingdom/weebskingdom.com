@@ -94,10 +94,10 @@ function addAdmin() {
     var menu = document.getElementById("menu");
     var adminLi = createLi(menu, "/admin", "Admin");
     var ul = createSubMenu(adminLi);
+    createLi(ul, "/admin/redeem", "Redeem");
     createLi(ul, "/admin/gentoken", "Token");
     createLi(ul, "/yukisora/devs/shopItem", "Shop Item");
     createLi(ul, "/admin/user", "User");
-    createLi(ul, "/admin/redeem", "Redeem");
 }
 
 function addDev() {
