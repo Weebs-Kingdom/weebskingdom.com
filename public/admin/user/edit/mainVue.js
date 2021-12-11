@@ -101,7 +101,7 @@ var usr = new Vue({
                     'Content-Type': 'application/json',
                     'auth-token': token
                 },
-                body: JSON.stringify({_id: id, data: "{$set: "+ this.user + "}"})
+                body: JSON.stringify({_id: id, data: this.user})
             };
 
             const response = await fetch('/api/yuki/user', options);
