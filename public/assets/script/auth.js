@@ -96,6 +96,7 @@ function addAdmin() {
     var ul = createSubMenu(adminLi);
     createLi(ul, "/admin/gentoken", "Token");
     createLi(ul, "/yukisora/devs/shopItem", "Shop Item");
+    createLi(ul, "/admin/user", "User");
     createLi(ul, "/admin/redeem", "Redeem");
 }
 
