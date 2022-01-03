@@ -23,6 +23,11 @@
     --button-accept-hover: #89DA72;
     --button-accept-2-hover: #89DA72;
 
+    --button-warning: #be4e20;
+    --button-warning-2: #be4e20;
+    --button-warning-hover: #be4e20;
+    --button-warning-2-hover: #be4e20;
+
     --color-headline: #dddddd;
     --color-shadow: rgba(0, 0, 0, .4);
     --color-shadow-hover: #36393e;
@@ -111,7 +116,6 @@ body {
     font-family: "Roboto", sans-serif;
     color: var(--color-font-primary);
     background-color: var(--color-bg);
-    overflow-x: hidden;
     position: relative;
 }
 
@@ -157,6 +161,26 @@ button:hover {
     border-radius: 10px;
     box-shadow: 0 1rem .6rem var(--color-shadow-highlight);
     transform: translate(0, -.4rem);
+}
+
+.button_row {
+    display: flex;
+    overflow: hidden;
+    transition: all 250ms ease;
+    background-color: var(--color-primary);
+    margin: 3em 5vmax auto;
+    box-shadow: 0 2px 30px 0 var(--color-shadow);
+    border-radius: 6px;
+    padding: 4vmin 10vmin;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2vmin;
+    row-gap: 2vmin;
+}
+
+.button_row:hover {
+    border-radius: 2rem;
 }
 
 .subText {
@@ -289,7 +313,6 @@ button:hover {
 }
 
 .textview {
-    overflow: hidden;
     transition: all 250ms ease;
     background-color: var(--color-primary);
     margin: 3em 5vmax auto;
@@ -504,6 +527,15 @@ button:hover {
     box-shadow: 0 1rem .6rem var(--button-accept-hover);
 }
 
+.warnBtn {
+    background: linear-gradient(to right, var(--button-warning), var(--button-warning-2));
+}
+
+.warnBtn:hover {
+    background: linear-gradient(to right, var(--button-warning-hover), var(--button-warning-2-hover));
+    box-shadow: 0 1rem .6rem var(--button-warning-hover);
+}
+
 dialog {
     width: 100%;
     background-color: var(--color-backdrop);
@@ -631,6 +663,7 @@ dialog::backdrop {
 img {
     border-radius: 8px;
     height: 20vmin;
+    width: auto;
 }
 
 .cart {
@@ -700,7 +733,8 @@ img {
 .cart-item-description .img {
     padding: 1vmin;
 }
-.cart-item-description .img img{
+
+.cart-item-description .img img {
     width: 100%;
     max-width: 20vmin;
     height: auto;
@@ -777,7 +811,7 @@ img {
     user-select: none;
 }
 
-.checkout{
+.checkout {
     display: flex;
     justify-content: space-between;
     height: 100%;
@@ -866,13 +900,16 @@ img {
     border-radius: 50%;
     transition: background 1s;
 }
+
 .step.selected {
     border: 2px solid #4B81BD;
 }
+
 .step.completed {
     border: 2px solid #4B81BD;
     background: #4B81BD;
 }
+
 .progress {
     position: absolute;
     width: 100%;
@@ -880,6 +917,7 @@ img {
     border-bottom: 2px solid #effcf4;
     z-index: -1;
 }
+
 .percent {
     position: absolute;
     width: 0;
@@ -993,7 +1031,7 @@ img {
         font-size: 3vmin !important;
     }
 
-    .checkout{
+    .checkout {
         flex-wrap: wrap;
         align-content: space-around;
         height: 80%;

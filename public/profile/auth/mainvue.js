@@ -1,12 +1,19 @@
 var au = new Vue({
     el: '#auth',
     data: {
-        msg: "Processing..."
+        msg: "Processing...",
+        img: ""
     },
     created: async function () {
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const token = urlParams.get('token');
+
+        if(token == null){
+            this.msg = "No token found";
+            this.img = "https://tenor.com/blVDy.gif";
+            return;
+        }
 
         var options = {
             method: 'POST',
@@ -31,11 +38,14 @@ var au = new Vue({
 
         if (json.status === 200) {
             this.msg = "Your account is verified!";
+            this.img = "https://tenor.com/bkVmR.gif";
         } else {
             if(json.message){
                 this.msg = json.message;
+                this.img = "https://tenor.com/bfsrA.gif";
             } else {
                 this.msg = "While connecting to the server an error occurred!";
+                this.img = "https://tenor.com/bvZtW.gif";
             }
         }
     }

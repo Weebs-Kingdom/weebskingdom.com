@@ -4,7 +4,7 @@ var monsters = [];
 var usr = new Vue({
     el: '#usr',
     data: {
-        submitmsg : "",
+        submitmsg: "",
         editMode: false,
         id: "",
         user: {
@@ -84,13 +84,13 @@ var usr = new Vue({
             if (json.status === 200) {
                 this.submitmsg = "Deleted user!";
             } else {
-                if(json.msg)
+                if (json.msg)
                     this.submitmsg = json.msg;
                 else
                     this.submitmsg = "Failed to delete user!";
             }
         },
-        editUser: async function(){
+        editUser: async function () {
             const id = this.user._id;
             delete this.user._id;
 
@@ -110,7 +110,7 @@ var usr = new Vue({
             if (json.status === 200) {
                 this.submitmsg = "Successfully updated user!";
             } else {
-                if(json.msg)
+                if (json.msg)
                     this.submitmsg = json.msg;
                 else
                     this.submitmsg = "Failed to update user!";
