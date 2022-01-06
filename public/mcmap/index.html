@@ -1,0 +1,30 @@
+<html>
+
+<head>
+  <title>MCMap</title>
+  <link rel="stylesheet" href="/assets/style/main.css">
+  <link rel="stylesheet" href="/assets/style/menu.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script type="text/javascript" src="/assets/script/auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <meta name="title" content="Weebskingdom.com Homepage">
+  <meta name="description" content="The homepage of Weebs Kingdom">
+  <meta name="theme-color" content="#ffffff">
+
+</head>
+<!--Jup, this site is handwritten lol-->
+<body>
+<script>auth(false)</script>
+<div id="navdiv">
+  <div v-html="navbar"></div>
+</div>
+<div style="width: 100%; height: 100%; display: flex;flex-flow: wrap;align-content: center;justify-content: center">
+  <div style="height: 90%; width: 90%;">
+    <object type="text/html" data="http://weebskingdom.com:8123" style="width: 100%;height: 100%"></object>
+  </div>
+</div>
+<div class="footer"></div>
+<script type="text/javascript" src="/assets/script/navbar.js"></script>
+</body>
+
+</html>
