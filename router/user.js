@@ -254,7 +254,7 @@ router.post("/genToken", verify, vAdmin, async (req, res) => {
     var doItAgain = true;
     while (true) {
         token = makeToken(6);
-        if (Tokens.findOne({token: token}).token !== token) break;
+        if (await Tokens.findOne({token: token}).token !== token) break;
     }
 
     const cToken = new Tokens({
