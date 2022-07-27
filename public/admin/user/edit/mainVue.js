@@ -58,10 +58,10 @@ var usr = new Vue({
                 this.user.maxEnergy = json.data.maxEnergy;
 
                 if(json.data.job){
-                    this.user.job.jobXP = json.data.jobXP;
-                    this.user.job.jobLevel = json.data.jobLevel;
-                    this.user.job.jobPosition = json.data.jobPosition;
-                    this.user.job.jobStreak = json.data.jobStreak;
+                    this.user.job.jobXP = json.data.job.jobXP;
+                    this.user.job.jobLevel = json.data.job.jobLevel;
+                    this.user.job.jobPosition = json.data.job.jobPosition;
+                    this.user.job.jobStreak = json.data.job.jobStreak;
                     this.user.isJob = true;
                 } else {
                     this.user.isJob = false;
