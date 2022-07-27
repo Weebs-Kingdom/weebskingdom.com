@@ -52,38 +52,64 @@
                 <label for="s" class="form__label">Discord ID</label>
             </div>
             <div class="form__group field">
-                <input type="text" class="form__field" placeholder="Coins" name="Coins" id='c' v-model="user.coins"
+                <input type="number" class="form__field" placeholder="Coins" name="Coins" id='c' v-model="user.coins"
                        :value="user.coins" required/>
                 <label for="c" class="form__label">Coins</label>
             </div>
             <div class="form__group field">
-                <input type="text" class="form__field" placeholder="XP" name="XP" id='x' v-model="user.xp"
+                <input type="number" class="form__field" placeholder="XP" name="XP" id='x' v-model="user.xp"
                        :value="user.xp" required/>
                 <label for="x" class="form__label">XP</label>
             </div>
             <div class="form__group field">
-                <input type="text" class="form__field" placeholder="Level" name="Level" id='l' v-model="user.level"
+                <input type="number" class="form__field" placeholder="Level" name="Level" id='l' v-model="user.level"
                        :value="user.level" required/>
                 <label for="x" class="form__label">Level</label>
             </div>
             <div class="form__group field">
-                <input type="text" class="form__field" placeholder="Max Monsters" name="Max Monsters" id='max'
+                <input type="number" class="form__field" placeholder="Max Monsters" name="Max Monsters" id='max'
                        v-model="user.maxMonsters"
                        :value="user.maxMonsters" required/>
                 <label for="max" class="form__label">Max Monsters</label>
             </div>
             <div class="form__group field">
-                <input type="text" class="form__field" placeholder="Max Items" name="Max Items" id='mmx'
+                <input type="number" class="form__field" placeholder="Max Items" name="Max Items" id='mmx'
                        v-model="user.maxItems"
                        :value="user.maxItems" required/>
                 <label for="mmx" class="form__label">Max Items</label>
             </div>
             <div class="form__group field">
-                <input type="text" class="form__field" placeholder="Max Energy" name="Max Energy" id='mmxx'
+                <input type="number" class="form__field" placeholder="Max Energy" name="Max Energy" id='mmxx'
                        v-model="user.maxEnergy"
                        :value="user.maxEnergy" required/>
                 <label for="mmxx" class="form__label">Max Energy</label>
             </div>
+
+            <div class="form__group field">
+                <input type="number" class="form__field" placeholder="Job XP" name="Job XP" id='jxp'
+                       v-model="user.job.jobXP"
+                       :value="user.job.jobXP" required/>
+                <label for="jxp" class="form__label">Job XP</label>
+            </div>
+            <div class="form__group field">
+                <input type="number" class="form__field" placeholder="Job Level" name="Job Level" id='jl'
+                       v-model="user.job.jobLevel"
+                       :value="user.job.jobLevel" required/>
+                <label for="jl" class="form__label">Job Level</label>
+            </div>
+            <div class="form__group field">
+                <input type="text" class="form__field" placeholder="Job Position" name="Job Position" id='jp'
+                       v-model="user.job.jobPosition"
+                       :value="user.job.jobPosition" required/>
+                <label for="jp" class="form__label">Job Position</label>
+            </div>
+            <div class="form__group field">
+                <input type="number" class="form__field" placeholder="Job Streak" name="Job Streak" id='js'
+                       v-model="user.job.jobStreak"
+                       :value="user.job.jobStreak" required/>
+                <label for="js" class="form__label">Job Streak</label>
+            </div>
+
         </div>
         <div v-if="!finished" style="margin-top: 3vmax">
             <button class="acceptBtn" @click="editUser()">Update</button>
