@@ -85,30 +85,32 @@
                 <label for="mmxx" class="form__label">Max Energy</label>
             </div>
 
-            <div class="form__group field">
-                <input type="number" class="form__field" placeholder="Job XP" name="Job XP" id='jxp'
-                       v-model="user.job.jobXP"
-                       :value="user.job.jobXP" required/>
-                <label for="jxp" class="form__label">Job XP</label>
-            </div>
-            <div class="form__group field">
-                <input type="number" class="form__field" placeholder="Job Level" name="Job Level" id='jl'
-                       v-model="user.job.jobLevel"
-                       :value="user.job.jobLevel" required/>
-                <label for="jl" class="form__label">Job Level</label>
-            </div>
-            <div class="form__group field">
-                <input type="text" class="form__field" placeholder="Job Position" name="Job Position" id='jp'
-                       v-model="user.job.jobPosition"
-                       :value="user.job.jobPosition" required/>
-                <label for="jp" class="form__label">Job Position</label>
-            </div>
-            <div class="form__group field">
-                <input type="number" class="form__field" placeholder="Job Streak" name="Job Streak" id='js'
-                       v-model="user.job.jobStreak"
-                       :value="user.job.jobStreak" required/>
-                <label for="js" class="form__label">Job Streak</label>
-            </div>
+           <div v-if="user.job">
+               <div class="form__group field">
+                   <input type="number" class="form__field" placeholder="Job XP" name="Job XP" id='jxp'
+                          v-model="user.job.jobXP"
+                          :value="user.job.jobXP" required/>
+                   <label for="jxp" class="form__label">Job XP</label>
+               </div>
+               <div class="form__group field">
+                   <input type="number" class="form__field" placeholder="Job Level" name="Job Level" id='jl'
+                          v-model="user.job.jobLevel"
+                          :value="user.job.jobLevel" required/>
+                   <label for="jl" class="form__label">Job Level</label>
+               </div>
+               <div class="form__group field">
+                   <input type="text" class="form__field" placeholder="Job Position" name="Job Position" id='jp'
+                          v-model="user.job.jobPosition"
+                          :value="user.job.jobPosition" required/>
+                   <label for="jp" class="form__label">Job Position</label>
+               </div>
+               <div class="form__group field">
+                   <input type="number" class="form__field" placeholder="Job Streak" name="Job Streak" id='js'
+                          v-model="user.job.jobStreak"
+                          :value="user.job.jobStreak" required/>
+                   <label for="js" class="form__label">Job Streak</label>
+               </div>
+           </div>
 
         </div>
         <div v-if="!finished" style="margin-top: 3vmax">
