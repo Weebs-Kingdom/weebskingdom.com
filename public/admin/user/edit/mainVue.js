@@ -16,7 +16,9 @@ var usr = new Vue({
             "level": 0,
             "maxMonsters": 0,
             "maxItems": 0,
-            "maxEnergy": 0
+            "maxEnergy": 0,
+            "job": {"joxXP": 0, "jobLevel": 0, "jobPosition": "Trainee", "jobStreak": 0},
+            isJob: false
         },
         finished: false
     },
@@ -60,8 +62,9 @@ var usr = new Vue({
                     this.user.job.jobLevel = json.data.jobLevel;
                     this.user.job.jobPosition = json.data.jobPosition;
                     this.user.job.jobStreak = json.data.jobStreak;
+                    this.user.isJob = true;
                 } else {
-
+                    this.user.isJob = false;
                 }
 
                 console.log(this.user);
