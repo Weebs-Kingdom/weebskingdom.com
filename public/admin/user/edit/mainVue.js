@@ -17,7 +17,7 @@ var usr = new Vue({
             "maxMonsters": 0,
             "maxItems": 0,
             "maxEnergy": 0,
-            job: {joxXP: 0, jobLevel: 0, jobPosition: "Trainee", jobStreak: 0}
+            "job": {"joxXP": 0, "jobLevel": 0, "jobPosition": "Trainee", "jobStreak": 0}
         },
         finished: false
     },
@@ -56,10 +56,12 @@ var usr = new Vue({
                 this.user.maxItems = json.data.maxItems;
                 this.user.maxEnergy = json.data.maxEnergy;
 
-                this.user.job.jobXP = json.data.jobXP;
-                this.user.job.jobLevel = json.data.jobLevel;
-                this.user.job.jobPosition = json.data.jobPosition;
-                this.user.job.jobStreak = json.data.jobStreak;
+                if(json.data.job){
+                    this.user.job.jobXP = json.data.jobXP;
+                    this.user.job.jobLevel = json.data.jobLevel;
+                    this.user.job.jobPosition = json.data.jobPosition;
+                    this.user.job.jobStreak = json.data.jobStreak;
+                }
 
                 console.log(this.user);
                 this.editMode = true;
