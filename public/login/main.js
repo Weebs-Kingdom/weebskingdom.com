@@ -6,7 +6,7 @@ async function login() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ password: password, email: email })
+        body: JSON.stringify({password: password, email: email})
     };
     const response = await fetch('/api/user/login', options);
     const json = await response.json();

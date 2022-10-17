@@ -9,7 +9,7 @@ var au = new Vue({
         const urlParams = new URLSearchParams(queryString);
         const token = urlParams.get('token');
 
-        if(token == null){
+        if (token == null) {
             this.msg = "No token found";
             this.img = "https://tenor.com/blVDy.gif";
             return;
@@ -40,7 +40,7 @@ var au = new Vue({
             this.msg = "Your account is verified!";
             this.img = "https://tenor.com/bkVmR.gif";
         } else {
-            if(json.message){
+            if (json.message) {
                 this.msg = json.message;
                 this.img = "https://tenor.com/bfsrA.gif";
             } else {

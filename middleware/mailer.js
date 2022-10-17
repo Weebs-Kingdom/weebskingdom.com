@@ -2,7 +2,7 @@ var nodemailer = require('nodemailer');
 
 let transporter = undefined;
 
-module.exports.connect = function (){
+module.exports.connect = function () {
     transporter = nodemailer.createTransport({
         port: process.env.MAIL_PORT,
         host: process.env.MAIL_HOST,
@@ -13,7 +13,7 @@ module.exports.connect = function (){
         secureConnection: true
     });
 
-    transporter.verify(function(error, success) {
+    transporter.verify(function (error, success) {
         if (error) {
             console.log(error);
             console.log("Failed to connect to email server")
@@ -23,6 +23,6 @@ module.exports.connect = function (){
     });
 }
 
-module.exports.transporter = function() {
+module.exports.transporter = function () {
     return transporter;
 }

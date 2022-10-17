@@ -20,7 +20,7 @@ router.post("/getLevelInfo", verifyApi, async (req, res) => {
         const job = schedule.scheduleJob({second: 10}, async function (fireDate) {
             try {
                 fs.unlinkSync(savepath);
-            } catch (e){
+            } catch (e) {
                 console.log(e);
             }
             job.cancel();

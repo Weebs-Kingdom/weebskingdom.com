@@ -125,7 +125,7 @@ var it = new Vue({
                 return;
             }
 
-            if(!this.isItemCookable && this.cooksInto != null){
+            if (!this.isItemCookable && this.cooksInto != null) {
                 this.msg = "If cooks into item is selected, the item should be cookable!";
                 return;
             }

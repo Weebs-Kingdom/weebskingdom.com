@@ -93,7 +93,7 @@ var craft = new Vue({
                 progress(this.count);
                 if (this.count >= this.selected.hammerPunches) {
                     this.blocked = true;
-                    if(await this.craft()){
+                    if (await this.craft()) {
                         showCase();
                     } else {
                         this.msg = "Crafting failed!";
@@ -107,9 +107,9 @@ var craft = new Vue({
         },
         getAmount: function (id, needed) {
             for (const el of this.inventory) {
-                if (el.item == id){
+                if (el.item == id) {
                     var am = el.amount;
-                    if(am > needed)
+                    if (am > needed)
                         return needed;
                     return am;
                 }

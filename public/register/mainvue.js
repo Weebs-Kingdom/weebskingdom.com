@@ -9,7 +9,7 @@ var v = new Vue({
     },
     methods: {
         register: async function () {
-            if(this.password !== this.repeat_password){
+            if (this.password !== this.repeat_password) {
                 this.error = "You passwords don't match!";
                 return;
             }

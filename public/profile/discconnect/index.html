@@ -3,33 +3,35 @@
 <head>
     <title>Profile - Discord</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script type="text/javascript" src="main.js"></script>
-    <script type="text/javascript" src="/assets/script/auth.js"></script>
-    <link rel="stylesheet" href="/assets/style/menu.css">
-    <link rel="stylesheet" href="/assets/style/main.css">
-    <meta name="title" content="Discord Connect">
-    <meta name="description" content="Connect your profile with the website!">
-    <meta name="theme-color" content="#ffffff">
+    <script src="main.js" type="text/javascript"></script>
+    <script src="/assets/script/auth.js" type="text/javascript"></script>
+    <link href="/assets/style/menu.css" rel="stylesheet">
+    <link href="/assets/style/main.css" rel="stylesheet">
+    <meta content="Discord Connect" name="title">
+    <meta content="Connect your profile with the website!" name="description">
+    <meta content="#ffffff" name="theme-color">
 </head>
 
 <body onload="auth(true), init()">
 <div id="navdiv" v-html="navbar"></div>
 
 <div class="textview">
-    <div class="form__group field", id="dicidiv">
-        <input type="input" class="form__field" placeholder="Discord User Id" name="Discord User Id" id='discuserid' required />
-        <label for="discuserid" class="form__label">Discord User Id</label>
+    <div , class="form__group field" id="dicidiv">
+        <input class="form__field" id='discuserid' name="Discord User Id" placeholder="Discord User Id" required
+               type="input"/>
+        <label class="form__label" for="discuserid">Discord User Id</label>
     </div>
-    <div class="form__group field", id="tokendiv">
-        <input type="input" class="form__field" placeholder="Token" name="Token" id='token' required />
-        <label for="token" class="form__label">Token</label>
+    <div , class="form__group field" id="tokendiv">
+        <input class="form__field" id='token' name="Token" placeholder="Token" required type="input"/>
+        <label class="form__label" for="token">Token</label>
     </div>
     <br>
-    <p>If you don't know your <a class="link">Discord ID</a>, go in a <a class="link">private chat with Yuki</a> and type <a class="link">-myid</a></p>
-    <button id="submitBtn" class="btn" type="button" id="submitButton" onclick="submit()">Submit</button>
+    <p>If you don't know your <a class="link">Discord ID</a>, go in a <a class="link">private chat with Yuki</a> and
+        type <a class="link">-myid</a></p>
+    <button class="btn" id="submitBtn" id="submitButton" onclick="submit()" type="button">Submit</button>
     <p class="message" id="msg"></p>
 </div>
-<script type="text/javascript" src="/assets/script/navbar.js"></script>
+<script src="/assets/script/navbar.js" type="text/javascript"></script>
 </body>
 
 </html>

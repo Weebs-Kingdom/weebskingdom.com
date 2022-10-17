@@ -33,7 +33,7 @@ var shop = new Vue({
         this.loadCart();
     },
     watch: {
-        checkoutMessage: function() {
+        checkoutMessage: function () {
             try {
                 var textWrapper = document.querySelector('.ml11 .letters');
                 textWrapper.innerHTML = this.checkoutMessage;
@@ -46,8 +46,8 @@ var shop = new Vue({
                 message
                     .add({
                         targets: '.ml11 .line',
-                        scaleY: [0,1],
-                        opacity: [0.5,1],
+                        scaleY: [0, 1],
+                        opacity: [0.5, 1],
                         easing: "easeOutExpo",
                         duration: 700
                     })
@@ -59,11 +59,11 @@ var shop = new Vue({
                         delay: 100
                     }).add({
                     targets: '.ml11 .letter',
-                    opacity: [0,1],
+                    opacity: [0, 1],
                     easing: "easeOutExpo",
                     duration: 5000,
                     offset: '-=775',
-                    delay: (el, i) => 34 * (i+1)
+                    delay: (el, i) => 34 * (i + 1)
                 }).add({
                     targets: '.ml11',
                     opacity: 0,
@@ -72,7 +72,7 @@ var shop = new Vue({
                     delay: 1000
                 });
                 message.play();
-            } catch (e){
+            } catch (e) {
             }
         }
     },
@@ -139,7 +139,7 @@ var shop = new Vue({
             for (let i = 0; i < this.shoppingcart.length; i++) {
                 if (this.shoppingcart[i]._id === id) {
                     var psh = this.shoppingcart[i];
-                    if(psh.amount <= 1){
+                    if (psh.amount <= 1) {
                         return;
                     }
                     psh.amount -= 1;
@@ -169,13 +169,13 @@ var shop = new Vue({
                 }
             }
         },
-        checkout: async function (){
-            if(this.itemsTotal <=0){
+        checkout: async function () {
+            if (this.itemsTotal <= 0) {
                 this.checkoutMessage = "You have no item in your cart";
                 return;
             }
 
-            if(this.checkedButton)
+            if (this.checkedButton)
                 return
             else
                 this.checkedButton = true;
@@ -200,19 +200,19 @@ var shop = new Vue({
                 return;
             }
 
-            if(json.status === 200){
+            if (json.status === 200) {
                 checkoutBtn.play();
                 setTimeout(() => {
                     this.checkoutMessage = "The items are now activated and you can find them in your account";
                 }, 4000);
                 oke = true;
-            } else if(json.status === 400 ||json.status === 401){
+            } else if (json.status === 400 || json.status === 401) {
                 this.checkoutMessage = json.message;
             } else {
                 this.checkoutMessage = "While connection to the server a error occurred";
             }
 
-            if(oke){
+            if (oke) {
                 setTimeout(() => {
                     this.complexCart = [];
                     this.shoppingcart = [];
@@ -220,14 +220,14 @@ var shop = new Vue({
                 }, 4000)
             }
         },
-        getTotal: function (){
+        getTotal: function () {
             try {
                 var it = 0;
                 for (const e of this.complexCart) {
                     it += e.price * e.amount;
                 }
                 return it;
-            } catch (e){
+            } catch (e) {
             }
         },
     }
@@ -265,7 +265,7 @@ Vue.component('cart', {
         deleteFromCart: function (id) {
             this.$emit('delete', id);
         },
-        getTotal: function (){
+        getTotal: function () {
             var it = 0;
             for (const e of this.items) {
                 it += e.price * e.amount;

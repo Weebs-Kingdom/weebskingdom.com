@@ -2,24 +2,24 @@
 
 <head>
     <title>Create Redeem</title>
-    <link rel="stylesheet" href="/assets/style/main.css">
-    <link rel="stylesheet" href="/assets/style/menu.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="/assets/style/main.css" rel="stylesheet">
+    <link href="/assets/style/menu.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script type="text/javascript" src="/assets/script/auth.js"></script>
-    <meta name="title" content="Create Recipe">
-    <meta name="description" content="You can create redeem codes here">
-    <meta name="theme-color" content="#ffffff">
+    <script src="/assets/script/auth.js" type="text/javascript"></script>
+    <meta content="Create Recipe" name="title">
+    <meta content="You can create redeem codes here" name="description">
+    <meta content="#ffffff" name="theme-color">
 </head>
 
 <body>
 <script>auth(false);</script>
 <div id="navdiv" v-html="navbar"></div>
 <div id="redeem">
-    <button class="fixedBtn" v-if="!show" @click="create">Create</button>
+    <button @click="create" class="fixedBtn" v-if="!show">Create</button>
     <div class="editbox" v-if="show">
-        <div class="ct" >
-            <button class="fixedBtn denyBtn" @click="closeEd">Close</button>
+        <div class="ct">
+            <button @click="closeEd" class="fixedBtn denyBtn">Close</button>
             <a class="advice">
                 {{modeinfo}}
             </a>
@@ -32,49 +32,53 @@
             </div>
             <div>
                 <div class="form__group field">
-                    <input type="input" class="form__field" placeholder="Code" name="Code" id='code'
-                           v-model="rCode" :value="rCode" required/>
-                    <label for="code" class="form__label">Code</label>
+                    <input :value="rCode" class="form__field" id='code' name="Code" placeholder="Code"
+                           required type="input" v-model="rCode"/>
+                    <label class="form__label" for="code">Code</label>
                 </div>
                 <div class="form__group field">
-                    <input type="input" class="form__field" placeholder="Instruction" name="Instruction" id='inst'
-                           v-model="rInstruction" :value="rInstruction" required/>
-                    <label for="inst" class="form__label">Instruction</label>
+                    <input :value="rInstruction" class="form__field" id='inst' name="Instruction" placeholder="Instruction"
+                           required type="input" v-model="rInstruction"/>
+                    <label class="form__label" for="inst">Instruction</label>
                 </div>
                 <div class="form__group field">
-                    <input type="checkbox" class="form__field" placeholder="Do Expire" name="Do Expire" id='dexpires'
-                           v-model="rDoExpire" :value="rDoExpire" required/>
-                    <label for="dexpires" class="form__label">Do Expire</label>
+                    <input :value="rDoExpire" class="form__field" id='dexpires' name="Do Expire" placeholder="Do Expire"
+                           required type="checkbox" v-model="rDoExpire"/>
+                    <label class="form__label" for="dexpires">Do Expire</label>
                 </div>
-                <div v-if="rDoExpire" class="form__group field">
-                    <input type="date" class="form__field" placeholder="Expires" name="Expires" id='expires'
-                           v-model="rExpire" :value="rExpire" required/>
-                    <label for="expires" class="form__label">Expires</label>
-                </div>
-                <div class="form__group field">
-                    <input type="checkbox" class="form__field" placeholder="MHas max usage" name="Has max usage" id='hmaxUsage'
-                           v-model="rHasMaxUsage" :value="rHasMaxUsage" required/>
-                    <label for="hmaxUsage" class="form__label">Has max usage</label>
-                </div>
-                <div v-if="rHasMaxUsage" class="form__group field">
-                    <input type="input" class="form__field" placeholder="Max usage" name="Max usage" id='maxUsage'
-                           v-model="rMaxUsage" :value="rMaxUsage" required/>
-                    <label for="maxUsage" class="form__label">Max usage</label>
-                </div>
-                <div v-if="rDoExpire || rHasMaxUsage" class="form__group field">
-                    <input type="checkbox" class="form__field" placeholder="Auto delete" name="Auto delete" id='autodel'
-                           v-model="rAutoDelete" :value="rAutoDelete" required/>
-                    <label for="autodel" class="form__label">Auto delete</label>
+                <div class="form__group field" v-if="rDoExpire">
+                    <input :value="rExpire" class="form__field" id='expires' name="Expires" placeholder="Expires"
+                           required type="date" v-model="rExpire"/>
+                    <label class="form__label" for="expires">Expires</label>
                 </div>
                 <div class="form__group field">
-                    <input type="input" class="form__field" placeholder="Max user usage" name="Max user usage" id='maxUUsage'
-                           v-model="rMaxUserUsage" :value="rMaxUserUsage" required/>
-                    <label for="maxUUsage" class="form__label">Max user usage</label>
+                    <input :value="rHasMaxUsage" class="form__field" id='hmaxUsage' name="Has max usage"
+                           placeholder="MHas max usage"
+                           required type="checkbox" v-model="rHasMaxUsage"/>
+                    <label class="form__label" for="hmaxUsage">Has max usage</label>
                 </div>
-                <p id="msg" class="message">{{submitmsg}}</p>
+                <div class="form__group field" v-if="rHasMaxUsage">
+                    <input :value="rMaxUsage" class="form__field" id='maxUsage' name="Max usage" placeholder="Max usage"
+                           required type="input" v-model="rMaxUsage"/>
+                    <label class="form__label" for="maxUsage">Max usage</label>
+                </div>
+                <div class="form__group field" v-if="rDoExpire || rHasMaxUsage">
+                    <input :value="rAutoDelete" class="form__field" id='autodel' name="Auto delete" placeholder="Auto delete"
+                           required type="checkbox" v-model="rAutoDelete"/>
+                    <label class="form__label" for="autodel">Auto delete</label>
+                </div>
+                <div class="form__group field">
+                    <input :value="rMaxUserUsage" class="form__field" id='maxUUsage' name="Max user usage"
+                           placeholder="Max user usage"
+                           required type="input" v-model="rMaxUserUsage"/>
+                    <label class="form__label" for="maxUUsage">Max user usage</label>
+                </div>
+                <p class="message" id="msg">{{submitmsg}}</p>
                 <div style="margin-top: 6em; display: inline-flex">
-                    <button class="btn" type="button" @click="submit">Submit</button>
-                    <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="deleteCode(editingRecipe)" v-if="editMode">delete</button>
+                    <button @click="submit" class="btn" type="button">Submit</button>
+                    <button @click="deleteCode(editingRecipe)" class="denyBtn material-icons" style="margin-left: 1vmin"
+                            v-if="editMode">delete
+                    </button>
                 </div>
             </div>
         </div>
@@ -93,13 +97,14 @@
             <p>A user can use this code {{code.maxUserUsage}} times</p>
             <div style="display: inline-flex"><a>{{code.instruction}}</a></div>
             <div style="display: inline-flex">
-                <button class="material-icons" @click="edit(code)">edit</button>
-                <button style="margin-left: 1vmin" class="denyBtn material-icons" @click="deleteCode(code._id)">delete</button>
+                <button @click="edit(code)" class="material-icons">edit</button>
+                <button @click="deleteCode(code._id)" class="denyBtn material-icons" style="margin-left: 1vmin">delete
+                </button>
             </div>
         </div>
     </div>
 </div>
 <script src="mainVue.js"></script>
-<script type="text/javascript" src="/assets/script/navbar.js"></script>
+<script src="/assets/script/navbar.js" type="text/javascript"></script>
 </body>
 </html>

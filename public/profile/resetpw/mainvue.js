@@ -4,7 +4,7 @@ var res = new Vue({
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const token = urlParams.get('token');
-        if(token) {
+        if (token) {
             this.bchangePassword = true;
             this.token = token;
         }
@@ -18,7 +18,7 @@ var res = new Vue({
         msg: ""
     },
     methods: {
-        reqResetPassword: async function (){
+        reqResetPassword: async function () {
             const options = {
                 method: 'POST',
                 headers: {
@@ -39,14 +39,14 @@ var res = new Vue({
                 return;
             }
 
-            if(json.status === 200){
+            if (json.status === 200) {
                 this.msg = "A message has been sent to your E-Mail address!";
             } else {
                 this.msg = "No account found with your E-Mail address!";
             }
         },
         changePassword: async function () {
-            if(this.password != this.repeat_password){
+            if (this.password != this.repeat_password) {
                 this.msg = "Passwords don't match!";
                 return;
             }
@@ -71,12 +71,12 @@ var res = new Vue({
                 return;
             }
 
-            if(json.status === 200){
+            if (json.status === 200) {
                 this.msg = "A new password has been set to your account!";
                 setTimeout(() => {
                     location.replace("/login");
                 }, 3000);
-            } else if(json.status === 400){
+            } else if (json.status === 400) {
                 this.msg = json.message;
             } else {
                 this.msg = "This token is expired!";

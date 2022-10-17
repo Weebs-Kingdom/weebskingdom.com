@@ -2,18 +2,18 @@
 
 <head>
     <title>Redeem Codes</title>
-    <link rel="stylesheet" href="/assets/style/main.css">
-    <link rel="stylesheet" href="/assets/style/menu.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="/assets/style/main.css" rel="stylesheet">
+    <link href="/assets/style/menu.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600" rel="stylesheet">
     <link href="/assets/style/checkoutbtn.css" rel="stylesheet">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script type="text/javascript" src="/assets/script/auth.js"></script>
-    <meta name="title" content="Weebskingdom.com redeem codes">
-    <meta name="description" content="The website where you activate delicious free content">
-    <meta name="theme-color" content="#ffffff">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2" type="text/javascript"></script>
+    <script src="/assets/script/auth.js" type="text/javascript"></script>
+    <meta content="Weebskingdom.com redeem codes" name="title">
+    <meta content="The website where you activate delicious free content" name="description">
+    <meta content="#ffffff" name="theme-color">
 </head>
 
 <body>
@@ -22,22 +22,22 @@
 <div id="redeem">
     <div class="textview">
         <div class="form__group field">
-            <input type="input" class="form__field" placeholder="Code" name="Code" id='code' v-model="code" required/>
-            <label for="code" class="form__label">Code</label>
+            <input class="form__field" id='code' name="Code" placeholder="Code" required type="input" v-model="code"/>
+            <label class="form__label" for="code">Code</label>
         </div>
 
         <div style="margin-top: 10vmin; padding: 1vmin">
             {{message}}
         </div>
 
-        <div class="checkoutbtn" @click="submit">
+        <div @click="submit" class="checkoutbtn">
             <main>
                 <div class="button">
                     <div class="text">Submit</div>
                 </div>
                 <div class="progress-bar"></div>
-                <svg x="0px" y="0px"
-                     viewBox="0 0 25 30" style="enable-background:new 0 0 25 30;">
+                <svg style="enable-background:new 0 0 25 30;" viewBox="0 0 25 30"
+                     x="0px" y="0px">
                     <path class="check" class="st0" d="M2,19.2C5.9,23.6,9.4,28,9.4,28L23,2"/>
                 </svg>
             </main>
@@ -45,8 +45,8 @@
     </div>
 </div>
 
-<script type="text/javascript" src="/assets/script/navbar.js"></script>
-<script type="text/javascript" src="mainvue.js"></script>
+<script src="/assets/script/navbar.js" type="text/javascript"></script>
+<script src="mainvue.js" type="text/javascript"></script>
 </body>
 
 </html>

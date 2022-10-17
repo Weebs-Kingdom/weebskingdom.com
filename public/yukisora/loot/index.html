@@ -2,27 +2,27 @@
 
 <head>
     <title>Lootbox</title>
-    <link rel="stylesheet" href="/assets/style/main.css">
-    <link rel="stylesheet" href="/assets/style/menu.css">
-    <link rel="stylesheet" href="/assets/style/anime.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="/assets/style/main.css" rel="stylesheet">
+    <link href="/assets/style/menu.css" rel="stylesheet">
+    <link href="/assets/style/anime.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600" rel="stylesheet">
     <link href="/assets/style/checkoutbtn.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script type="text/javascript" src="/assets/script/auth.js"></script>
-    <meta name="title" content="Lootbox">
-    <meta name="description" content="You can open shineyyyyy lootboxes here UwU">
-    <meta name="theme-color" content="#ffffff">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2" type="text/javascript"></script>
+    <script src="/assets/script/auth.js" type="text/javascript"></script>
+    <meta content="Lootbox" name="title">
+    <meta content="You can open shineyyyyy lootboxes here UwU" name="description">
+    <meta content="#ffffff" name="theme-color">
 </head>
 
 <body>
 <script>auth(true)</script>
 <div id="navdiv" v-html="navbar"></div>
 <div id="loot">
-    <div id="anime" class="anime">
+    <div class="anime" id="anime">
         <div id="particles-js"></div>
         <span class="ocly cly">
         </span>
@@ -31,23 +31,23 @@
         <div id="lootImage">
             <img :src="image">
         </div>
-        <div id="bg" class="bg"></div>
-        <div v-if="key" id="keyImage" @click="loadLootBox" class="aImage">
-            <img style="position: relative; height: 70vmin; width: auto" class="img"
-                 src="/yukisora/assets/items/loot-key.PNG">
+        <div class="bg" id="bg"></div>
+        <div @click="loadLootBox" class="aImage" id="keyImage" v-if="key">
+            <img class="img" src="/yukisora/assets/items/loot-key.PNG"
+                 style="position: relative; height: 70vmin; width: auto">
             <a style="">Use key</a>
         </div>
-        <div style="visibility: hidden" id="lootBoxImage" @click="openLootBox" class="aImage">
-            <img style="height: 70vmin; width: auto" src="/yukisora/assets/items/loot.PNG">
+        <div @click="openLootBox" class="aImage" id="lootBoxImage" style="visibility: hidden">
+            <img src="/yukisora/assets/items/loot.PNG" style="height: 70vmin; width: auto">
             <a v-if="showMsg">Open</a>
         </div>
-        <div v-if="showMsg" class="errorMsg">
+        <div class="errorMsg" v-if="showMsg">
             <a>{{msg}}</a>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="mainvue.js"></script>
-<script type="text/javascript" src="/assets/script/navbar.js"></script>
+<script src="mainvue.js" type="text/javascript"></script>
+<script src="/assets/script/navbar.js" type="text/javascript"></script>
 </body>
 
 </html>

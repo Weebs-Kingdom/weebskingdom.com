@@ -6,13 +6,13 @@ var redeem = new Vue({
         clicked: false
     },
     methods: {
-        submit: async function (){
+        submit: async function () {
             this.message = "";
-            if(this.code == ""){
+            if (this.code == "") {
                 this.message = "There is no code...lol";
                 return;
             }
-            if(this.clicked)
+            if (this.clicked)
                 return;
 
             this.clicked = true;
@@ -36,10 +36,10 @@ var redeem = new Vue({
                 return;
             }
             console.log(json);
-            if(json.status === 200){
+            if (json.status === 200) {
                 submitBtn.play();
                 this.message = json.data;
-            } else if(json.status === 400 ||json.status === 401){
+            } else if (json.status === 400 || json.status === 401) {
                 this.message = json.message;
             } else {
                 this.message = "While connection to the server a error occurred";

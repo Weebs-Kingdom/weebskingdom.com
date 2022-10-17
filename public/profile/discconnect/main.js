@@ -1,11 +1,11 @@
 var stage2 = false;
 
-function init(){
+function init() {
     document.getElementById("tokendiv").hidden = true;
 }
 
-async function submit(){
-    if(!stage2){
+async function submit() {
+    if (!stage2) {
         const user = document.getElementById("discuserid").value;
 
         const options = {
@@ -20,7 +20,7 @@ async function submit(){
         const response = await fetch('/api/user/discconnect', options);
         const json = await response.json();
         console.log(json);
-        if(json.status == 200){
+        if (json.status == 200) {
             document.getElementById("tokendiv").hidden = false;
             document.getElementById("dicidiv").hidden = true;
             stage2 = true;
@@ -42,11 +42,11 @@ async function submit(){
 
         const response = await fetch('/api/user/discconnecttoken', options);
         const json = await response.json();
-        if(json.status == 200){
+        if (json.status == 200) {
             document.getElementById("msg").innerHTML = "Your profile is now connected with your Discord Account!";
             setTimeout(() => {
                 window.location.replace("/yukisora/loot?first=true");
-            },  6000)
+            }, 6000)
         } else {
             document.getElementById("msg").innerHTML = "This token is invalid!";
         }

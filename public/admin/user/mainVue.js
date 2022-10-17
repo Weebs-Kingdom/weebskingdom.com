@@ -33,8 +33,8 @@ var usr = new Vue({
                 this.submitmsg = "Can't find shit...";
             }
         },
-        loadEdit(id){
-            window.location.href= "/admin/user/edit?id=" + id;
+        loadEdit(id) {
+            window.location.href = "/admin/user/edit?id=" + id;
         }
     }
 });

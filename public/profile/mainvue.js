@@ -21,7 +21,7 @@ var profile = new Vue({
                     'Content-Type': 'application/json',
                     'auth-token': token
                 },
-                body: JSON.stringify({ email: this.input1 })
+                body: JSON.stringify({email: this.input1})
             };
             const usernameOpt = {
                 method: 'POST',
@@ -29,7 +29,7 @@ var profile = new Vue({
                     'Content-Type': 'application/json',
                     'auth-token': token
                 },
-                body: JSON.stringify({ username: this.input1 })
+                body: JSON.stringify({username: this.input1})
             };
             const passOpt = {
                 method: 'POST',
@@ -37,7 +37,7 @@ var profile = new Vue({
                     'Content-Type': 'application/json',
                     'auth-token': token
                 },
-                body: JSON.stringify({ password: this.input1, repeat_password: this.input2 })
+                body: JSON.stringify({password: this.input1, repeat_password: this.input2})
             };
 
             var res = null;
@@ -61,10 +61,10 @@ var profile = new Vue({
             } else if (json.status == 401) {
                 window.location.replace("/login");
             } else {
-                this.submitmsg  = json.message;
+                this.submitmsg = json.message;
             }
         },
-        resentEmail: async function (){
+        resentEmail: async function () {
             try {
                 const options = {
                     method: 'GET',
@@ -75,17 +75,17 @@ var profile = new Vue({
                 };
 
                 const response = await fetch('/api/user/resentAuthEmail', options);
-                if(response.status === 200){
+                if (response.status === 200) {
                     this.submitmsg = "Resent authentication email!";
                 }
-            } catch (e){
+            } catch (e) {
             }
         },
-        changeMode: function (i){
+        changeMode: function (i) {
             this.selection = i;
             this.submitmsg = "";
 
-            switch (i){
+            switch (i) {
                 case 0:
                     this.input1Name = "Email";
                     break;

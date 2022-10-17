@@ -55,18 +55,18 @@ var attack = new Vue({
         if (edit) {
             this.edit(edit);
         }
-        if(closeOnBtn){
+        if (closeOnBtn) {
             this.closeOnBtn = true;
         }
-        if(createMode){
+        if (createMode) {
             this.create();
         }
     },
     methods: {
         doCommand(e) {
             let cmd = e.keyCode;
-            if(cmd == 13){
-                if(this.creatMode || this.editMode)
+            if (cmd == 13) {
+                if (this.creatMode || this.editMode)
                     this.submit();
             }
         },
@@ -131,7 +131,7 @@ var attack = new Vue({
             this.setupCreate();
         },
         closeEd: function () {
-            if(this.closeOnBtn){
+            if (this.closeOnBtn) {
                 window.close();
             }
             this.show = false;
@@ -153,7 +153,7 @@ var attack = new Vue({
             this.astatusEffect = attack.statusEffect;
             this.aattackType = attack.attackType;
         },
-        submit: async function (){
+        submit: async function () {
             location.replace("#" + "msg");
             var packedAttack = {
                 baseDmg: this.abaseDmg,
@@ -165,7 +165,7 @@ var attack = new Vue({
 
             console.log(packedAttack);
 
-            if(this.editMode){
+            if (this.editMode) {
                 var pack = {
                     _id: this.edetingAttack,
                     data: packedAttack
@@ -185,19 +185,19 @@ var attack = new Vue({
                 if (json.status === 200) {
                     this.attacks = await this.loadAttack();
                     this.submitmsg = "Successfully updated attack!";
-                    if(this.closeOnBtn){
+                    if (this.closeOnBtn) {
                         closeTo();
                     }
                     return json.message;
                 } else {
                     this.submitmsg = "An error occurred";
                     console.log(response);
-                    if(this.closeOnBtn){
+                    if (this.closeOnBtn) {
                         closeTo();
                     }
                     return undefined;
                 }
-            } else if(this.creatMode) {
+            } else if (this.creatMode) {
                 const options = {
                     method: 'POST',
                     headers: {
@@ -213,14 +213,14 @@ var attack = new Vue({
                     this.attacks = await this.loadAttack();
                     this.searchFc();
                     this.submitmsg = "Successfully created attack!";
-                    if(this.closeOnBtn){
+                    if (this.closeOnBtn) {
                         closeTo();
                     }
                     return json.message;
                 } else {
                     this.submitmsg = "An error occurred";
                     console.log(response);
-                    if(this.closeOnBtn){
+                    if (this.closeOnBtn) {
                         closeTo();
                     }
                     return undefined;
@@ -236,8 +236,8 @@ Vue.component('attack', {
     props: ['attack']
 });
 
-function closeTo(){
-    setTimeout(function() {
-            window.close();
+function closeTo() {
+    setTimeout(function () {
+        window.close();
     }, 1000);
 }

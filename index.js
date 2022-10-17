@@ -1,4 +1,3 @@
-
 const express = require('express');
 const app = express();
 const appRouter = require('./router/app.js');
@@ -37,7 +36,7 @@ console.log("\nDesigned by: Noah Elijah Till\nand the weebskingdom team\n-------
 dotenv.config();
 app.listen(5001, () => console.log('listening on port ' + 5001));
 app.use(express.static('public'));
-app.use(express.json({ limit: '2mb' }));
+app.use(express.json({limit: '2mb'}));
 app.use(appRouter);
 database.connect();
 mailer.connect();
@@ -53,7 +52,7 @@ process.on('uncaughtException', (error) => {
     //process.exit(1);
 })
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     let date_ob = new Date();
     let date = ("0" + date_ob.getDate()).slice(-2);
@@ -68,7 +67,7 @@ app.use(function(req, res, next) {
     // respond with html page
     // respond with json
     if (req.accepts('json')) {
-        res.send({ status: 404, response: 'Not found' });
+        res.send({status: 404, response: 'Not found'});
         return;
     }
     // default to plain-text. send()

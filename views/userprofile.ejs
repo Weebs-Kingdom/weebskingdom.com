@@ -2,91 +2,91 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Profile</title>
     <link rel="stylesheet" href="https://weebskingdom.com/assets/style/info.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body style="height: fit-content">
-    <div class="box">
+<div class="box">
         <span class="img-wrap">
             <span class="img">
-                <img src=<%=img%>>
+                <img src=<%= img %>>
             </span>
         </span>
-        <div class="name">
-            <%=name%>
-        </div>
-        <div class="info">
-            <div class="infr">
-                <div class="infc">
-                    Level:
-                </div>
-                <div class="infc">
-                    <a><%=level%></a>
-                </div>
+    <div class="name">
+        <%= name %>
+    </div>
+    <div class="info">
+        <div class="infr">
+            <div class="infc">
+                Level:
             </div>
-            <div class="infr">
-                <div class="infc">
-                    XP:
-                </div>
-                <div class="infc">
-                    <a><%=xp%></a>
-                </div>
-            </div>
-            <div class="infr">
-                <div class="infc">
-                    Weboos:
-                </div>
-                <div class="infc">
-                    <a><%=weboos%>宅</a>
-                </div>
-            </div>
-            <div class="infr">
-                <div class="infc">
-                    Energy:
-                </div>
-                <div class="infc">
-                    <a><%=energy%><i class="material-icons">construction</i></a>
-                </div>
+            <div class="infc">
+                <a><%= level %></a>
             </div>
         </div>
-        <div class="info">
-            <div class="infr">
-                <div class="infc">
-                    Job:
-                </div>
-                <div class="infc">
-                    <a><%=job%></a>
-                </div>
+        <div class="infr">
+            <div class="infc">
+                XP:
             </div>
-            <div class="infr">
-                <div class="infc">
-                    Job Position:
-                </div>
-                <div class="infc">
-                    <a><%=jobpos%></a>
-                </div>
+            <div class="infc">
+                <a><%= xp %></a>
             </div>
-            <div class="infr">
-                <div class="infc">
-                    Job Level:
-                </div>
-                <div class="infc">
-                    <a><%=jlevel%></a>
-                </div>
+        </div>
+        <div class="infr">
+            <div class="infc">
+                Weboos:
             </div>
-            <div class="infr">
-                <div class="infc">
-                    Job XP:
-                </div>
-                <div class="infc">
-                    <a><%=jxp%></a>
-                </div>
+            <div class="infc">
+                <a><%= weboos %>宅</a>
+            </div>
+        </div>
+        <div class="infr">
+            <div class="infc">
+                Energy:
+            </div>
+            <div class="infc">
+                <a><%= energy %><i class="material-icons">construction</i></a>
             </div>
         </div>
     </div>
+    <div class="info">
+        <div class="infr">
+            <div class="infc">
+                Job:
+            </div>
+            <div class="infc">
+                <a><%= job %></a>
+            </div>
+        </div>
+        <div class="infr">
+            <div class="infc">
+                Job Position:
+            </div>
+            <div class="infc">
+                <a><%= jobpos %></a>
+            </div>
+        </div>
+        <div class="infr">
+            <div class="infc">
+                Job Level:
+            </div>
+            <div class="infc">
+                <a><%= jlevel %></a>
+            </div>
+        </div>
+        <div class="infr">
+            <div class="infc">
+                Job XP:
+            </div>
+            <div class="infc">
+                <a><%= jxp %></a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>

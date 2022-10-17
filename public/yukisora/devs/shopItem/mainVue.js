@@ -23,8 +23,8 @@ var sitem = new Vue({
         iCategory: ""
     },
     created: async function () {
-      await this.loadShopItems();
-      await this.loadItems();
+        await this.loadShopItems();
+        await this.loadItems();
     },
     methods: {
         loadShopItems: async function () {
@@ -42,7 +42,7 @@ var sitem = new Vue({
             } else {
             }
         },
-        loadItems: async function(){
+        loadItems: async function () {
             const options = {
                 method: 'GET',
                 headers: {
@@ -75,8 +75,8 @@ var sitem = new Vue({
             this.creatMode = false;
             this.setupEdit(item);
         },
-        setupEdit: function (item){
-            if(!item)
+        setupEdit: function (item) {
+            if (!item)
                 return;
 
             this.iParentItem = item.connectedItemId;
@@ -218,8 +218,8 @@ var sitem = new Vue({
                 await this.loadShopItems();
             }
         },
-        selectItem: function (item){
-            if(!item){
+        selectItem: function (item) {
+            if (!item) {
                 this.iParentItem = "";
                 return;
             }
@@ -237,7 +237,7 @@ var sitem = new Vue({
 });
 
 Vue.component('shop-item', {
-   template: `
+    template: `
    <div class="content">
    <h1>{{item.name}}</h1>
     <div>
@@ -257,7 +257,7 @@ Vue.component('shop-item', {
 });
 
 Vue.component('item', {
-template: `
+    template: `
 <div class="content">
 <div>
     <h1>{{item.itemName}}</h1>

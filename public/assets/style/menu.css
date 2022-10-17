@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Rubik+Mono+One|Roboto+Mono:400,700&display=swap");
+
 .page-container {
     display: flex;
     flex-direction: column;
@@ -9,7 +10,7 @@
     padding: 1rem;
 }
 
-.page-container>*+* {
+.page-container > * + * {
     margin-top: 1.5rem;
 }
 
@@ -23,7 +24,7 @@
     transition: left 0s calc(var(--td) * 2), transform 0s calc(var(--td) * 2);
     width: 100%;
     z-index: 1000;
-    top:0;
+    top: 0;
 }
 
 .nav-main::before,
@@ -60,7 +61,7 @@
     top: -100%;
 }
 
-[id=main-navigation-toggle]~label {
+[id=main-navigation-toggle] ~ label {
     cursor: pointer;
     position: fixed;
     right: 1rem;
@@ -68,7 +69,7 @@
     z-index: 1001;
 }
 
-[id=main-navigation-toggle]~label span {
+[id=main-navigation-toggle] ~ label span {
     display: block;
     height: 2.5vmax;
     padding: 0.5rem;
@@ -77,8 +78,8 @@
     width: 2.5vmax;
 }
 
-[id=main-navigation-toggle]~label span::before,
-[id=main-navigation-toggle]~label span::after {
+[id=main-navigation-toggle] ~ label span::before,
+[id=main-navigation-toggle] ~ label span::after {
     background-color: var(--color-dark);
     bottom: 0;
     content: "";
@@ -93,68 +94,68 @@
 
 }
 
-[id=main-navigation-toggle]~label span::before {
+[id=main-navigation-toggle] ~ label span::before {
     transform: rotate(0) translateY(-100%);
 }
 
-[id=main-navigation-toggle]~label span::after {
+[id=main-navigation-toggle] ~ label span::after {
     transform: rotate(0) translateY(100%);
 }
 
-[id=main-navigation-toggle]:checked~label span {
+[id=main-navigation-toggle]:checked ~ label span {
     transform: rotate(1turn);
 }
 
-[id=main-navigation-toggle]:checked~label span::before {
+[id=main-navigation-toggle]:checked ~ label span::before {
     transform: rotate(45deg);
 }
 
-[id=main-navigation-toggle]:checked~label span::after {
+[id=main-navigation-toggle]:checked ~ label span::after {
     transform: rotate(-45deg);
 }
 
-[id=main-navigation-toggle]:checked~.nav-main {
+[id=main-navigation-toggle]:checked ~ .nav-main {
     left: 0;
     transition: transform 0s;
 }
 
-[id=main-navigation-toggle]:checked~.nav-main::before,
-[id=main-navigation-toggle]:checked~.nav-main::after {
+[id=main-navigation-toggle]:checked ~ .nav-main::before,
+[id=main-navigation-toggle]:checked ~ .nav-main::after {
     transform: translateX(0);
     transition-delay: 0s;
 }
 
-[id=main-navigation-toggle]:checked~.nav-main::after {
+[id=main-navigation-toggle]:checked ~ .nav-main::after {
     transition-delay: calc(var(--td) / 2);
 }
 
-[id=main-navigation-toggle]:checked~.nav-main .menu__item {
+[id=main-navigation-toggle]:checked ~ .nav-main .menu__item {
     opacity: 1;
     transform: translateX(0);
     transition: opacity calc(var(--td) * 2) var(--te), transform calc(var(--td) * 2) var(--te);
 }
 
-[id=main-navigation-toggle]:checked~.nav-main .menu__item:nth-child(1) {
+[id=main-navigation-toggle]:checked ~ .nav-main .menu__item:nth-child(1) {
     transition-delay: calc(var(--td) * 2 * (1 * 0.25));
     z-index: -1;
 }
 
-[id=main-navigation-toggle]:checked~.nav-main .menu__item:nth-child(2) {
+[id=main-navigation-toggle]:checked ~ .nav-main .menu__item:nth-child(2) {
     transition-delay: calc(var(--td) * 2 * (2 * 0.25));
     z-index: -2;
 }
 
-[id=main-navigation-toggle]:checked~.nav-main .menu__item:nth-child(3) {
+[id=main-navigation-toggle]:checked ~ .nav-main .menu__item:nth-child(3) {
     transition-delay: calc(var(--td) * 2 * (3 * 0.25));
     z-index: -3;
 }
 
-[id=main-navigation-toggle]:checked~.nav-main .menu__item:nth-child(4) {
+[id=main-navigation-toggle]:checked ~ .nav-main .menu__item:nth-child(4) {
     transition-delay: calc(var(--td) * 2 * (4 * 0.25));
     z-index: -4;
 }
 
-[id=main-navigation-toggle]:checked~.nav-main .menu__item:nth-child(5) {
+[id=main-navigation-toggle]:checked ~ .nav-main .menu__item:nth-child(5) {
     transition-delay: calc(var(--td) * 2 * (5 * 0.25));
     z-index: -5;
 }
@@ -165,7 +166,7 @@
     z-index: 1;
 }
 
-.menu>.menu__item {
+.menu > .menu__item {
     font-family: var(--font-family-secondary);
     font-size: 8vmin;
 }
@@ -273,18 +274,18 @@
     opacity: 1;
 }
 
-.menu__item:hover>.menu__link {
+.menu__item:hover > .menu__link {
     color: var(--color-font-secondary);
     opacity: 1;
     transform: translate(0, 0);
 }
 
-.menu__item:hover>.menu__link:hover {
+.menu__item:hover > .menu__link:hover {
     color: var(--color-light);
     transition-delay: 0s;
 }
 
-.menu__item:hover~.menu__item>.menu__link {
+.menu__item:hover ~ .menu__item > .menu__link {
     transition-duration: calc(var(--td) * 3);
     transform: translate(0, var(--pull));
 }

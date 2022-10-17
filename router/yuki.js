@@ -248,22 +248,22 @@ module.exports.getItems = async function () {
     return res;
 }
 
-module.exports.coins = async function (c, user){
+module.exports.coins = async function (c, user) {
     var res = await redirectPost({coins: c, id: user}, "override", "coins");
     return res;
 }
 
-module.exports.item = async function(item, amount, user){
+module.exports.item = async function (item, amount, user) {
     var res = await redirectPost({item: item, id: user, amount: amount}, "override", "userItem");
     return res;
 }
 
-module.exports.lootbox = async function(user){
+module.exports.lootbox = async function (user) {
     var res = await redirectPost({id: user}, "override", "openLootBox");
     return res;
 }
 
-module.exports.route = async function(user, route){
+module.exports.route = async function (user, route) {
     var res = await redirectPost({id: user}, "override", route);
     return res;
 }

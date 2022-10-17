@@ -63,8 +63,8 @@ var monster = new Vue({
     methods: {
         doCommand(e) {
             let cmd = e.keyCode;
-            if(cmd == 13){
-                if(this.creatMode || this.editMode)
+            if (cmd == 13) {
+                if (this.creatMode || this.editMode)
                     this.submit();
             }
         },
@@ -137,7 +137,7 @@ var monster = new Vue({
             this.mshown = mnster.shown;
             this.mevolves = mnster.evolves;
             this.mattacks = mnster.attacks;
-            if(!mnster.attacks)
+            if (!mnster.attacks)
                 this.mattacks = [];
             else {
                 var natts = [];
@@ -152,18 +152,18 @@ var monster = new Vue({
             this.mmonsterType = mnster.monsterType;
         },
         clckEv: function (id, add) {
-                for (let i = 0; i < this.mevolves.length; i++) {
-                    if (this.mevolves[i] == id)
-                        this.mevolves.splice(i, 1);
-                }
+            for (let i = 0; i < this.mevolves.length; i++) {
+                if (this.mevolves[i] == id)
+                    this.mevolves.splice(i, 1);
+            }
             if (add)
                 this.mevolves.push(id);
         },
         clckType: function (id, add) {
-                for (let i = 0; i < this.mmonsterType.length; i++) {
-                    if (this.mmonsterType[i] == id)
-                        this.mmonsterType.splice(i, 1);
-                }
+            for (let i = 0; i < this.mmonsterType.length; i++) {
+                if (this.mmonsterType[i] == id)
+                    this.mmonsterType.splice(i, 1);
+            }
             if (add)
                 this.mmonsterType.push(id);
         },
@@ -303,16 +303,16 @@ Vue.component('attacks', {
         <button class="material-icons" v-on:click="edit">edit</button>
    </div>
    `,
-    data: function (){
-      return {
-          lvl: 1,
-          checked: false
-      }
+    data: function () {
+        return {
+            lvl: 1,
+            checked: false
+        }
     },
-    created: function (){
-        if(this.isSelected()){
+    created: function () {
+        if (this.isSelected()) {
             this.lvl = this.selected.filter(e => e.attack == this.ev._id)[0].level;
-            if(!this.lvl || this.lvl == undefined || this.lvl === 0)
+            if (!this.lvl || this.lvl == undefined || this.lvl === 0)
                 this.lvl = 1;
         }
     },
@@ -384,7 +384,6 @@ async function loadMonsters() {
             'auth-token': token
         }
     };
-
 
 
     const response = await fetch('/api/yuki/monsters', options);

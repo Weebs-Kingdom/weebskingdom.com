@@ -14,7 +14,7 @@ const tokenSchema = new mongoose.Schema({
         default: Date.now()
     },
     finishedUp: {
-      type: Date
+        type: Date
     },
     user: {
         type: String

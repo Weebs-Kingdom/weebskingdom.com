@@ -10,7 +10,13 @@ async function register() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ password: password, email: email, username: username, access_token: token, repeat_password: rpassword })
+        body: JSON.stringify({
+            password: password,
+            email: email,
+            username: username,
+            access_token: token,
+            repeat_password: rpassword
+        })
     };
 
     const response = await fetch('/api/user/registertk', options);

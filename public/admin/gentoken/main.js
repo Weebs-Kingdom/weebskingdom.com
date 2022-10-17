@@ -1,24 +1,24 @@
 var tk = new Vue({
-   el: '#token',
+    el: '#token',
     data: {
-      uses: 0,
-      isAdmin: false,
-      isDev: false,
+        uses: 0,
+        isAdmin: false,
+        isDev: false,
         error: "",
         tokens: []
     },
-    created: async function (){
-       await this.getTokens();
+    created: async function () {
+        await this.getTokens();
     },
     methods: {
         createToken: async function () {
-            if(this.isAdmin === undefined)
+            if (this.isAdmin === undefined)
                 this.isAdmin = false;
 
-            if(this.isDev === undefined)
+            if (this.isDev === undefined)
                 this.isDev = false;
 
-            if(!this.isDev && !this.isAdmin){
+            if (!this.isDev && !this.isAdmin) {
                 this.error = "The token should have at least on right";
                 return;
             }
@@ -28,7 +28,7 @@ var tk = new Vue({
                 return;
             }
 
-            if(this.uses <= 0){
+            if (this.uses <= 0) {
                 this.error = "Uses has to be grater than 0";
                 return;
             }
@@ -40,7 +40,7 @@ var tk = new Vue({
                     'Content-Type': 'application/json',
                     'auth-token': token
                 },
-                body: JSON.stringify({ maxUse: this.uses, isAdmin: this.isAdmin, isDev: this.isDev})
+                body: JSON.stringify({maxUse: this.uses, isAdmin: this.isAdmin, isDev: this.isDev})
             };
 
             const response = await fetch('/api/user/genToken', options);
@@ -71,7 +71,7 @@ var tk = new Vue({
                 } else {
                     this.error = "Error on loading tokens!";
                 }
-            } catch (e){
+            } catch (e) {
                 this.error = "Error on loading tokens!";
             }
         },

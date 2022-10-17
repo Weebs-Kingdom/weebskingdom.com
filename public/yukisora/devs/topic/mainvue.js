@@ -170,7 +170,7 @@ var topic = new Vue({
             this.show = true;
         },
         submit: async function () {
-            if(this.selected.length == 0){
+            if (this.selected.length == 0) {
                 this.submitmsg = "You should at least check one topic!";
                 return;
             }
@@ -225,7 +225,7 @@ var topic = new Vue({
             console.log(json);
             try {
                 this.sites = parseInt(this.topics.length / 10 + 1);
-            } catch (e){
+            } catch (e) {
             }
             if (this.topics.length === 0)
                 this.sites = 0;

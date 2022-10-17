@@ -5,7 +5,7 @@ var loot = new Vue({
     },
     methods: {
         openLootBox: async function () {
-            if(!this.ready)
+            if (!this.ready)
                 return;
             if (this.clicked == true)
                 return;
@@ -30,7 +30,7 @@ var loot = new Vue({
             }, 850);
 
         },
-        loadLootBox: async function (){
+        loadLootBox: async function () {
             this.key = false;
             const options = {
                 method: 'POST',
@@ -52,13 +52,13 @@ var loot = new Vue({
             console.log(json);
             this.showMsg = true;
 
-            if(json.status === 200){
+            if (json.status === 200) {
                 this.msg = "Used key!";
                 this.ready = true;
                 this.image = json.data.imageUrl;
                 this.boxQuality = json.data.rarity;
                 document.getElementById("lootBoxImage").style.visibility = "visible";
-            } else if(json.status === 400 ||json.status === 401){
+            } else if (json.status === 400 || json.status === 401) {
                 this.msg = json.message;
             } else {
                 this.msg = "While connection to the server a error occurred";

@@ -106,13 +106,13 @@ var redeem = new Vue({
                 maxUserUsage: this.rMaxUserUsage
             };
 
-            if(this.rDoExpire){
+            if (this.rDoExpire) {
                 packedCode.doExpire = true;
                 packedCode.expires = this.rExpire;
                 packedCode.autoDelete = this.rAutoDelete;
             }
 
-            if(this.rHasMaxUsage){
+            if (this.rHasMaxUsage) {
                 packedCode.hasMaxUsage = true;
                 packedCode.maxUsage = this.rMaxUsage;
             }

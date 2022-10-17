@@ -2,7 +2,7 @@ var loggedIn = false;
 var isAdmin = false;
 var token;
 
-function changeTheme(theme){
+function changeTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
 }
 
@@ -54,7 +54,7 @@ async function auth(goToLoginOnFail) {
 }
 
 async function setupLogin() {
-    if (await getIsDev()){
+    if (await getIsDev()) {
         addDev();
     }
 
@@ -65,7 +65,7 @@ async function setupLogin() {
     createLi(home, "/yukisora/loot", "Lootbox");
     createLi(home, "/yukisora/craft", "Craft");
 
-    if (await getIsAdmin()){
+    if (await getIsAdmin()) {
         addAdmin();
     }
 }
@@ -163,14 +163,14 @@ function isLoggedIn() {
 function ping(host) {
     var http = new XMLHttpRequest();
     http.open("GET", host, /*async*/true);
-    http.onreadystatechange = function() {
+    http.onreadystatechange = function () {
         if (http.readyState == 4) {
         }
     };
     try {
         http.send(null);
-    } catch(exception) {
-       return true;
+    } catch (exception) {
+        return true;
     }
     return false;
 }

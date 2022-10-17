@@ -42,8 +42,8 @@ router.post("/verifyToken", async (req, res) => {
     var token = await ApiToken.findOne({regToken: req.body.token});
 
     if (!token) return res.status(400).json({message: "Token doesnt exist!", status: 400});
-    if(token.setup) return res.status(401).json({message: "Token expired!", status: 401});
-    if(!token.user)return res.status(401).json({message: "Token not setup!", status: 401});
+    if (token.setup) return res.status(401).json({message: "Token expired!", status: 401});
+    if (!token.user) return res.status(401).json({message: "Token not setup!", status: 401});
 
     const time = new Date(token.finishedUp);
     const expireTime = time.setMinutes(time.getMinutes() + 2);
@@ -58,7 +58,7 @@ router.post("/userVerify", verifyIntern, async (req, res) => {
     var token = await ApiToken.findOne({regToken: req.body.token});
 
     if (!token) res.status(400).json({message: "Token doesnt exist!", status: 400});
-    if(token.user) res.status(400).json({message: "Token already setup!", status: 400});
+    if (token.user) res.status(400).json({message: "Token already setup!", status: 400});
 
     token.user = req.body.user;
     token.finishedUp = Date.now();

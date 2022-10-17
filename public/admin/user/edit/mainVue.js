@@ -57,7 +57,7 @@ var usr = new Vue({
                 this.user.maxItems = json.data.maxItems;
                 this.user.maxEnergy = json.data.maxEnergy;
 
-                if(json.data.job){
+                if (json.data.job) {
                     this.user.job.jobXP = json.data.job.jobXP;
                     this.user.job.jobLevel = json.data.job.jobLevel;
                     this.user.job.jobPosition = json.data.job.jobPosition;

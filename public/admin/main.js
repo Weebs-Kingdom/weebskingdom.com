@@ -1,4 +1,4 @@
-async function loadFromRoot(){
+async function loadFromRoot() {
     const tokenfrom = document.getElementById("accessfrom").value;
     const urlfrom = document.getElementById("urlFrom").value;
     const tokento = document.getElementById("accessto").value;
@@ -102,7 +102,7 @@ async function loadFromRoot(){
     }
 }
 
-async function loadFromJson(){
+async function loadFromJson() {
     const json = JSON.parse(document.getElementById("json").value);
     const li = document.getElementById("link").value;
     for (var i = 0; i < json.length; i++) {
@@ -110,7 +110,7 @@ async function loadFromJson(){
     }
 }
 
-async function makepost(json, link, atoken){
+async function makepost(json, link, atoken) {
     var poptions = {
         method: 'POST',
         headers: {
