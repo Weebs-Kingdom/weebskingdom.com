@@ -7,10 +7,13 @@ module.exports.connect = function () {
         useUnifiedTopology: true
     }, {useUnifiedTopology: true}).then(
         () => {
-            console.log("Connected to DB")
+            console.log("Connected to DB");
+            return true;
         },
         err => {
-            console.log(err)
+            console.error(err);
+            console.log(err);
+            return false;
         }
     );
 }
