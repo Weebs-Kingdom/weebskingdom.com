@@ -166,7 +166,7 @@ var sitem = new Vue({
                 const response = await fetch('/api/shop/items', options);
                 const json = await response.json();
                 if (json.status === 200) {
-                    await loadMonsters();
+                    await this.loadShopItems();
                     this.msg = "Successfully updated shop item!";
                     return json.message;
                 } else {

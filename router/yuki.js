@@ -202,11 +202,13 @@ async function redirectPost(jjson, res, api) {
         },
         body: JSON.stringify(jjson)
     };
-
     const json = await fetch('http://127.0.0.1:5004/api/yuki/' + api, options).then(res => res.json()).then(json => {
         if (res != "override")
             return res.status(200).json(json);
         else return json;
+    }).catch(e => {
+        console.log("fetching yuki post request threw an error")
+        console.log(e);
     });
     return json;
 }
@@ -260,6 +262,11 @@ module.exports.item = async function (item, amount, user) {
 
 module.exports.lootbox = async function (user) {
     var res = await redirectPost({id: user}, "override", "openLootBox");
+    return res;
+}
+
+module.exports.task = async function (task) {
+    var res = await redirectPost({task: task}, "override", "task");
     return res;
 }
 

@@ -4,8 +4,9 @@ Vue.component('product', {
     <h1>{{item.name}}</h1> 
     <div class="des">
         <div><img v-if="item.image != undefined && item.image != ''" :src="item.image"> <a v-else>No product image</a></div>
+        <div style="color: red" v-if="item.hasStocks && item.stock == 0">This item is unfortunately out of stock!</div>
         <div>{{item.description}}</div>
-        <div v-if="item.stock === 0"><a">Limited</a> {{item.stock}}</div>
+        <div v-if="item.hasStocks && item.stock != 0"><a>Limited</a> {{item.stock}}</div>
     </div> 
     <button class="material-icons" v-on:click="$emit('add',item._id)">add_shopping_cart</button> 
    {{item.price}} 宅

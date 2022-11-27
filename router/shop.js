@@ -29,7 +29,7 @@ router.post("/items", verify, vDev, vAdmin, async (req, res) => {
 
 router.delete("/items", verify, vDev, vAdmin, async (req, res) => {
     var tk = await ShopItem.findOne({id: req.body._id});
-    await tk.remove();
+    await tk.deleteOne();
     res.status(200).json({status: 200, msg: "removed shop item"});
 });
 
@@ -53,6 +53,10 @@ router.post("/checkout", verify, vActive, async (req, res) => {
     for (const e of req.body.cart) {
         var it = await ShopItem.findById(e._id);
         if (it) {
+            if (it.hasStocks)
+                if (it.stock == 0)
+                    continue;
+
             it.cartamount = e.amount;
             items.push(it);
             sumPrice += it.price * e.amount;
@@ -71,35 +75,41 @@ router.post("/checkout", verify, vActive, async (req, res) => {
         const e = items[i];
         var ok = false;
         var ritems = undefined;
-        try {
-            ritems = await yukiapi.item(e.connectedItemId, e.cartamount, req.dbUser.discordId)
-            ok = ritems.status == 200;
-        } catch (e) {
-            ok = false;
-        }
 
-        if (!ok) {
-            var rRoute = undefined;
+        if (e.isItem) {
             try {
-                rRoute = await yukiapi.route(req.dbUser.discordId, e.connectedRoute);
-                ok = rRoute.status == 200;
+                ritems = await yukiapi.item(e.connectedItemId, e.cartamount, req.dbUser.discordId)
+                ok = ritems.status == 200;
             } catch (e) {
                 ok = false;
             }
+        }
 
-            if (ok)
-                for (let j = 0; j < e.cartamount - 1; j++) {
-                    const rRoute = await yukiapi.route(req.dbUser.discordId, e.connectedRoute);
+        if (e.isRoute)
+            if (!ok) {
+                var rRoute = undefined;
+                try {
+                    rRoute = await yukiapi.route(req.dbUser.discordId, e.connectedRoute);
+                    ok = rRoute.status == 200;
+                } catch (e) {
+                    ok = false;
                 }
-        }
 
-        if (!ok) {
-            if (e.connectedRole) {
-                const js = await giveUserRole(String(e.connectedRole).toLowerCase(), req.dbUser.discordId);
-                if (js.status == 200)
-                    ok = true;
+                if (ok)
+                    for (let j = 0; j < e.cartamount - 1; j++) {
+                        const rRoute = await yukiapi.route(req.dbUser.discordId, e.connectedRoute);
+                    }
             }
-        }
+
+        if (e.isRole)
+            if (!ok) {
+                if (e.connectedRole) {
+                    const js = await giveUserRole(String(e.connectedRole).toLowerCase(), req.dbUser.discordId);
+                    if (js != null)
+                        if (js.status == 200)
+                            ok = true;
+                }
+            }
 
         //If item give fails, you get money back lol~
         if (!ok) {
@@ -127,19 +137,7 @@ function findItem(items, id) {
 }
 
 async function giveUserRole(role, discUserId) {
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({instruction: "giverole", data: {user: discUserId, role: role}})
-    };
-
-    return await fetch('http://127.0.0.1:5003/api', options).then(res => res.json()).then(json => {
-        return json;
-    }).catch(e => {
-        return undefined;
-    });
+    await yukiapi.task("{\"task\": \"giveRole\", \"data\": [{\"role\": \"" + role + "\"}, {\"userId\": \"" + discUserId + "\"}]}");
 }
 
 module.exports = router;

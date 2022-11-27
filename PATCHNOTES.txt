@@ -1,7 +1,7 @@
-Weebskingdom.com Website patched to version 1.0.6
+Weebskingdom.com Website patched to version 1.0.7
 
 New features
-• Alexa integration
+•
 •
 •
 
@@ -11,6 +11,6 @@ Changes
 •
 
 Bugfix
-•
-•
-•
+• Fixed a bug where you couldn't delete shop items
+• Fixed a bug where the shop displayed the stocks incorrectly
+• Fixed the buying system

@@ -33,7 +33,7 @@ var info = new Vue({
             };
 
             const response = await fetch('/api/yuki/discuser', options);
-            if (response.status === 200) {
+            if (response.status == 200) {
                 const json = await response.json();
                 if (json.status == 200)
                     this.user = json.data;

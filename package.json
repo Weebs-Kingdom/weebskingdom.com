@@ -1,6 +1,6 @@
 {
   "name": "index",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Site for Weebskingdom.com",
   "main": "index.js",
   "scripts": {
