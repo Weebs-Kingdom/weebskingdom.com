@@ -4,20 +4,6 @@ const ApiToken = require("../models/ApiTokens");
 const verifyApi = require('../middleware/verifyApiToken')
 const verifyIntern = require("../middleware/verifyInternApi");
 
-router.post("/dispatchYukiCommand", verifyApi, async (req, res) => {
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({instruction: "dispatchCommand", data: {cmd: req.body.cmd, user: req.apiUser}})
-    };
-
-    fetch('http://127.0.0.1:5003/api', options).then(res => res.json()).then(json => {
-        res.status(200).json(json);
-    });
-});
-
 router.get("/createVerifyToken", async (req, res) => {
     var tokn = makeToken(30, true, true, true);
     var regToken = makeToken(5, true, false, false);

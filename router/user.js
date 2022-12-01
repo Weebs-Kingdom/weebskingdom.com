@@ -314,9 +314,8 @@ router.post("/discconnect", verify, async (req, res) => {
         body: JSON.stringify({instruction: "discconnect", data: {user: req.body.user, token: token}})
     };
 
-    fetch('http://127.0.0.1:5003/api', options).then(res => res.json()).then(json => {
-        res.status(200).json(json);
-    });
+    //TODO: make this work again using tasks
+    res.status(200).json({status: 200, data: []});
 });
 
 router.post("/discconnecttoken", verify, async (req, res) => {

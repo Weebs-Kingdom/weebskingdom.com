@@ -28,7 +28,7 @@ router.post("/items", verify, vDev, vAdmin, async (req, res) => {
 });
 
 router.delete("/items", verify, vDev, vAdmin, async (req, res) => {
-    var tk = await ShopItem.findOne({id: req.body._id});
+    var tk = await ShopItem.findOne({_id: req.body._id});
     await tk.deleteOne();
     res.status(200).json({status: 200, msg: "removed shop item"});
 });
@@ -85,30 +85,27 @@ router.post("/checkout", verify, vActive, async (req, res) => {
             }
         }
 
-        if (e.isRoute)
-            if (!ok) {
-                var rRoute = undefined;
-                try {
-                    rRoute = await yukiapi.route(req.dbUser.discordId, e.connectedRoute);
-                    ok = rRoute.status == 200;
-                } catch (e) {
-                    ok = false;
-                }
-
-                if (ok)
-                    for (let j = 0; j < e.cartamount - 1; j++) {
-                        const rRoute = await yukiapi.route(req.dbUser.discordId, e.connectedRoute);
-                    }
+        if (e.isRoute) {
+            var rRoute = undefined;
+            try {
+                rRoute = await yukiapi.route(req.dbUser.discordId, e.connectedRoute);
+                ok = rRoute.status == 200;
+            } catch (e) {
+                ok = false;
             }
 
-        if (e.isRole)
-            if (!ok) {
-                if (e.connectedRole) {
-                    const js = await giveUserRole(String(e.connectedRole).toLowerCase(), req.dbUser.discordId);
-                    if (js != null)
-                        if (js.status == 200)
-                            ok = true;
+            if (ok)
+                for (let j = 0; j < e.cartamount - 1; j++) {
+                    const rRoute = await yukiapi.route(req.dbUser.discordId, e.connectedRoute);
                 }
+        }
+
+        if (e.isRole)
+            if (e.connectedRole) {
+                const js = await giveUserRole(String(e.connectedRole).toLowerCase(), req.dbUser.discordId);
+                if (js != null)
+                    if (js.status == 200)
+                        ok = true;
             }
 
         //If item give fails, you get money back lol~
@@ -137,7 +134,7 @@ function findItem(items, id) {
 }
 
 async function giveUserRole(role, discUserId) {
-    await yukiapi.task("{\"task\": \"giveRole\", \"data\": [{\"role\": \"" + role + "\"}, {\"userId\": \"" + discUserId + "\"}]}");
+    return await yukiapi.task("{\"task\": \"giveRole\", \"data\": [{\"role\": \"" + role + "\"}, {\"userId\": \"" + discUserId + "\"}]}");
 }
 
 module.exports = router;
