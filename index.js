@@ -73,3 +73,5 @@ app.use(function (req, res, next) {
     // default to plain-text. send()
     res.type('txt').send('Not found');
 });
+
+module.exports = app;
