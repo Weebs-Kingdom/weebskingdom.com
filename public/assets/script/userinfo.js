@@ -8,10 +8,16 @@ var info = new Vue({
     },
     methods: {
         loop: async function () {
-            await this.getUser();
-            setTimeout(function () {
-                info.loop();
-            }, 4000)
+            if (loggedIn){
+                await this.getUser();
+                setTimeout(function () {
+                    info.loop();
+                }, 4000)
+            } else {
+                setTimeout(function () {
+                    info.loop();
+                }, 500)
+            }
         },
         energy: function () {
             if (this.user == undefined)
