@@ -12,15 +12,16 @@ var main = new Vue({
             };
 
             try {
-                await fetch('https://map.weebskingdom.com/', options).then(res => res.json()).then(res => {
-                    if (res.status === 200) {
-                        this.isUp = true;
-                        return true;
-                    } else
-                        return false;
-                }).catch(err => {
+                await fetch('https://map.weebskingdom.com/', options).catch(err => {
                     return false;
-                });
+                })
+                    .then(res => res.json()).then(res => {
+                        if (res.status === 200) {
+                            this.isUp = true;
+                            return true;
+                        } else
+                            return false;
+                    });
             } catch (error) {
                 return false;
             }
