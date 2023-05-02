@@ -4,6 +4,9 @@ var main = new Vue({
         isUp: false
     },
     methods: {
+        created: async function () {
+          this.checkMap();
+        },
         // method to check if https://map.weebskingdom.com/ is up
         checkMap: async function () {
             const options = {
