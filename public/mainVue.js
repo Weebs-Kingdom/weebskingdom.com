@@ -1,5 +1,23 @@
 var main = new Vue({
     el: "#index",
-    data: {},
-    methods: {}
+    data: {
+        isUp: false
+    },
+    methods: {
+        // method to check if https://map.weebskingdom.com/ is up
+        checkMap: async function () {
+            const options = {
+                method: 'GET',
+                headers: {}
+            };
+
+            await fetch('https://map.weebskingdom.com/', options).then(res => res.json()).then(res => {
+                if (res.status === 200) {
+                    this.isUp = true;
+                    return true;
+                } else
+                    return false;
+            })
+        }
+    }
 });
