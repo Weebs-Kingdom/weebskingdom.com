@@ -17,7 +17,9 @@ var main = new Vue({
                     return true;
                 } else
                     return false;
-            })
+            }).catch(err => {
+                return false;
+            });
         }
     }
 });
