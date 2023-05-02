@@ -11,15 +11,19 @@ var main = new Vue({
                 headers: {}
             };
 
-            await fetch('https://map.weebskingdom.com/', options).then(res => res.json()).then(res => {
-                if (res.status === 200) {
-                    this.isUp = true;
-                    return true;
-                } else
+            try {
+                await fetch('https://map.weebskingdom.com/', options).then(res => res.json()).then(res => {
+                    if (res.status === 200) {
+                        this.isUp = true;
+                        return true;
+                    } else
+                        return false;
+                }).catch(err => {
                     return false;
-            }).catch(err => {
+                });
+            } catch (error) {
                 return false;
-            });
+            }
         }
     }
 });
