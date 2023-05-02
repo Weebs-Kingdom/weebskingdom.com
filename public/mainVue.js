@@ -8,7 +8,10 @@ var main = new Vue({
         checkMap: async function () {
             const options = {
                 method: 'GET',
-                headers: {}
+                headers: {
+                    //Cors
+                    'Access-Control-Allow-Origin': '*',
+                }
             };
 
             try {
